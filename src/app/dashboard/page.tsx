@@ -1,4 +1,6 @@
 import React from "react";
+import FeatherIcon from "feather-icons-react";
+
 
 export default function Page() {
   return (
@@ -7,11 +9,14 @@ export default function Page() {
       <div className="">
 
       
-      <div className="flex p-[.5vw]">
-        <h1 className="text-xl font-extrabold roundedxl w-3/4">heatmaps</h1>
-        <button className="w-1/4 ">Login</button>
+      <div className="flex p-[.5vw] shadow-[0px_1px_1px_-1px_rgba(0,0,0,1)]">
+        <h1 className="text-xl font-extrabold  roundedxl w-3/4">heatmaps</h1>
+        <div className="">
+
+       
+        <button className=" justify-self-end "><FeatherIcon icon="log-in"/></button>
+        </div>
       </div>
-      <div className="shadow pr pl-4 rounded-full w-1/1 h-1"></div>
     </div>
     </div>
   );
