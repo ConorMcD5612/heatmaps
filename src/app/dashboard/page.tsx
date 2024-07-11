@@ -1,5 +1,5 @@
 import React from "react";
-import LoginBtn from "../components/loginBtn";
+import LoginBtn from "../components/LoginBtn";
 
 
 
