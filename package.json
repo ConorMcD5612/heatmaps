@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@vercel/postgres": "^0.9.0",
     "feather": "^0.0.6",
     "feather-icons": "^4.29.2",
     "feather-icons-react": "^0.7.0",
