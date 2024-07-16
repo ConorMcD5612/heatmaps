@@ -14,8 +14,8 @@ export default function Page() {
           </div>
         </div>
       </div>
-      <div className="h-max overflow-x-scroll">
-      <Heatmap />
+      <div className="h-max overflow-x-scroll pt-[1vw]">
+      <Heatmap name="excercise"/>
       </div>
     </div>
   );
