@@ -6,12 +6,12 @@ import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function LoginBtn() {
     const {data: session} = useSession()
-
+    console.log(session)
     if(session) {
         return(
             <>
              <button onClick={() => signOut()} >
-             <FeatherIcon icon="log-out"  />
+             <FeatherIcon size={30} icon="log-out"  />
         </button>
             </>
         )
@@ -19,7 +19,7 @@ export default function LoginBtn() {
     return( 
         <>
          <button onClick={() => signIn()} >
-              <FeatherIcon icon="log-in"  />
+              <FeatherIcon size={30} icon="log-in"  />
         </button>
         </>
     )
