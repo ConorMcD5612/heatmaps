@@ -1,9 +1,20 @@
 import React from "react";
 import Cell from "./Cell";
+import { fetchHeatmapData } from "../lib/data";
 
-export default function Heatmap({ name }: { name: string }) {
+
+
+export default async function Heatmap({name, color, totalMins, type} : {
+  name: string;
+  color: string;
+  totalMins: number;
+  type: 'time' | 'count';
+}) {
   const yearArray = Array.from({ length: 365 });
   const startDate = new Date();
+
+
+
 
   return (
     <div className="">

@@ -1,6 +1,7 @@
 import React from "react";
 import LoginBtn from "../components/LoginBtn";
 import Heatmap from "../components/Heatmap";
+import HeatmapContainer from "../components/HeatmapContainer";
 
 
 export default function Page() {
@@ -15,7 +16,7 @@ export default function Page() {
         </div>
       </div>
       <div className="h-max pt-[1vw] ">
-      <Heatmap name="Excercise"/>
+      <HeatmapContainer />
       </div>
     </div>
   );
