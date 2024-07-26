@@ -6,9 +6,14 @@ import Heatmap from "./Heatmap";
 export default async function HeatmapContainer() {
   const heatmapData = await fetchHeatmapData();
   return (
-    <div>
-      {heatmapData.map(({name, color, totalMins, type}, index) => (
-        <Heatmap key={index} name={name} color={color} totalMins={totalMins} type={type} />
+    <div className="flex-col">
+      {heatmapData.map((data, index) => (
+        <Heatmap 
+        key={index}
+        name={data.heatmap_name}
+        color={data.color}
+        totalMins={data.total_mins} 
+        type={data.type} />
       ))}
     </div>
   );

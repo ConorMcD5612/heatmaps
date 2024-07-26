@@ -1,22 +1,21 @@
 export type User = {
-    email: string;
+    user_id: string;
 }
 
 export type HeatmapData = {
-    email: string;
-    heatmapID: string;
-    name: string;
+    user_id: string;
+    heatmap_id: string;
+    heatmap_name: string;
     color: string;
-    totalMins: number;
+    total_mins: number;
     type: 'time' | 'count' ;
 
 }
 
 export type Cell = {
     //these might not be numbers when I created the table
-    cellID: number;
-    heatmapID: number;
+    cell_id: number;
+    heatmap_id: number;
     mins: number;
     count: number;
-    
 }
