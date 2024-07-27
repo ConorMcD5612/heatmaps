@@ -6,7 +6,7 @@ import Heatmap from "./Heatmap";
 export default async function HeatmapContainer() {
   const heatmapData = await fetchHeatmapData();
   return (
-    <div className="flex-col">
+    <div className="h-full">
       {heatmapData.map((data, index) => (
         <Heatmap 
         key={index}
