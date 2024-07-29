@@ -11,10 +11,13 @@ export async function fetchHeatmapData() {
     //this has to be based on user though
     //I think you can just use session provider here.
     const data =
-      await sql<HeatmapData>`SELECT * FROM heatmap_data WHERE user_id=${session?.user?.email}`;
+      await sql<HeatmapData>`SELECT *, EXTRACT(EPOCH FROM start_date) AS start_date
+      FROM heatmap_data 
+      WHERE user_id=${session?.user?.email}`;
     console.log(data.rows, "data");
     return data.rows;
   } catch (error) {
+    console.error("Failed to fetch heatmap data:", error);
     throw new Error("Failed to fetch heatmap data");
   }
 }

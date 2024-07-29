@@ -8,7 +8,7 @@ export async function GET(request: Request) {
 
     const { searchParams } = new URL(request.url)
     try {
-        await sql`INSERT INTO heatmap_data VALUES ('conordmcdevitt@gmail.com', 1, 'Excercise', '#0000FF', 0, 'time', '2024-07-14');`
+        await sql`INSERT INTO heatmap_data VALUES ('conordmcdevitt@gmail.com', 1, 'Excercise', '#0000FF', 0, 'time', '20240705');`
     } catch (error) {
         return NextResponse.json({error}, {status: 500})
     }

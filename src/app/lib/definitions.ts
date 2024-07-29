@@ -9,6 +9,7 @@ export type HeatmapData = {
     color: string;
     total_mins: number;
     type: 'time' | 'count' ;
+    start_date: number;
 
 }
 
