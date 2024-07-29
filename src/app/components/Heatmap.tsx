@@ -1,7 +1,11 @@
 import React from "react";
 import Cell from "./Cell";
+//I think your suppose
 import { fetchHeatmapData } from "../lib/data";
+import CurrentWeek from "./CurrentWeek";
 
+
+//This is wrong doesn't account for date cells
 const daysFromStart = (startDate: number): number => {
   const startDateJS = new Date(startDate * 1000)
   const todaysDate = new Date()
@@ -10,27 +14,6 @@ const daysFromStart = (startDate: number): number => {
   const days = Math.ceil(difference / (1000 * 3600 * 24))
   return days 
 };
-
-// I think this should be a component
-const currentWeek = (index: number, cellAmount: number, startDate: number): string => {
-  // This won't work for the under 8 stuff 
-  const startDateJS = new Date(startDate * 1000)
-
- 
-  if(index == 0) {
-    console.log(startDateJS, "THIS IS STARTDATE")
-    return `${startDateJS.getMonth()+1}/${startDateJS.getDay() + 1}`
-  }
-
-  // not sure if this is necessary going to need specific date for each cell
-  
-  const weekDate = new Date(startDateJS.getTime() + (7 * 24 * 60 * 60 * 1000))
-  console.log(weekDate, "This is week date")
-
-  return `${weekDate.getMonth()+1}/${weekDate.getDay() + 1}`
-}
-
-
 
 export default async function Heatmap({
   name,
@@ -74,7 +57,7 @@ export default async function Heatmap({
           index % Math.min(8, cellAmount) ? (
             <Cell />
           ) : (
-            <div className="col-span-3 m-auto">{currentWeek(index, cellAmount, startDate)}</div>
+           <CurrentWeek index={index} startDate={startDate}/>
           )
         )}
       </div>
