@@ -39,7 +39,7 @@ export default async function Heatmap({
   const cellAmount = daysFromStart(startDateJS) + dateCellsAmount + fillerCellAmount
   
  
-  const yearArray = Array.from({ length: cellAmount });
+  const daysArray = Array.from({ length: cellAmount });
 
   
   console.log(startDate, todaysDate);
@@ -58,9 +58,9 @@ export default async function Heatmap({
         {daysOfWeek.map((day, index) =>
           index < cellAmount - 1 ? <div className="m-auto">{day}</div> : null
         )}
-        {yearArray.map((cell, index) =>
+        {daysArray.map((cell, index) =>
           index % Math.min(8, cellAmount) ? (
-            <Cell />
+            <Cell startDate={startDate} index={index} fillerCellAmount={fillerCellAmount} />
           ) : (
            <CurrentWeek index={index} startDate={startDate}/>
           )
