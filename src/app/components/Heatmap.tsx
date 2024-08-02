@@ -1,18 +1,19 @@
 import React from "react";
 import Cell from "./Cell";
-//I think your suppose
-import { fetchHeatmapData } from "../lib/data";
 import CurrentWeek from "./CurrentWeek";
 
 
-//This is wrong doesn't account for date cells
-const daysFromStart = (startDate: number): number => {
-  const startDateJS = new Date(startDate * 1000)
+//startDate.getDay() 0-6  add this + 1 to cell amount render 
+//should also make the date not start on friday for weeks 
+
+//This is correct days, doesn't account for dateCells
+const daysFromStart = (startDateJS: Date): number => {
+  
   const todaysDate = new Date()
   const difference = todaysDate.getTime() - startDateJS.getTime();
   
   const days = Math.ceil(difference / (1000 * 3600 * 24))
-  return days 
+  return days
 };
 
 export default async function Heatmap({
@@ -29,9 +30,13 @@ export default async function Heatmap({
   startDate: number;
 }) {
   const todaysDate = new Date();
-  
- 
-  const cellAmount = daysFromStart(startDate)
+  const startDateJS = new Date(startDate * 1000)
+
+  //amount of days from monday (startingDate)
+  const fillerCellAmount = startDateJS.getDate() + 1
+
+  const dateCellsAmount = Math.floor(daysFromStart(startDateJS) / 7)
+  const cellAmount = daysFromStart(startDateJS) + dateCellsAmount + fillerCellAmount
   
  
   const yearArray = Array.from({ length: cellAmount });
