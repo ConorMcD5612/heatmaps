@@ -6,7 +6,7 @@ export default function Cell({
   fillerCellAmount,
   index
 }: {
-  startDate: number;
+  startDate: Date;
   fillerCellAmount: number;
   index: number;
 }) {

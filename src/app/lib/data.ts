@@ -14,8 +14,14 @@ export async function fetchHeatmapData() {
       await sql<HeatmapData>`SELECT *, EXTRACT(EPOCH FROM start_date) AS start_date
       FROM heatmap_data 
       WHERE user_id=${session?.user?.email}`;
-    console.log(data.rows, "data");
-    return data.rows;
+
+    //change start date to js date 
+    const rows: any = data.rows.map((row) => ({
+      ...row,
+      start_date: new Date(row.start_date as number * 1000),
+    }));
+
+    return rows;
   } catch (error) {
     console.error("Failed to fetch heatmap data:", error);
     throw new Error("Failed to fetch heatmap data");

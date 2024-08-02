@@ -7,10 +7,10 @@ import CurrentWeek from "./CurrentWeek";
 //should also make the date not start on friday for weeks 
 
 //This is correct days, doesn't account for dateCells
-const daysFromStart = (startDateJS: Date): number => {
+const daysFromStart = (startDate: Date): number => {
   
   const todaysDate = new Date()
-  const difference = todaysDate.getTime() - startDateJS.getTime();
+  const difference = todaysDate.getTime() - startDate.getTime();
   
   const days = Math.ceil(difference / (1000 * 3600 * 24))
   return days
@@ -27,16 +27,16 @@ export default async function Heatmap({
   color: string;
   totalMins: number;
   type: "time" | "count";
-  startDate: number;
+  startDate: Date;
 }) {
   const todaysDate = new Date();
-  const startDateJS = new Date(startDate * 1000)
+  
 
   //amount of days from monday (startingDate)
-  const fillerCellAmount = startDateJS.getDate() + 1
+  const fillerCellAmount = startDate.getDate() + 1
 
-  const dateCellsAmount = Math.floor(daysFromStart(startDateJS) / 7)
-  const cellAmount = daysFromStart(startDateJS) + dateCellsAmount + fillerCellAmount
+  const dateCellsAmount = Math.floor(daysFromStart(startDate) / 7)
+  const cellAmount = daysFromStart(startDate) + dateCellsAmount + fillerCellAmount
   
  
   const daysArray = Array.from({ length: cellAmount });
