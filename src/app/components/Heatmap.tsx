@@ -28,12 +28,10 @@ export default async function Heatmap({
   type: "time" | "count";
   startDate: Date;
 }) {
-
-
   const todaysDate = new Date();
 
-  //amount of days from monday (startingDate)
-  const fillerCellAmount = startDate.getDate() + 1;
+  //amount of days from monday (startingDate) (not including startday)
+  const fillerCellAmount = startDate.getDate();
 
   const dateCellsAmount = Math.floor(daysFromStart(startDate) / 7);
   const cellAmount =
@@ -41,8 +39,9 @@ export default async function Heatmap({
 
   const daysArray = Array.from({ length: cellAmount });
 
+  console.log(startDate, todaysDate);
   const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-
+  let dateCounter = 0;
   return (
     <div className="flex flex-col h-[30%]">
       <div className="">{name}</div>
@@ -56,17 +55,25 @@ export default async function Heatmap({
         {daysOfWeek.map((day, index) =>
           index < cellAmount - 1 ? <div className="m-auto">{day}</div> : null
         )}
-        {daysArray.map((cell, index) =>
-          index % Math.min(8, cellAmount) ? (
-            <Cell
-              startDate={startDate}
-              index={index}
-              fillerCellAmount={fillerCellAmount}
-            />
-          ) : (
-            <CurrentWeek index={index} startDate={startDate} />
-          )
-        )}
+        {daysArray.map((_, index) => {
+          const isCell = index % Math.min(8, cellAmount) !== 0;
+          if (isCell) {
+            const currentIndex = dateCounter;
+            dateCounter++; // Increment only if a Cell is rendered
+            return (
+              <Cell
+                key={index}
+                startDate={startDate}
+                index={currentIndex}
+                fillerCellAmount={fillerCellAmount}
+              />
+            );
+          } else {
+            return (
+              <CurrentWeek key={index} index={index} startDate={startDate} />
+            );
+          }
+        })}
       </div>
     </div>
   );
