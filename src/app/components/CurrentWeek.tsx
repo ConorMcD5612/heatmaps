@@ -1,5 +1,4 @@
 "use client";
-import { Sawarabi_Gothic } from "next/font/google";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";

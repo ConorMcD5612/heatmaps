@@ -34,8 +34,9 @@ export default async function Heatmap({
   const fillerCellAmount = startDate.getDate();
 
   const dateCellsAmount = Math.floor(daysFromStart(startDate) / 7);
+  //ill figure out plus 2 later
   const cellAmount =
-    daysFromStart(startDate) + dateCellsAmount + fillerCellAmount + 1;
+    daysFromStart(startDate) + dateCellsAmount + fillerCellAmount;
 
   const daysArray = Array.from({ length: cellAmount });
 
@@ -66,6 +67,8 @@ export default async function Heatmap({
                 startDate={startDate}
                 index={currentIndex}
                 fillerCellAmount={fillerCellAmount}
+                cellAmount={cellAmount}
+                name={name}
               />
             );
           } else {
