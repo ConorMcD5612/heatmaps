@@ -15,4 +15,4 @@ export async function GET(request: Request) {
 
     const heatmapData = await sql`SELECT * FROM heatmap_data`
     return NextResponse.json({heatmapData}, {status: 200})
-}
+}   

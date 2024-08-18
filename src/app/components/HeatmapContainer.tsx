@@ -16,6 +16,7 @@ export default async function HeatmapContainer() {
         totalMins={data.total_mins} 
         type={data.type}
         startDate={data.start_date} 
+        heatmapID={data.heatmap_id}
         />
       ))}
     </div>

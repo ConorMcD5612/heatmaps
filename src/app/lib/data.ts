@@ -27,3 +27,8 @@ export async function fetchHeatmapData() {
     throw new Error("Failed to fetch heatmap data");
   }
 }
+
+
+export async function fetchCellData() {
+  
+}

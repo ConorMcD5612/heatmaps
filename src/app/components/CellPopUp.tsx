@@ -1,40 +1,15 @@
 import React from "react";
 import { clsx } from "clsx";
 
-const getDate = (
-  startDate: Date,
-  index: number,
-  fillerCellAmount: number
-): Date => {
-  const currentDate = new Date(startDate);
-
-  const dayAmount = index - fillerCellAmount;
-  currentDate.setDate(currentDate.getDate() + dayAmount);
-  return currentDate;
-};
-
-const formatDate = (
-  startDate: Date,
-  index: number,
-  fillerCellAmount: number,
-  name: string
-): string => {
-  const date = getDate(startDate, index, fillerCellAmount);
-  return `1hr 0m of ${name.toLowerCase()} on ${date.getMonth() + 1}/${
-    date.getDate() + 1
-  }/${date.getUTCFullYear()}`;
-};
 
 export default function CellPopUp({
-  startDate,
-  index,
+  formattedDate,
   fillerCellAmount,
-  name,
+  index
 }: {
-  startDate: Date;
-  index: number;
+  formattedDate: string;
   fillerCellAmount: number;
-  name: string;
+  index: number;
 }) {
   return (
     <>
@@ -57,7 +32,7 @@ export default function CellPopUp({
           )}
         >
           <div className="w-full">
-            {formatDate(startDate, index, fillerCellAmount, name)}
+            {formattedDate}
           </div>
         </div>
       )}

@@ -1,6 +1,7 @@
 import React from "react";
 import Cell from "./Cell";
 import CurrentWeek from "./CurrentWeek";
+import { createCell } from "../lib/actions";
 
 //startDate.getDay() 0-6  add this + 1 to cell amount render
 //should also make the date not start on friday for weeks
@@ -21,22 +22,24 @@ export default async function Heatmap({
   totalMins,
   type,
   startDate,
+  heatmapID
 }: {
   name: string;
   color: string;
   totalMins: number;
   type: "time" | "count";
   startDate: Date;
+  heatmapID: number;
 }) {
   const todaysDate = new Date();
 
   //amount of days from monday (startingDate) (not including startday)
-  const fillerCellAmount = startDate.getDate();
+  const fillerCellAmount = startDate.getDay();
 
   const dateCellsAmount = Math.floor(daysFromStart(startDate) / 7);
-  //ill figure out plus 2 later
+  //plus 2 when date is a week start (Monday), date cell and cell itself 
   const cellAmount =
-    daysFromStart(startDate) + dateCellsAmount + fillerCellAmount;
+    daysFromStart(startDate) + dateCellsAmount + fillerCellAmount + 2;
 
   const daysArray = Array.from({ length: cellAmount });
 
@@ -61,6 +64,7 @@ export default async function Heatmap({
           if (isCell) {
             const currentIndex = dateCounter;
             dateCounter++; // Increment only if a Cell is rendered
+            
             return (
               <Cell
                 key={index}
@@ -69,6 +73,7 @@ export default async function Heatmap({
                 fillerCellAmount={fillerCellAmount}
                 cellAmount={cellAmount}
                 name={name}
+                heatmapID={heatmapID}
               />
             );
           } else {
