@@ -6,10 +6,12 @@ export async function createCell(heatmapID: number, index: number, day: any){
     //ill just do this for now 
     try{
         const result = await sql`SELECT 1 FROM cell_data WHERE heatmap_id=${heatmapID} AND cell_id=${index}`
-        console.log(result)
+        console.log(heatmapID, index, day)
         if (result.rowCount === 0){
-            await sql`INSERT INTO cell_data (heatmap_id, cell_id, time_mins, count, date)
-            VALUES (${heatmapID}, ${index}, '0', '0', ${day})`
+            await sql`INSERT INTO cell_data 
+            (cell_id, heatmap_id, time_mins, count, date)
+            VALUES 
+            (${index}, ${heatmapID}, '0', '0', ${day})`
             console.log("created cell in cell_data")
         }
     } catch (error) {

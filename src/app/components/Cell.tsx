@@ -45,7 +45,9 @@ export default async function Cell({
   heatmapID: number;
 }) {
 
-  
+  //if getDate doesnt work move it to utils can use in createCell
+  //doing this for filler cells btw + 2
+  await createCell(heatmapID, index, getDate(startDate, index, fillerCellAmount))
   
   return (
     <>
