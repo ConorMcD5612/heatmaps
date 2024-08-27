@@ -21,3 +21,7 @@ export async function createCell(heatmapID: number, index: number, day: any){
 
 //you can't update a column without having created it first. 
 // export async function updateCell(heatmapID: string, index: number, day: Date)
+//What do I need to update. Need cellID and heatmapID 
+export async function updateCell(cellID: number, heatmapID: number){
+    
+}
