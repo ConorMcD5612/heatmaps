@@ -4,6 +4,7 @@ import { clsx } from "clsx";
 import CellPopUp from "./CellPopUp";
 import { useEffect } from "react";
 import { createCell } from "../lib/actions";
+import Link from "next/link";
 
 const getDate = (
   startDate: Date,
@@ -69,6 +70,7 @@ export default async function Cell({
           fillerCellAmount={fillerCellAmount}
           index={index}
         />
+        <Link className="w-full h-full block" href={`/dashboard?showDialog=y&date=${getDate(startDate, index, fillerCellAmount)}`}>&nbsp;</Link>
       </div>
     </>
   );
