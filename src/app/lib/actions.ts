@@ -1,4 +1,11 @@
 import { sql } from "@vercel/postgres"
+import { revalidatePath } from "next/cache"
+import { redirect } from 'next/navigation';
+imort {ZCOOL_KuaiLe}
+
+
+
+
 export async function createCell(heatmapID: number, index: number, day: any){
 
     //this seems bad becausae u could be doing 1000+ await checks to see if cell exists everytime 
@@ -22,6 +29,32 @@ export async function createCell(heatmapID: number, index: number, day: any){
 //you can't update a column without having created it first. 
 // export async function updateCell(heatmapID: string, index: number, day: Date)
 //What do I need to update. Need cellID and heatmapID 
-export async function updateCell(cellID: number, heatmapID: number){
-    
+
+const FormSchema = z.object({
+    heatmapID: z.string()
+})
+export async function updateCell(cellID: string | null, heatmapID: string | null, formData: FormData){
+    //how am I getting formData its not passed 
+    //its just not calling 
+    //maybe this is why you use zod so you can change the types? 
+    const hours = formData.get('hrs')
+    const mins = formData.get('mins')
+
+   
+    console.log(typeof(hours))
+    //const totalMins: = hours * 60 + mins
+    console.log(formData.get('hrs'), cellID, heatmapID)
+    console.log("called")
+    //this should really never be null though? 
+    //add mins to time 
+    // try {
+    //     await sql`UPDATE cell_data 
+    //     SET `
+    // } catch(e) {
+
+    // }
+
+    //dont know what this does
+    // revalidatePath('/dashboard');
+    redirect('/dashboard');
 }

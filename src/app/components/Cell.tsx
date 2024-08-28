@@ -70,7 +70,7 @@ export default async function Cell({
           fillerCellAmount={fillerCellAmount}
           index={index}
         />
-        <Link className="w-full h-full block" href={`/dashboard?showDialog=y&date=${getDate(startDate, index, fillerCellAmount).toLocaleDateString()}`}>&nbsp;</Link>
+        <Link className="w-full h-full block" href={`/dashboard?showDialog=y&date=${getDate(startDate, index, fillerCellAmount).toLocaleDateString()}&heatmapID=${heatmapID}&cellID=${index}`}>&nbsp;</Link>
       </div>
     </>
   );
