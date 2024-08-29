@@ -16,7 +16,7 @@ export default function UpdateCell() {
 
   //need heatmapID in from URL
 
-  const updateCellWithID = updateCell.bind(null, heatmapID, cellID);
+  const updateCellWithID = updateCell.bind(null, cellID, heatmapID);
 
   return (
     <>
@@ -30,7 +30,6 @@ export default function UpdateCell() {
           <button type="submit" className="bg-black text-white">Save</button>
         </form>
         <div></div>
-       
       </div>
     </>
   );
