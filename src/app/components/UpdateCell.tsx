@@ -31,6 +31,6 @@ export default function UpdateCell() {
         </form>
         <div></div>
       </div>
-    </>
+    </> 
   );
 }

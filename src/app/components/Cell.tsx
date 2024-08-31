@@ -5,6 +5,8 @@ import CellPopUp from "./CellPopUp";
 import { useEffect } from "react";
 import { createCell } from "../lib/actions";
 import Link from "next/link";
+import { fetchCellData } from "../lib/data";
+import { CellData } from "../lib/definitions";
 
 const getDate = (
   startDate: Date,
@@ -22,10 +24,14 @@ const formatDate = (
   startDate: Date,
   index: number,
   fillerCellAmount: number,
-  name: string
+  name: string,
+  cellData: any
 ): string => {
   const date = getDate(startDate, index, fillerCellAmount);
-  return `1hr 0m of ${name.toLowerCase()} on ${date.getMonth() + 1}/${
+  const hours = Math.floor(cellData[0].time_mins / 60)
+  const mins = cellData[0].time_mins - (hours * 60)
+
+  return `${hours}hr ${mins}m of ${name.toLowerCase()} on ${date.getMonth() + 1}/${
     date.getDate() + 1
   }/${date.getUTCFullYear()}`;
 };
@@ -50,6 +56,9 @@ export default async function Cell({
   //doing this for filler cells btw + 2
   await createCell(heatmapID, index, getDate(startDate, index, fillerCellAmount))
   
+  const cellData = await fetchCellData(heatmapID, index)
+  console.log("THIS IS FTECHCELL DATA", cellData[0].time_mins)
+  
   return (
     <>
       <div
@@ -66,7 +75,7 @@ export default async function Cell({
         )}
       >
         <CellPopUp
-          formattedDate={formatDate(startDate, index, fillerCellAmount, name)}
+          formattedDate={formatDate(startDate, index, fillerCellAmount, name, cellData)}
           fillerCellAmount={fillerCellAmount}
           index={index}
         />

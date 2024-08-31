@@ -1,5 +1,5 @@
 import { sql } from "@vercel/postgres";
-import { HeatmapData } from "./definitions";
+import { HeatmapData, CellData } from "./definitions";
 import { getServerSession } from "next-auth";
 import { options } from "../api/auth/[...nextauth]/options";
 
@@ -28,7 +28,20 @@ export async function fetchHeatmapData() {
   }
 }
 
+//going to call this on possibly thousands of cells. 
 
-export async function fetchCellData() {
-  
+export async function fetchCellData(heatmapID: number, cellID: number) {
+  //going to need type of heatmap later 
+    try {
+      const data = await sql<CellData>`
+      SELECT *
+      FROM cell_data
+      WHERE heatmap_id=${heatmapID} AND cell_id=${cellID}
+      `
+      
+      return data.rows
+    } catch (e) {
+      console.error("fetchCellData failed", e)
+      throw new Error("Failed to fetch cellData")
+    }
 }
