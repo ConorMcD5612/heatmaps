@@ -45,3 +45,19 @@ export async function fetchCellData(heatmapID: number, cellID: number) {
       throw new Error("Failed to fetch cellData")
     }
 }
+
+
+export async function fetchMinsAverage(heatmapID: number) {
+  try {
+    const data = await sql`
+    SELECT AVG(time_mins)
+    FROM cell_data
+    WHERE heatmap_id=${heatmapID}`
+    console.log(data.rows)
+
+    return data.rows
+  } catch (e) {
+    console.error("fetchTimeAverage failed")
+    throw new Error("Failed to fetch average")
+  }
+}

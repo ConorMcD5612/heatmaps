@@ -3,6 +3,7 @@ import Cell from "./Cell";
 import CurrentWeek from "./CurrentWeek";
 import { createCell } from "../lib/actions";
 import { fetchCellData } from "../lib/data";
+import { fetchMinsAverage } from "../lib/data";
 
 //startDate.getDay() 0-6  add this + 1 to cell amount render
 //should also make the date not start on friday for weeks
@@ -48,7 +49,7 @@ export default async function Heatmap({
   //use for cell indexing 
   let dateCounter = 0;
 
-  const cellData = await fetchCellData(heatmapID)
+ const minsAverage = await fetchMinsAverage(heatmapID)
 
   return (
     <div className="flex flex-col h-[30%]">
@@ -77,7 +78,7 @@ export default async function Heatmap({
                 cellAmount={cellAmount}
                 name={name}
                 heatmapID={heatmapID}
-                
+                minsAverage={minsAverage[0].avg}
               />
             );
           } else {

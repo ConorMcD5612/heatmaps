@@ -26,6 +26,7 @@ const formatDate = (
   fillerCellAmount: number,
   name: string,
   cellData: any
+ 
 ): string => {
   const date = getDate(startDate, index, fillerCellAmount);
   const hours = Math.floor(cellData[0].time_mins / 60)
@@ -36,13 +37,22 @@ const formatDate = (
   }/${date.getUTCFullYear()}`;
 };
 
+
+
+ //color intensity based on average
+const calculateColor = (cellData: any, minsAverage: number) => {
+  const mins = cellData[0].time_mins
+
+} 
+
 export default async function Cell({
   startDate,
   fillerCellAmount,
   index,
   name,
   cellAmount,
-  heatmapID
+  heatmapID,
+  minsAverage
 }: {
   startDate: Date;
   fillerCellAmount: number;
@@ -50,12 +60,14 @@ export default async function Cell({
   name: string;
   cellAmount: number;
   heatmapID: number;
+  minsAverage: number;
 }) {
 
   //if getDate doesnt work move it to utils can use in createCell
   //doing this for filler cells btw + 2
   await createCell(heatmapID, index, getDate(startDate, index, fillerCellAmount))
   
+
   const cellData = await fetchCellData(heatmapID, index)
   console.log("THIS IS FTECHCELL DATA", cellData[0].time_mins)
   
