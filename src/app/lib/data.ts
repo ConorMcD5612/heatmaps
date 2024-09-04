@@ -61,3 +61,16 @@ export async function fetchMinsAverage(heatmapID: number) {
     throw new Error("Failed to fetch average")
   }
 }
+
+//max, min for cell color
+export async function fetchMaxMin(heatmapID: number) {
+  try { 
+    const data = await sql`
+    SELECT MIN(time_mins) AND MAX(time_mins)
+    FROM cell_data
+    WHERE heatmap_id=${heatmapID}`
+  } catch (e) {
+    console.error("fetchMaxMin failed")
+    throw new Error("Failed to fetch min max")
+  }
+}

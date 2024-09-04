@@ -39,9 +39,26 @@ const formatDate = (
 
 
 
+
  //color intensity based on average
-const calculateColor = (cellData: any, minsAverage: number) => {
+const calculateColor = (cellData: any, max: number, min: number): string => {
   const mins = cellData[0].time_mins
+  //0 .25 5 .75 1
+  //0, 128, 51
+  //just do ratio 
+  //just want a number below 0 
+  // can just take average and see if above or below 
+  //can do average + average + .25 of average 
+  //how do I make it go 0-1 based on what the time is 
+  //normalize 0-1 based on average?
+  //think I need min and max then 
+  //return base color if max-min === 0
+  // max color
+  if(max - min === 0) return "rgb(0,255,0)"
+  //range from 0-1   
+  const val = cellData[0].time_mins
+  const opacity = (val - min) / (max - min) 
+  return `rgba(0, 255, 0, ${opacity})`
 
 } 
 
@@ -70,6 +87,7 @@ export default async function Cell({
 
   const cellData = await fetchCellData(heatmapID, index)
   console.log("THIS IS FTECHCELL DATA", cellData[0].time_mins)
+  const color = calculateColor(dataCell)
   
   return (
     <>
@@ -81,6 +99,7 @@ export default async function Cell({
           "max-h-100",
           "relative",
           "group/item",
+          `bg-color-[${color}]`
           cellAmount == index + 7
             ? "shadow-inner border-black"
             : "border-gray-300"
