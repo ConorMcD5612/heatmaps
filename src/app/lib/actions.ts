@@ -28,11 +28,10 @@ export async function createCell(heatmapID: number, index: number, day: any) {
 
 const FormSchema = z.object({
   hours: z.coerce
-    .number()
-    .gt(0, { message: "Please enter an amount greater than $0." }),
+    .number(),
+    
   mins: z.coerce
     .number()
-    .gt(0, { message: "Please enter an amount greater than $0." }),
 });
 
 const UpdateCell = FormSchema;
