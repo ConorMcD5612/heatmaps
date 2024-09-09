@@ -53,7 +53,7 @@ export async function fetchMinsAverage(heatmapID: number) {
     SELECT AVG(time_mins)
     FROM cell_data
     WHERE heatmap_id=${heatmapID}`
-    console.log(data.rows)
+    console.log(data.rows, "YOYOOYOYO")
 
     return data.rows
   } catch (e) {
@@ -63,12 +63,15 @@ export async function fetchMinsAverage(heatmapID: number) {
 }
 
 //max, min for cell color
-export async function fetchMaxMin(heatmapID: number) {
+export async function fetchMinMax(heatmapID: number) {
   try { 
     const data = await sql`
-    SELECT MIN(time_mins) AND MAX(time_mins)
+    SELECT MIN(time_mins) as min_time, MAX(time_mins) as max_time
     FROM cell_data
     WHERE heatmap_id=${heatmapID}`
+
+    console.log(data.rows)
+    return data.rows[0]
   } catch (e) {
     console.error("fetchMaxMin failed")
     throw new Error("Failed to fetch min max")

@@ -7,6 +7,8 @@ import { createCell } from "../lib/actions";
 import Link from "next/link";
 import { fetchCellData } from "../lib/data";
 import { CellData } from "../lib/definitions";
+import { fetchMinMax } from "../lib/data";
+import CellColor from "./CellColor"
 
 const getDate = (
   startDate: Date,
@@ -41,26 +43,6 @@ const formatDate = (
 
 
  //color intensity based on average
-const calculateColor = (cellData: any, max: number, min: number): string => {
-  const mins = cellData[0].time_mins
-  //0 .25 5 .75 1
-  //0, 128, 51
-  //just do ratio 
-  //just want a number below 0 
-  // can just take average and see if above or below 
-  //can do average + average + .25 of average 
-  //how do I make it go 0-1 based on what the time is 
-  //normalize 0-1 based on average?
-  //think I need min and max then 
-  //return base color if max-min === 0
-  // max color
-  if(max - min === 0) return "rgb(0,255,0)"
-  //range from 0-1   
-  const val = cellData[0].time_mins
-  const opacity = (val - min) / (max - min) 
-  return `rgba(0, 255, 0, ${opacity})`
-
-} 
 
 export default async function Cell({
   startDate,
@@ -69,7 +51,8 @@ export default async function Cell({
   name,
   cellAmount,
   heatmapID,
-  minsAverage
+  min,
+  max
 }: {
   startDate: Date;
   fillerCellAmount: number;
@@ -77,17 +60,19 @@ export default async function Cell({
   name: string;
   cellAmount: number;
   heatmapID: number;
-  minsAverage: number;
+  min: number;
+  max: number;
 }) {
 
   //if getDate doesnt work move it to utils can use in createCell
   //doing this for filler cells btw + 2
   await createCell(heatmapID, index, getDate(startDate, index, fillerCellAmount))
+ 
   
-
   const cellData = await fetchCellData(heatmapID, index)
-  console.log("THIS IS FTECHCELL DATA", cellData[0].time_mins)
-  const color = calculateColor(dataCell)
+  console.log(cellData, "LAWL")
+ 
+
   
   return (
     <>
@@ -99,18 +84,19 @@ export default async function Cell({
           "max-h-100",
           "relative",
           "group/item",
-          `bg-color-[${color}]`
+          
           cellAmount == index + 7
             ? "shadow-inner border-black"
             : "border-gray-300"
         )}
       >
+        <CellColor timeMins={cellData[0].time_mins} min={min} max={max}/>
         <CellPopUp
           formattedDate={formatDate(startDate, index, fillerCellAmount, name, cellData)}
           fillerCellAmount={fillerCellAmount}
           index={index}
         />
-        <Link className="w-full h-full block" href={`/dashboard?showDialog=y&date=${getDate(startDate, index, fillerCellAmount).toLocaleDateString()}&heatmapID=${heatmapID}&cellID=${index}`}>&nbsp;</Link>
+        <Link className="absolute inset-0 block z-10" href={`/dashboard?showDialog=y&date=${getDate(startDate, index, fillerCellAmount).toLocaleDateString()}&heatmapID=${heatmapID}&cellID=${index}`}>&nbsp;</Link>
       </div>
     </>
   );
