@@ -17,7 +17,8 @@ const getDate = (
 ): Date => {
   const currentDate = new Date(startDate);
 
-  const dayAmount = index - fillerCellAmount;
+  const dayAmount = index - fillerCellAmount + 1;
+ 
   currentDate.setDate(currentDate.getDate() + dayAmount);
   return currentDate;
 };
@@ -34,8 +35,10 @@ const formatDate = (
   const hours = Math.floor(cellData[0].time_mins / 60)
   const mins = cellData[0].time_mins - (hours * 60)
 
+
+  //getDate() not 0 indexed but month is lol
   return `${hours}hr ${mins}m of ${name.toLowerCase()} on ${date.getMonth() + 1}/${
-    date.getDate() + 1
+    date.getDate()
   }/${date.getUTCFullYear()}`;
 };
 

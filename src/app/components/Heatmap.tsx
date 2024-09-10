@@ -35,9 +35,9 @@ export default async function Heatmap({
 }) {
   const todaysDate = new Date();
 
-  //amount of days from monday (startingDate) (not including startday)
+  //This could possibly be wrong It goes sat-sunday 
   const fillerCellAmount = startDate.getDay();
-
+  
   const dateCellsAmount = Math.floor(daysFromStart(startDate) / 7);
   //plus 2 when date is a week start (Monday), date cell and cell itself 
   const cellAmount =
