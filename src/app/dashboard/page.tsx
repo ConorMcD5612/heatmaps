@@ -4,6 +4,7 @@ import Heatmap from "../components/Heatmap";
 import HeatmapContainer from "../components/HeatmapContainer";
 import Dialog from "../components/Dialog";
 import UpdateCell from "../components/UpdateCell";
+import CreateHeatmap from "../components/CreateHeatmap";
 
 
 export default function Page() {
@@ -33,6 +34,7 @@ export default function Page() {
       <div className="flex flex-col h-[95%]">
       <HeatmapContainer />
       </div>
+      <CreateHeatmap />
     </div>
     </>
   );

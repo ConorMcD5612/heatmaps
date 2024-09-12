@@ -41,7 +41,7 @@ export default async function Heatmap({
   const dateCellsAmount = Math.floor(daysFromStart(startDate) / 7);
   //plus 2 when date is a week start (Monday), date cell and cell itself 
   const cellAmount =
-    daysFromStart(startDate) + dateCellsAmount + fillerCellAmount + 2;
+    daysFromStart(startDate) + dateCellsAmount + fillerCellAmount;
 
   const daysArray = Array.from({ length: cellAmount });
   const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
