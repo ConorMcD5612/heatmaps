@@ -34,7 +34,7 @@ export default function Page() {
       <div className="flex flex-col h-[95%]">
       <HeatmapContainer />
       </div>
-      <CreateHeatmap />
+
     </div>
     </>
   );
