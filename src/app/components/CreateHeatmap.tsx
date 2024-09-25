@@ -1,16 +1,27 @@
 import React from 'react'
-import FeatherIcon from 'feather-icons-react'
 
 export default function CreateHeatmap() {
-    
-
-
+  //color input val is hex no matter what 
   return (
-    <div className='border-2 opacity-50 border-black border-dashed flex gap-1 justify-center p-1'>
-      
-      <FeatherIcon className="my-auto" size={20} icon='plus-circle'/>
+    <div className='border-2 border-black'>
+      <form>
+        <input type="text" name="name" placeholder='Heatmap name?'/>
+        Cell Color: <input name="color" type="color" />
+        
+        <div>
+          <legend>Select Measurement:</legend>
+          <input  type="radio"/>
+          <label>Count</label>
 
-      <h4 className='my-auto'>Add Heatmap</h4>
+          <input type="radio"/>
+          <label>Time</label>
+          
+        </div>
+
+        <button>Close</button>
+        <button>Save</button>
+        
+      </form>
     </div>
   )
 }

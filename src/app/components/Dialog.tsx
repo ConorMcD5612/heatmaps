@@ -38,7 +38,6 @@ export default function Dialog({onClose, onSave, children}: Props) {
         <dialog ref={dialogRef}>
             <div>
                 {children}
-
             </div>
         </dialog>
     ) : null

@@ -2,7 +2,7 @@ import React from "react";
 import { fetchHeatmapData } from "../lib/data";
 import Heatmap from "./Heatmap";
 import { HeatmapData } from "../lib/definitions";
-import CreateHeatmap from "./CreateHeatmap";
+import CreateHeatmapBtn from "./CreateHeatmapBtn";
 
 
 export default async function HeatmapContainer() {
@@ -20,7 +20,7 @@ export default async function HeatmapContainer() {
         heatmapID={data.heatmap_id}
         />
       ))}
-      <CreateHeatmap />
+      <CreateHeatmapBtn />
     </div>
   );
 }

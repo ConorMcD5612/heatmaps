@@ -4,7 +4,7 @@ import Heatmap from "../components/Heatmap";
 import HeatmapContainer from "../components/HeatmapContainer";
 import Dialog from "../components/Dialog";
 import UpdateCell from "../components/UpdateCell";
-import CreateHeatmap from "../components/CreateHeatmap";
+import CreateHeatmap from "../components/CreateHeatmapBtn";
 
 
 export default function Page() {
