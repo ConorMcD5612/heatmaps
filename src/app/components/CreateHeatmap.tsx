@@ -9,9 +9,9 @@ export default function CreateHeatmap({
 }) {
   //color input val is hex no matter what
   const formSubmit = (formData: FormData): void => {
-    createHeatmap(formData)
-    closeModal()
-  }
+    createHeatmap(formData);
+    closeModal();
+  };
 
   return (
     <div className="border-2 border-black text-lg">
@@ -21,6 +21,7 @@ export default function CreateHeatmap({
           type="text"
           name="heatmapName"
           placeholder="Heatmap name?"
+          required
         />
         <div className="flex flex-col w-2/12 self-start h-full">
           <label>Cell Color:</label>
@@ -35,16 +36,19 @@ export default function CreateHeatmap({
             </div>
 
             <div className="font-light text-base">
-              <input name="type" type="radio" value="Time" />
+              <input name="type" checked type="radio" value="Time" />
               <label className="ml-1">Time (Hr, Mins)</label>
             </div>
           </div>
         </fieldset>
-        <input
-          className="w-2/12 bg-gray-200 hover:cursor-grab"
-          type="submit"
-          value="Save"
-        />
+        <div className="w-2/12 flex flex-col">
+          <input
+            className=" bg-gray-200 hover:cursor-grab"
+            type="submit"
+            value="Save"
+          />
+          <button onClick={closeModal}>Close</button>
+        </div>
       </form>
     </div>
   );
