@@ -38,7 +38,7 @@ const FormSchema = z.object({
   type: MeasureSchema,
 });
 
-const UpdateCell = FormSchema;
+const UpdateCell = FormSchema.omit({heatmapName: true, color: true, type: true});
 
 //YOU NEED TO HAVE USER ID AS WELL 
 export async function updateCell(

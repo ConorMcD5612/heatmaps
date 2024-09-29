@@ -7,13 +7,14 @@ type Props = {
   
     onClose: () => void,
     onSave: () => void,
+    modalName: string,
     children: React.ReactNode
 }
 
-export default function Dialog({onClose, onSave, children}: Props) {
+export default function Dialog({onClose, onSave, modalName, children}: Props) {
     const searchParams = useSearchParams()
     const dialogRef = useRef<null | HTMLDialogElement>(null)
-    const showDialog = searchParams.get('showDialog')
+    const showDialog = searchParams.get(modalName)
     
 
     useEffect(() => {

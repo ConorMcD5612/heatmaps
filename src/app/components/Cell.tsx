@@ -55,7 +55,8 @@ export default async function Cell({
   cellAmount,
   heatmapID,
   min,
-  max
+  max,
+  color,
 }: {
   startDate: Date;
   fillerCellAmount: number;
@@ -65,6 +66,7 @@ export default async function Cell({
   heatmapID: number;
   min: number;
   max: number;
+  color: string;
 }) {
 
   //if getDate doesnt work move it to utils can use in createCell
@@ -93,13 +95,13 @@ export default async function Cell({
             : "border-gray-300"
         )}
       >
-        <CellColor timeMins={cellData[0].time_mins} min={min} max={max}/>
+        <CellColor color={color} timeMins={cellData[0].time_mins} min={min} max={max}/>
         <CellPopUp
           formattedDate={formatDate(startDate, index, fillerCellAmount, name, cellData)}
           fillerCellAmount={fillerCellAmount}
           index={index}
         />
-        <Link className="absolute inset-0 block z-10" href={`/dashboard?showDialog=y&date=${getDate(startDate, index, fillerCellAmount).toLocaleDateString()}&heatmapID=${heatmapID}&cellID=${index}`}>&nbsp;</Link>
+        <Link className="absolute inset-0 block z-10" href={`/dashboard?cellModal=y&date=${getDate(startDate, index, fillerCellAmount).toLocaleDateString()}&heatmapID=${heatmapID}&cellID=${index}`}>&nbsp;</Link>
       </div>
     </>
   );

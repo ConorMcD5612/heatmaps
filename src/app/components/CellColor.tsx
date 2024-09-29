@@ -15,15 +15,19 @@ export default function CellColor({
   timeMins,
   min,
   max,
+  color
 }: {
   timeMins: number;
   min: number;
   max: number;
+  color: string;
 }) {
-
+// you can't dynamically do tailwind classes 
   return (
     <>
-      <div className={`bg-green-500 w-full h-full z-0`} style={{opacity: calculateColor(timeMins, max, min)}}></div>
+      <div className={`w-full h-full z-0`} style={
+        {opacity: calculateColor(timeMins, max, min),backgroundColor: color,
+        }}></div>
     </>
   );
 }

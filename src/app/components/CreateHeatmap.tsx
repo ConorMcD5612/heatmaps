@@ -36,7 +36,7 @@ export default function CreateHeatmap({
             </div>
 
             <div className="font-light text-base">
-              <input name="type" checked type="radio" value="Time" />
+              <input name="type" required type="radio" value="Time" />
               <label className="ml-1">Time (Hr, Mins)</label>
             </div>
           </div>

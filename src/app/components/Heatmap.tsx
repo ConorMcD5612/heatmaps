@@ -4,6 +4,8 @@ import CurrentWeek from "./CurrentWeek";
 import { createCell } from "../lib/actions";
 import { fetchCellData, fetchMinMax } from "../lib/data";
 import { fetchMinsAverage } from "../lib/data";
+import FeatherIcon from "feather-icons-react";
+import Link from "next/link";
 
 //startDate.getDay() 0-6  add this + 1 to cell amount render
 //should also make the date not start on friday for weeks
@@ -24,7 +26,7 @@ export default async function Heatmap({
   totalMins,
   type,
   startDate,
-  heatmapID
+  heatmapID,
 }: {
   name: string;
   color: string;
@@ -35,28 +37,33 @@ export default async function Heatmap({
 }) {
   const todaysDate = new Date();
 
-  //This could possibly be wrong It goes sat-sunday 
+  //This could possibly be wrong It goes sat-sunday
   const fillerCellAmount = startDate.getDay();
-  
+
   const dateCellsAmount = Math.floor(daysFromStart(startDate) / 7) + 1;
-  console.log("DATE CELLS", dateCellsAmount)
-  //plus 2 when date is a week start (Monday), date cell and cell itself 
+  console.log("DATE CELLS", dateCellsAmount);
+  //plus 2 when date is a week start (Monday), date cell and cell itself
   const cellAmount =
     daysFromStart(startDate) + dateCellsAmount + fillerCellAmount;
 
   const daysArray = Array.from({ length: cellAmount });
   const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
-  //use for cell indexing 
+  //use for cell indexing
   let dateCounter = 0;
-  const minMaxData = await fetchMinMax(heatmapID)
-  
-  
-
+  const minMaxData = await fetchMinMax(heatmapID);
 
   return (
     <div className="flex flex-col h-[30%]">
-      <div className="">{name}</div>
+      <div className="flex justify-between">
+        <div className="flex">
+          {name}
+          <p className="ml-1 font-light">(360hrs)</p>
+        </div>
+        <Link href="/dashboard?optionsModal=y">
+          <FeatherIcon icon="settings" />
+        </Link>
+      </div>
       <div
         className={`grid p-[.5vw] grid-rows-${Math.min(
           8,
@@ -72,7 +79,7 @@ export default async function Heatmap({
           if (isCell) {
             const currentIndex = dateCounter;
             dateCounter++; // Increment only if a Cell is rendered
-            
+
             return (
               <Cell
                 startDate={startDate}
@@ -83,6 +90,7 @@ export default async function Heatmap({
                 heatmapID={heatmapID}
                 min={minMaxData.min_time}
                 max={minMaxData.max_time}
+                color={color}
               />
             );
           } else {

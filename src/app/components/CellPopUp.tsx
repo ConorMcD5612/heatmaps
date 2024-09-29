@@ -20,7 +20,6 @@ export default function CellPopUp({
             "flex",
             "place-items-center",
             "-top-[150%]",
-            "-left-[50%]",
             "rounded",
             "bg-black",
             "w-52",
