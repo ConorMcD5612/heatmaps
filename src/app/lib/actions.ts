@@ -63,11 +63,11 @@ export async function updateCell(
  
   
   try {
-    console.log("IDSADSA", numCellID, numHeatmapID)
+    
     const result = await sql`UPDATE cell_data 
         SET time_mins = time_mins + ${totalMins}
         WHERE cell_id = ${cellID} AND heatmap_id = ${heatmapID};`;
-        console.log(result)
+        
   } catch (e) {
     console.error("updateCell error", e);
   }
@@ -98,7 +98,6 @@ export async function createHeatmap(formData: FormData) {
     const result = await sql`INSERT INTO heatmap_data
     (user_id, heatmap_name, color, total_mins, type, start_date)
     VALUES (${userID}, ${heatmapName}, ${color}, ${totalMins}, ${type}, ${startDate} )`
-    console.log(result, "Create heatmap RESULT ")
   } catch (e) {
     console.error("createHeatmap Error")
   }

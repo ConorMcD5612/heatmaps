@@ -6,7 +6,7 @@ import { options } from "../api/auth/[...nextauth]/options";
 export async function fetchHeatmapData() {
   //get user's email
   const session = await getServerSession(options);
-  console.log(session, "this is session");
+
   try {
     //this has to be based on user though
     //I think you can just use session provider here.
@@ -53,7 +53,7 @@ export async function fetchMinsAverage(heatmapID: number) {
     SELECT AVG(time_mins)
     FROM cell_data
     WHERE heatmap_id=${heatmapID}`
-    console.log(data.rows, "YOYOOYOYO")
+   
 
     return data.rows
   } catch (e) {
@@ -70,7 +70,7 @@ export async function fetchMinMax(heatmapID: number) {
     FROM cell_data
     WHERE heatmap_id=${heatmapID}`
 
-    console.log(data.rows)
+  
     return data.rows[0]
   } catch (e) {
     console.error("fetchMaxMin failed")

@@ -16,7 +16,7 @@ const daysFromStart = (startDate: Date): number => {
   const difference = todaysDate.getTime() - startDate.getTime();
 
   const days = Math.ceil(difference / (1000 * 3600 * 24));
-  console.log("DAYS", days);
+
   return days;
 };
 
@@ -39,9 +39,10 @@ export default async function Heatmap({
 
   //This could possibly be wrong It goes sat-sunday
   const fillerCellAmount = startDate.getDay();
+  console.log("Name", fillerCellAmount, "HeatmapID", heatmapID)
 
   const dateCellsAmount = Math.floor(daysFromStart(startDate) / 7) + 1;
-  console.log("DATE CELLS", dateCellsAmount);
+ 
   //plus 2 when date is a week start (Monday), date cell and cell itself
   const cellAmount =
     daysFromStart(startDate) + dateCellsAmount + fillerCellAmount;

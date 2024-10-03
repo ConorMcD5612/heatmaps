@@ -14,6 +14,7 @@ export default function CreateHeatmapBtn() {
   const openModal = (): void => {
     setModalOpen(true)
   }
+  console.log
 
   return (
     <>

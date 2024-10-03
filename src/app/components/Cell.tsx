@@ -1,4 +1,3 @@
-
 import React from "react";
 import { clsx } from "clsx";
 import CellPopUp from "./CellPopUp";
@@ -8,7 +7,7 @@ import Link from "next/link";
 import { fetchCellData } from "../lib/data";
 import { CellData } from "../lib/definitions";
 import { fetchMinMax } from "../lib/data";
-import CellColor from "./CellColor"
+import CellColor from "./CellColor";
 
 const getDate = (
   startDate: Date,
@@ -18,7 +17,7 @@ const getDate = (
   const currentDate = new Date(startDate);
 
   const dayAmount = index - fillerCellAmount + 1;
- 
+
   currentDate.setDate(currentDate.getDate() + dayAmount);
   return currentDate;
 };
@@ -29,23 +28,18 @@ const formatDate = (
   fillerCellAmount: number,
   name: string,
   cellData: any
- 
 ): string => {
   const date = getDate(startDate, index, fillerCellAmount);
-  const hours = Math.floor(cellData[0].time_mins / 60)
-  const mins = cellData[0].time_mins - (hours * 60)
-
+  const hours = Math.floor(cellData[0].time_mins / 60);
+  const mins = cellData[0].time_mins - hours * 60;
 
   //getDate() not 0 indexed but month is lol
-  return `${hours}hr ${mins}m of ${name.toLowerCase()} on ${date.getMonth() + 1}/${
-    date.getDate()
-  }/${date.getUTCFullYear()}`;
+  return `${hours}hr ${mins}m of ${name.toLowerCase()} on ${
+    date.getMonth() + 1
+  }/${date.getDate()}/${date.getUTCFullYear()}`;
 };
 
-
-
-
- //color intensity based on average
+//color intensity based on average
 
 export default async function Cell({
   startDate,
@@ -68,17 +62,16 @@ export default async function Cell({
   max: number;
   color: string;
 }) {
-
   //if getDate doesnt work move it to utils can use in createCell
   //doing this for filler cells btw + 2
-  await createCell(heatmapID, index, getDate(startDate, index, fillerCellAmount))
- 
-  
-  const cellData = await fetchCellData(heatmapID, index)
-  console.log(cellData, "LAWL")
- 
+  await createCell(
+    heatmapID,
+    index,
+    getDate(startDate, index, fillerCellAmount)
+  );
 
-  
+  const cellData = await fetchCellData(heatmapID, index);
+
   return (
     <>
       <div
@@ -88,20 +81,36 @@ export default async function Cell({
           "col-span-3",
           "max-h-100",
           "relative",
-          "group/item",
-          
-          cellAmount == index + 7
-            ? "shadow-inner border-black"
-            : "border-gray-300"
+          "group/item"
         )}
       >
-        <CellColor color={color} timeMins={cellData[0].time_mins} min={min} max={max}/>
+        <CellColor
+          color={color}
+          timeMins={cellData[0].time_mins}
+          min={min}
+          max={max}
+        />
         <CellPopUp
-          formattedDate={formatDate(startDate, index, fillerCellAmount, name, cellData)}
+          formattedDate={formatDate(
+            startDate,
+            index,
+            fillerCellAmount,
+            name,
+            cellData
+          )}
           fillerCellAmount={fillerCellAmount}
           index={index}
         />
-        <Link className="absolute inset-0 block z-10" href={`/dashboard?cellModal=y&date=${getDate(startDate, index, fillerCellAmount).toLocaleDateString()}&heatmapID=${heatmapID}&cellID=${index}`}>&nbsp;</Link>
+        <Link
+          className="absolute inset-0 block z-10"
+          href={`/dashboard?cellModal=y&date=${getDate(
+            startDate,
+            index,
+            fillerCellAmount
+          ).toLocaleDateString()}&heatmapID=${heatmapID}&cellID=${index}`}
+        >
+          &nbsp;
+        </Link>
       </div>
     </>
   );

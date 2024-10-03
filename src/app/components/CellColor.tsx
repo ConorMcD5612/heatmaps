@@ -6,7 +6,7 @@ const calculateColor = (timeMins: number, max: number, min: number): number => {
   if (max - min === 0) return 0;
 
   let opacity = (timeMins - min) / (max - min);
-  console.log("Min:", min, "Max:", max, "Value:", timeMins);
+
  
   return opacity.toFixed(1) 
 };
