@@ -104,14 +104,21 @@ export async function createHeatmap(formData: FormData) {
 
 }
 
-export async function deleteHeatmap( heatmapID: number) {
+export async function deleteHeatmap(heatmapID: number) {
   const session = await getServerSession(options);
   const userID = session?.user?.email
 
+
   try {
-    const result = await sql`DELETE FROM heatmap_data WHERE user_id=${userID}`
+    const result = await sql`DELETE FROM heatmap_data WHERE user_id=${userID} AND heatmap_id=${heatmapID}`
+    console.log("REsult ", result)
   } catch (e) {
     console.error("Failed to delete heatmap", e)
   }
+ 
+}
+
+export async function updateHeatmap(formData: FormData, heatmapID: number) {
+  
 }
 

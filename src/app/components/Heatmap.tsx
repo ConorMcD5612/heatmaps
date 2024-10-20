@@ -61,7 +61,7 @@ export default async function Heatmap({
           {name}
           <p className="ml-1 font-light">(360hrs)</p>
         </div>
-        <Link href="/dashboard?optionsModal=y">
+        <Link href={`/dashboard?optionsModal=y&heatmapID=${heatmapID}&name=${name}&color=${encodeURIComponent(color)}`}>
           <FeatherIcon icon="settings" />
         </Link>
       </div>
