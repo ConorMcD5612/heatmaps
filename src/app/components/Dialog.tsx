@@ -2,6 +2,7 @@
 import { useSearchParams } from 'next/navigation'
 import React from 'react'
 import { useRef, useEffect } from 'react'
+import { Suspense } from 'react'
 
 type Props = {
   
@@ -36,6 +37,7 @@ export default function Dialog({onClose, onSave, modalName, children}: Props) {
     }
 
     const dialog: JSX.Element | null = showDialog === 'y' ? (
+
         <dialog ref={dialogRef}>
             <div>
                 {children}
@@ -43,5 +45,10 @@ export default function Dialog({onClose, onSave, modalName, children}: Props) {
         </dialog>
     ) : null
 
-    return dialog
+    //"This will ensure the page does not de-opt to client-side rendering."
+    return (
+        <Suspense>
+            {dialog}
+        </Suspense>
+    )
 }
