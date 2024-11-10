@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { Suspense, useEffect } from "react";
 
 import { deleteHeatmap } from "../lib/actions";
 import { useSearchParams } from "next/navigation";
@@ -35,6 +35,7 @@ export default function HeatmapOptions() {
 
 
   return (
+   
     <div className="w-[25vw] h-[40vh] p-5">
       <h1 className="text-4xl text-center mb-1">Heatmap Options</h1>
       <div className="h-[1px] bg-black"></div>
@@ -69,5 +70,6 @@ export default function HeatmapOptions() {
         <input name="save" placeholder="save" type="submit" className=" bg-black text-white hover:cursor-grab p-1" />
       </div>
     </div>
+  
   );
 }

@@ -46,9 +46,7 @@ export default function Dialog({onClose, onSave, modalName, children}: Props) {
     ) : null
 
     //"This will ensure the page does not de-opt to client-side rendering."
-    return (
-        <Suspense>
-            {dialog}
-        </Suspense>
-    )
+    return dialog
+    
+    
 }
