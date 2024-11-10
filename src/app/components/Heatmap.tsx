@@ -73,7 +73,7 @@ export default async function Heatmap({
       >
         <div>&nbsp;</div>
         {daysOfWeek.map((day, index) =>
-          index < cellAmount - 1 ? <div className="m-auto">{day}</div> : null
+          index < cellAmount - 1 ? <div key={index} className="m-auto">{day}</div> : null
         )}
         {daysArray.map((_, index) => {
           const isCell = index % Math.min(8, cellAmount) !== 0;
@@ -92,6 +92,7 @@ export default async function Heatmap({
                 min={minMaxData.min_time}
                 max={minMaxData.max_time}
                 color={color}
+                key={index}
               />
             );
           } else {
