@@ -17,6 +17,6 @@ export type CellData = {
     //these might not be numbers when I created the table
     cell_id: number;
     heatmap_id: number;
-    mins: number;
+    time_mins: number;
     count: number;
 }
