@@ -11,9 +11,13 @@ export async function createCell(heatmapID: number, index: number, day: any) {
   //this seems bad becausae u could be doing 1000+ await checks to see if cell exists everytime
   //Could possibily everytime you edit cell, create cell in table
   //ill just do this for now
+  //FIXME: CAUSING LAG?
+  const session = await getServerSession(options);
+  const userID = session?.user?.email
+
   try {
     const result =
-      await sql`SELECT 1 FROM cell_data WHERE heatmap_id=${heatmapID} AND cell_id=${index}`;
+      await sql`SELECT 1 FROM cell_data WHERE heatmap_id=${heatmapID} AND cell_id=${index} AND email=${userID}`;
     if (result.rowCount === 0) {
       await sql`INSERT INTO cell_data 
             (cell_id, heatmap_id, time_mins, count, date)
@@ -79,6 +83,7 @@ export async function updateCell(
 
 const CreateHeatmap = FormSchema.omit({hours: true, mins: true})
 
+
 export async function createHeatmap(formData: FormData) {
 
   const {color, type, heatmapName} = CreateHeatmap.parse({
@@ -107,7 +112,6 @@ export async function createHeatmap(formData: FormData) {
 export async function deleteHeatmap(heatmapID: number) {
   const session = await getServerSession(options);
   const userID = session?.user?.email
-
 
   try {
     const result = await sql`DELETE FROM heatmap_data WHERE user_id=${userID} AND heatmap_id=${heatmapID}`

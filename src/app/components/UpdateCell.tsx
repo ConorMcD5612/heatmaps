@@ -1,9 +1,7 @@
 "use client";
-import React, { Suspense } from "react";
-import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { updateCell } from "../lib/actions";
-import Heatmap from "./Heatmap";
+
 
 export default function UpdateCell() {
   const searchParams = useSearchParams();
@@ -19,7 +17,6 @@ export default function UpdateCell() {
   const updateCellWithID = updateCell.bind(null, cellID, heatmapID);
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
       <div>
         <div>{cellDate}</div>
         <form action={updateCellWithID}>
@@ -31,6 +28,5 @@ export default function UpdateCell() {
         </form>
         <div></div>
       </div>
-    </Suspense> 
   );
 }
