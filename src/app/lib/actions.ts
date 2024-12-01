@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import { getServerSession } from "next-auth";
 import { options } from "../api/auth/[...nextauth]/options";
+import Heatmap from "../components/Heatmap";
 
 
 export async function createCell(heatmapID: number, index: number, day: any) {
@@ -113,13 +114,24 @@ export async function createHeatmap(formData: FormData) {
 
 }
 
+export async function deleteCells(heatmapID: number) {
+  const session = await getServerSession(options);
+  const userID = session?.user?.email
+
+  try {
+    const result = await sql`DELETE FROM cell_data WHERE email=${userID} AND heatmap_id=${heatmapID}`
+  } catch (e) {
+   console.error("delete cells failed", e)
+   }
+}
+
 export async function deleteHeatmap(heatmapID: number) {
   const session = await getServerSession(options);
   const userID = session?.user?.email
 
   try {
     const result = await sql`DELETE FROM heatmap_data WHERE email=${userID} AND heatmap_id=${heatmapID}`
-    console.log("REsult ", result)
+    await deleteCells(heatmapID)
   } catch (e) {
     console.error("Failed to delete heatmap", e)
   }
