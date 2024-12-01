@@ -13,7 +13,7 @@ export async function fetchHeatmapData() {
     const data =
       await sql<HeatmapData>`SELECT *, EXTRACT(EPOCH FROM start_date) AS start_date
       FROM heatmap_data 
-      WHERE user_id=${session?.user?.email}`;
+      WHERE email=${session?.user?.email}`;
     
     //change start date to js date 
     const rows: any = data.rows.map((row) => ({
@@ -32,13 +32,15 @@ export async function fetchHeatmapData() {
 
 export async function fetchCellData(heatmapID: number, cellID: number) {
   //going to need type of heatmap later 
+  const session = await getServerSession(options);
+  const userID = session?.user?.email
+
     try {
       const data = await sql<CellData>`
       SELECT *
       FROM cell_data
-      WHERE heatmap_id=${heatmapID} AND cell_id=${cellID}
+      WHERE heatmap_id=${heatmapID} AND cell_id=${cellID} AND email=${userID}
       `
-      
       return data.rows
     } catch (e) {
       console.error("fetchCellData failed", e)

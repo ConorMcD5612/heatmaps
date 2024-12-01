@@ -4,21 +4,32 @@ import { NextResponse } from "next/server";
 export async function GET(request: Request) {
   try {
     
-    
+    // await sql`DROP TABLE heatmap_data;`
+    // await sql `DROP TABLE cell_data;`
     const result = await sql`
     CREATE TABLE IF NOT EXISTS heatmap_data (
-      user_id VARCHAR(255),
-      heatmap_id SERIAL PRIMARY KEY,
-      heatmap_name VARCHAR(255),
-      total_mins INT,
-      color VARCHAR(255),
-      type VARCHAR(255),
-      start_date DATE
-    );
+    email VARCHAR(255),
+    heatmap_id SERIAL PRIMARY KEY,
+    heatmap_name VARCHAR(255),
+    total_mins INT,
+    color VARCHAR(255),
+    type VARCHAR(255),
+    start_date DATE
+);
   `
+  // await sql`
+  // CREATE TABLE IF NOT EXISTS cell_data (
+  //   email VARCHAR(255),
+  //   heatmap_id INT,
+  //   cell_id INT, 
+  //   time_mins INT,
+  //   count INT,
+  //   date DATE
+  // );
+  // `
   console.log("Table creation result:", result)
      
-     return NextResponse.json({result}, {status: 200})
+  return NextResponse.json({result}, {status: 200})
    
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });

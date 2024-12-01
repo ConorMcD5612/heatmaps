@@ -45,6 +45,7 @@ const FormSchema = z.object({
 const UpdateCell = FormSchema.omit({heatmapName: true, color: true, type: true});
 
 //YOU NEED TO HAVE USER ID AS WELL 
+//TODO: Add email
 export async function updateCell(
   cellID: string | null,
   heatmapID: string | null,
@@ -64,13 +65,16 @@ export async function updateCell(
   const numCellID = Number(cellID) 
   const numHeatmapID = Number(heatmapID)
   const totalMins = hours * 60 + mins;
+
+  const session = await getServerSession(options);
+  const userID = session?.user?.email
  
   
   try {
     
     const result = await sql`UPDATE cell_data 
         SET time_mins = time_mins + ${totalMins}
-        WHERE cell_id = ${cellID} AND heatmap_id = ${heatmapID};`;
+        WHERE cell_id = ${cellID} AND heatmap_id = ${heatmapID} AND email=${userID};`;
         
   } catch (e) {
     console.error("updateCell error", e);
@@ -101,7 +105,7 @@ export async function createHeatmap(formData: FormData) {
   try {
     //dont think I need seperate for mins and count 
     const result = await sql`INSERT INTO heatmap_data
-    (user_id, heatmap_name, color, total_mins, type, start_date)
+    (email, heatmap_name, color, total_mins, type, start_date)
     VALUES (${userID}, ${heatmapName}, ${color}, ${totalMins}, ${type}, ${startDate} )`
   } catch (e) {
     console.error("createHeatmap Error")
@@ -114,7 +118,7 @@ export async function deleteHeatmap(heatmapID: number) {
   const userID = session?.user?.email
 
   try {
-    const result = await sql`DELETE FROM heatmap_data WHERE user_id=${userID} AND heatmap_id=${heatmapID}`
+    const result = await sql`DELETE FROM heatmap_data WHERE email=${userID} AND heatmap_id=${heatmapID}`
     console.log("REsult ", result)
   } catch (e) {
     console.error("Failed to delete heatmap", e)
