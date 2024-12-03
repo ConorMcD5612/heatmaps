@@ -6,6 +6,7 @@ import { fetchCellData, fetchMinMax } from "../lib/data";
 import { fetchMinsAverage } from "../lib/data";
 import FeatherIcon from "feather-icons-react";
 import Link from "next/link";
+import TotalMins from "./TotalMins";
 
 //startDate.getDay() 0-6  add this + 1 to cell amount render
 //should also make the date not start on friday for weeks
@@ -59,7 +60,7 @@ export default async function Heatmap({
       <div className="flex justify-between">
         <div className="flex">
           {name}
-          <p className="ml-1 font-light">(360hrs)</p>
+          <TotalMins heatmapID={heatmapID}/>
         </div>
         <Link href={`/dashboard?optionsModal=y&heatmapID=${heatmapID}&name=${name}&color=${encodeURIComponent(color)}`}>
           <FeatherIcon icon="settings" />

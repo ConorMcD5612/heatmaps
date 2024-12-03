@@ -71,6 +71,7 @@ export default async function Cell({
   );
 
   const cellData = await fetchCellData(heatmapID, index);
+  console.log(cellData)
 
   return (
     <>

@@ -92,7 +92,7 @@ export async function fetchTotalTime(heatmapID: number) {
     const data = await sql`SELECT SUM(time_mins) as sum_time
     FROM cell_data
     WHERE heatmap_id=${heatmapID} and email=${userID}`;
-
+    
     return data.rows[0];
   } catch (e) {
     console.error("time mins sum fetch failed");

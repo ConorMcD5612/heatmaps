@@ -21,7 +21,7 @@ export async function createCell(heatmapID: number, index: number, day: any) {
       await sql`SELECT 1 FROM cell_data WHERE heatmap_id=${heatmapID} AND cell_id=${index} AND email=${userID}`;
     if (result.rowCount === 0) {
       await sql`INSERT INTO cell_data 
-            (cell_id, heatmap_id, time_mins, count, date)
+            (email, cell_id, heatmap_id, time_mins, count, date)
             VALUES 
             (${index}, ${heatmapID}, '0', '0', ${day})`;
     }
