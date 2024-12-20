@@ -1,11 +1,13 @@
 import React, { Suspense } from "react";
-import LoginBtn from "../components/LoginBtn";
-import Heatmap from "../components/Heatmap";
-import HeatmapContainer from "../components/HeatmapContainer";
+import LoginBtn from "../(dashboard)/_components/LoginBtn";
+import HeatmapContainer from "../(dashboard)/_components/HeatmapContainer";
 import Dialog from "../components/Dialog";
-import UpdateCell from "../components/UpdateCell";
-import CreateHeatmap from "../components/CreateHeatmapBtn";
-import HeatmapOptions from "../components/HeatmapOptions";
+
+
+import Heatmap from "../(heatmap)/_components/Heatmap";
+import UpdateCell from "../(cell)/_components/UpdateCell";
+import HeatmapOptions from "../(heatmap)/_components/HeatmapOptions";
+import CreateHeatmap from "../(dashboard)/_components/CreateHeatmap";
 
 export default function Page() {
   async function onClose() {

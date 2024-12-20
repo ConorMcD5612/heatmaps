@@ -1,6 +1,6 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import { updateCell } from "../lib/actions";
+import { updateCell } from "@/app/lib/actions";
 
 
 export default function UpdateCell() {

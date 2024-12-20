@@ -1,5 +1,5 @@
 import React from 'react'
-import { fetchTotalTime } from '../lib/data'
+import { fetchTotalTime } from '../../lib/data'
 import Heatmap from './Heatmap'
 
 

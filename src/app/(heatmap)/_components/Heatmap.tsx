@@ -1,9 +1,11 @@
 import React from "react";
-import Cell from "./Cell";
+
 import CurrentWeek from "./CurrentWeek";
-import { createCell } from "../lib/actions";
-import { fetchCellData, fetchMinMax } from "../lib/data";
-import { fetchMinsAverage } from "../lib/data";
+import Cell from "@/app/(cell)/_components/Cell";
+
+import { createCell } from "@/app/lib/actions";
+import { fetchCellData, fetchMinMax } from "@/app/lib/data";
+import { fetchMinsAverage } from "@/app/lib/data";
 import FeatherIcon from "feather-icons-react";
 import Link from "next/link";
 import TotalMins from "./TotalMins";

@@ -1,13 +1,18 @@
 import React from "react";
 import { clsx } from "clsx";
-import CellPopUp from "./CellPopUp";
+
 import { useEffect } from "react";
-import { createCell } from "../lib/actions";
+
 import Link from "next/link";
-import { fetchCellData } from "../lib/data";
-import { CellData } from "../lib/definitions";
-import { fetchMinMax } from "../lib/data";
+
 import CellColor from "./CellColor";
+
+
+import CellPopUp from "./CellPopUp";
+import { createCell } from "@/app/lib/actions";
+import { fetchCellData } from "@/app/lib/data";
+import { CellData } from "@/app/lib/definitions";
+import { fetchMinMax } from "@/app/lib/data";
 
 const getDate = (
   startDate: Date,

@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { createHeatmap } from "../lib/actions";
+import { createHeatmap } from "../../lib/actions";
 
 export default function CreateHeatmap({
   closeModal,

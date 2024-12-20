@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import { getServerSession } from "next-auth";
 import { options } from "../api/auth/[...nextauth]/options";
-import Heatmap from "../components/Heatmap";
+
 
 
 export async function createCell(heatmapID: number, index: number, day: any) {

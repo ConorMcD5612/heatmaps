@@ -1,7 +1,7 @@
 import React from "react";
-import { fetchHeatmapData } from "../lib/data";
-import Heatmap from "./Heatmap";
-import { HeatmapData } from "../lib/definitions";
+import { fetchHeatmapData } from "../../lib/data";
+import Heatmap from "../../(heatmap)/_components/Heatmap";
+import { HeatmapData } from "../../lib/definitions";
 import CreateHeatmapBtn from "./CreateHeatmapBtn";
 
 
