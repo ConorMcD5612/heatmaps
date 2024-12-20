@@ -77,11 +77,12 @@ export default async function Heatmap({
           index < cellAmount - 1 ? <div key={index} className="m-auto">{day}</div> : null
         )}
         {daysArray.map((_, index) => {
+          
           const isCell = index % Math.min(8, cellAmount) !== 0;
           if (isCell) {
             const currentIndex = dateCounter;
             dateCounter++; // Increment only if a Cell is rendered
-
+            console.log(currentIndex, "current index")
             return (
               <Cell
                 startDate={startDate}
