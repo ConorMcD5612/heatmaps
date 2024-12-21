@@ -2,21 +2,14 @@ import React from "react";
 import WeekDays from "./WeekDays";
 import WeekStart from "./WeekStart";
 import Cells from "./Cells";
+import { HeatmapData } from "@/app/lib/definitions";
 
 export default async function Heatmap({
-  name,
-  color,
-  totalMins,
-  type,
-  startDate,
-  heatmapID,
+  heatmapData,
+  key,
 }: {
-  name: string;
-  color: string;
-  totalMins: number;
-  type: "time" | "count";
-  startDate: Date;
-  heatmapID: number;
+  heatmapData: HeatmapData;
+  key: number;
 }) {
   return (
     <div className="flex  h-[30%] ">

@@ -15,13 +15,17 @@ export async function fetchHeatmapData() {
       FROM heatmap_data 
       WHERE email=${session?.user?.email}`;
 
-    //change start date to js date
-    const rows: any = data.rows.map((row) => ({
-      ...row,
-      start_date: new Date((row.start_date as number) * 1000),
-    }));
-    console.log(rows);
-    return rows;
+    //why is start_date being turned into number 
+    // const rows: any = data.rows.map((row) => ({
+    //   ...row,
+    //   start_date: new Date((row.start_date as number) * 1000),
+    // }));
+    //rows should be array of heatmapData objs
+    //I want data.rows to be type heatmapData
+    //want to return array of obj
+    const rows = data.rows 
+    console.log("heatmap rows", rows);
+    return data.rows;
   } catch (error) {
     console.error("Failed to fetch heatmap data:", error);
     throw new Error("Failed to fetch heatmap data");

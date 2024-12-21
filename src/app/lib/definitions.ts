@@ -10,7 +10,7 @@ export type HeatmapData = {
     total_mins: number;
     type: 'time' | 'count' ;
     start_date: Date | number
-
+    last_updated: Date
 }
 
 export type CellData = {
