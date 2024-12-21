@@ -34,7 +34,7 @@ export async function fetchHeatmapData() {
 
 //going to call this on possibly thousands of cells.
 
-export async function fetchCellData(heatmapID: number, cellID: number) {
+export async function fetchCellData(heatmapID: number) {
   //going to need type of heatmap later
   const session = await getServerSession(options);
   const userID = session?.user?.email;
@@ -43,7 +43,7 @@ export async function fetchCellData(heatmapID: number, cellID: number) {
     const data = await sql<CellData>`
       SELECT *
       FROM cell_data
-      WHERE heatmap_id=${heatmapID} AND cell_id=${cellID} AND email=${userID}
+      WHERE heatmap_id=${heatmapID} AND email=${userID}
       `;
     return data.rows;
   } catch (e) {

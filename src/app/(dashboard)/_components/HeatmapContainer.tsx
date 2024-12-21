@@ -9,9 +9,9 @@ export default async function HeatmapContainer() {
   const heatmapData = await fetchHeatmapData();
   return (
     <div className="h-full">
-      {heatmapData.map((data: HeatmapData, index: number) => (
+      {heatmapData.map((data: HeatmapData) => (
         <Heatmap 
-        key={index}
+        key={data.heatmap_id}
         heatmapData={data}
         />
       ))}
