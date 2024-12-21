@@ -1,0 +1,14 @@
+import React from "react";
+
+export default function WeekStart() {
+  const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
+  return (
+    <div className="grid grid-rows-8">
+    <div className="">&nbsp;</div>
+      {daysOfWeek.map((day) => (
+        <div className="">{day}</div>
+      ))}
+    </div>
+  );
+}
