@@ -3,7 +3,6 @@ import WeekDays from "./WeekDays";
 import WeekStart from "./WeekStart";
 import Cells from "./Cells";
 
-
 export default async function Heatmap({
   name,
   color,
@@ -19,14 +18,12 @@ export default async function Heatmap({
   startDate: Date;
   heatmapID: number;
 }) {
- 
-
   return (
-    <div className="flex flex-col h-[30%]">
-      <div>
+    <div className="flex  h-[30%] ">
       <WeekDays />
-      <WeekStart />
-      <Cells />
+      <div className="flex flex-col w-[80%]">
+        <WeekStart />
+        <Cells />
       </div>
     </div>
   );
