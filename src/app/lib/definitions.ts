@@ -3,8 +3,8 @@ export type User = {
 }
 
 export type HeatmapData = {
-    user_id: string;
-    heatmap_id: string;
+    email: string;
+    heatmap_id: number;
     heatmap_name: string;
     color: string;
     total_mins: number;

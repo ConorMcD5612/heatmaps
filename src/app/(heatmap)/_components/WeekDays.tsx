@@ -4,10 +4,9 @@ export default function WeekDays() {
     const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
     return (
-      <div className="grid grid-rows-8 w-[20%]">
-      <div className="">&nbsp;</div>
+      <div className='w-[10%] grid grid-rows-7 grid-flow-col'>
         {daysOfWeek.map((day) => (
-          <div>{day}</div>
+          <div className='border-r'>{day}</div>
         ))}
       </div>
     );
