@@ -10,7 +10,7 @@ export default async function Cells({heatmapData}: {
     //fetch cells 
   const cellData = await fetchCellData(heatmapData.heatmap_id)
   return (
-    <div className='row-span-7 col-span-7 grid grid-rows-subgrid grid-cols-subgrid grid-flow-col border'>
+    <div className='row-span-7 col-span-7 grid grid-rows-subgrid grid-cols-subgrid grid-flow-col border place-items-center'>
         {cellData.map((cell: CellData) => (
             <Cell cellData={cell}  />
         ))}
