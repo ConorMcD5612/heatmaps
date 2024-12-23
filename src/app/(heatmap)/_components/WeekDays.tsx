@@ -6,7 +6,7 @@ export default function WeekDays() {
     return (
       <div className='w-[10%] grid grid-rows-7 grid-flow-col'>
         {daysOfWeek.map((day) => (
-          <div className='border-r'>{day}</div>
+          <div className='border-r border-l'>{day}</div>
         ))}
       </div>
     );
