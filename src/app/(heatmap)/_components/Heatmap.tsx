@@ -10,9 +10,9 @@ export default async function Heatmap({
   heatmapData: HeatmapData;
 }) {
   return (
-    <div className="flex flex-col h-[30%] mb-2">
+    <div className="flex p-[2px] bg-black gap-[2px] flex-col h-[30%] mb-2">
       <WeekStart />
-      <div className="flex">
+      <div className="flex w-full h-full gap-[2px]">
           <WeekDays />
           <Cells heatmapData={heatmapData} />
       </div>
