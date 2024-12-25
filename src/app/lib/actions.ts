@@ -8,29 +8,6 @@ import { options } from "../api/auth/[...nextauth]/options";
 import { Result } from "postcss";
 
 
-
-export async function createCell(heatmapID: number, index: number, day: any) {
-  //this seems bad becausae u could be doing 1000+ await checks to see if cell exists everytime
-  //Could possibily everytime you edit cell, create cell in table
-  //ill just do this for now
-  //FIXME: CAUSING LAG?
-  const session = await getServerSession(options);
-  const userID = session?.user?.email
-
-  try {
-    const result =
-      await sql`SELECT 1 FROM cell_data WHERE heatmap_id=${heatmapID} AND cell_id=${index} AND email=${userID}`;
-    if (result.rowCount === 0) {
-      await sql`INSERT INTO cell_data 
-            (email, cell_id, heatmap_id, time_mins, count, date)
-            VALUES 
-            (${index}, ${heatmapID}, '0', '0', ${day})`;
-    }
-  } catch (e) {
-    console.error("createCell Failed", e);
-  }
-}
-
 function dateToYYYYMMDD(date: Date): string {
   let formattedDate = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+ date.getDate()
   return formattedDate
@@ -53,7 +30,7 @@ export async function addCell(heatmapID: number, lastUpdated: Date) {
       (${userID}, ${heatmapID}, 0,0, ${currentDate})`
 
       //update lastUpdated to be today
-      await sql`UPDATE heatmap_data SET last_updated = ${currentDate} WHERE heatmap_id= ${heatmapID} and email=${userID}`
+      await sql`UPDATE heatmap_data SET last_updated = ${currentDate} WHERE heatmap_id=${heatmapID} and email=${userID}`
       
     } catch(e) {
       console.error("addCell failed", e)

@@ -8,6 +8,7 @@ import { useState } from "react";
 
 const calculateWeek = (index: number, startDate: Date) => {
   //start week on monday 
+  //monday = 1
   const daysFromMonday = startDate.getDay()
 
   //calculate days (index is multiple of 8)

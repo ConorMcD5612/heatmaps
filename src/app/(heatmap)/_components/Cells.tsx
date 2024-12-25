@@ -2,6 +2,7 @@ import { fetchCellData } from '@/app/lib/data'
 import { CellData, HeatmapData } from '@/app/lib/definitions'
 import Cell from '@/app/(cell)/_components/Cell'
 import React from 'react'
+import WeekStart from './WeekStart'
 
 export default async function Cells({heatmapData}: {
     heatmapData: HeatmapData
@@ -10,10 +11,13 @@ export default async function Cells({heatmapData}: {
     //fetch cells 
   const cellData = await fetchCellData(heatmapData.heatmap_id)
   return (
+    <>
+    <WeekStart cellAmount={cellData.length} startDate={heatmapData.start_date}/>
     <div className='row-span-7 col-span-7 grid grid-rows-subgrid grid-cols-subgrid grid-flow-col border place-items-center'>
         {cellData.map((cell: CellData) => (
             <Cell cellData={cell}  />
         ))}
     </div>
+    </>
   )
 }
