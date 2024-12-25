@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import { getServerSession } from "next-auth";
 import { options } from "../api/auth/[...nextauth]/options";
+import { Result } from "postcss";
 
 
 
@@ -28,6 +29,37 @@ export async function createCell(heatmapID: number, index: number, day: any) {
   } catch (e) {
     console.error("createCell Failed", e);
   }
+}
+
+function dateToYYYYMMDD(date: Date): string {
+  let formattedDate = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+ date.getDate()
+  return formattedDate
+}
+
+//called on heatmap render, adds cell if new day. 
+export async function addCell(heatmapID: number, lastUpdated: Date) {
+  const session = await getServerSession(options);
+  const userID = session?.user?.email
+  
+  const nowDate = new Date()
+  const currentDate = dateToYYYYMMDD(nowDate)
+  const lastFormatted = dateToYYYYMMDD(lastUpdated)
+
+
+  if(currentDate != lastFormatted) {
+    try {
+      await sql`INSERT INTO cell_data (email, heatmap_id, time_mins, count, date)
+      VALUES 
+      (${userID}, ${heatmapID}, 0,0, ${currentDate})`
+
+      //update lastUpdated to be today
+      await sql`UPDATE heatmap_data SET last_updated = ${currentDate} WHERE heatmap_id= ${heatmapID} and email=${userID}`
+      
+    } catch(e) {
+      console.error("addCell failed", e)
+    }
+  }
+
 }
 
 
