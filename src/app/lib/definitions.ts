@@ -19,4 +19,5 @@ export type CellData = {
     heatmap_id: number;
     time_mins: number;
     count: number;
+    date: Date;
 }

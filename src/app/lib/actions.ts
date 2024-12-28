@@ -6,12 +6,10 @@ import { z } from "zod";
 import { getServerSession } from "next-auth";
 import { options } from "../api/auth/[...nextauth]/options";
 import { Result } from "postcss";
+import dateToYYYYMMDD from "./utils";
 
 
-function dateToYYYYMMDD(date: Date): string {
-  let formattedDate = date.getFullYear()+'-'+(date.getMonth()+1)+'-'+ date.getDate()
-  return formattedDate
-}
+
 
 //called on heatmap render, adds cell if new day. 
 export async function addCell(heatmapID: number, lastUpdated: Date) {
