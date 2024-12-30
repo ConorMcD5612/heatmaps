@@ -44,6 +44,7 @@ export async function fetchCellData(heatmapID: number) {
       SELECT *
       FROM cell_data
       WHERE heatmap_id=${heatmapID} AND email=${userID}
+      ORDER BY date
       `;
     return data.rows;
   } catch (e) {
