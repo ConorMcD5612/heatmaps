@@ -12,9 +12,10 @@ export default function CellPopUp({
   timeMins: number;
   mapName: string;
 }) {
+  const formattedDate = dateToYYYYMMDD(date)
+
   return (
     <>
-     
         <div
           className={clsx(
             "absolute",
@@ -34,8 +35,8 @@ export default function CellPopUp({
             "hover:invisible"
           )}
         >
-          <div className="w-full">
-            {`${timeMins} minutes of ${mapName} on ${date} ${dateToYYYYMMDD(date)}`}
+          <div className="w-full text-sm">
+            {`${timeMins} minutes of ${mapName} on ${formattedDate}`}
           </div>
         </div>
    
