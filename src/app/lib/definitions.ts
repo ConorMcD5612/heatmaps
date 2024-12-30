@@ -15,9 +15,8 @@ export type HeatmapData = {
 
 export type CellData = {
     //these might not be numbers when I created the table
-    cell_id: number;
     heatmap_id: number;
     time_mins: number;
     count: number;
-    date: Date;
+    date: Date | string;
 }

@@ -12,7 +12,7 @@ export default async function Cells({heatmapData}: {
   const cellData = await fetchCellData(heatmapData.heatmap_id)
   return (
     <>
-    <WeekStart cellAmount={cellData.length} startDate={heatmapData.start_date}/>
+    <WeekStart cellAmount={cellData.length} startDate={heatmapData.start_date as Date}/>
     <div className='row-span-7 col-span-7 grid grid-rows-subgrid grid-cols-subgrid grid-flow-col border place-items-center '>
         {cellData.map((cell: CellData) => (
             <Cell cellData={cell} mapName={heatmapData.heatmap_name}  />
