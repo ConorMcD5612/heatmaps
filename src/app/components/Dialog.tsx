@@ -1,52 +1,47 @@
-"use client"
-import { useSearchParams } from 'next/navigation'
-import React from 'react'
-import { useRef, useEffect } from 'react'
-import { Suspense } from 'react'
+"use client";
+import { useSearchParams } from "next/navigation";
+import React from "react";
+import { useRef, useEffect } from "react";
+import { Suspense } from "react";
 
 type Props = {
-  
-    onClose: () => void,
-    onSave: () => void,
-    modalName: string,
-    children: React.ReactNode
-}
+  onClose: () => void;
+  onSave: () => void;
+  modalName: string;
+  children: React.ReactNode;
+};
 
-export default function Dialog({onClose, onSave, modalName, children}: Props) {
-    const searchParams = useSearchParams()
-    const dialogRef = useRef<null | HTMLDialogElement>(null)
-    const showDialog = searchParams.get(modalName)
-    
+export default function Dialog({
+  onClose,
+  onSave,
+  modalName,
+  children,
+}: Props) {
+  const searchParams = useSearchParams();
+  const dialogRef = useRef<null | HTMLDialogElement>(null);
+  const showDialog = searchParams.get(modalName);
 
-    useEffect(() => {
-        if(showDialog === 'y') {
-            dialogRef.current?.showModal()
-        } else {
-            dialogRef.current?.close()
-        }
-    }, [showDialog])
-
-    const closeDialog = () => {
-        dialogRef.current?.close()
-        onClose()
+  useEffect(() => {
+    if (showDialog === "y") {
+      dialogRef.current?.showModal();
+    } else {
+      dialogRef.current?.close();
     }
+  }, [showDialog]);
 
-    const clickSave = () => {
-        onSave()
-        closeDialog()
-    }
+  const closeDialog = () => {
+    dialogRef.current?.close();
+    onClose();
+  };
 
-    const dialog: JSX.Element | null = showDialog === 'y' ? (
+  const clickSave = () => {
+    onSave();
+    closeDialog();
+  };
 
-        <dialog ref={dialogRef}>
-            <div>
-                {children}
-            </div>
-        </dialog>
-    ) : null
+  const dialog: JSX.Element | null =
+    showDialog === "y" ? <dialog className="" ref={dialogRef}>{children}</dialog> : null;
 
-    //"This will ensure the page does not de-opt to client-side rendering."
-    return dialog
-    
-    
+  //"This will ensure the page does not de-opt to client-side rendering."
+  return dialog;
 }
