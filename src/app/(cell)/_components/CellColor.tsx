@@ -1,18 +1,20 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-const calculateColor = (timeMins: number, max: number, min: number): number => {
-  if (max - min === 0) return 0;
+//percentiles are 10% first, 35% second, 60% third 
+let ZScoreHash = {
+  "first": -1.282,
+  "second": -.385,
+  "third": .253,
+}
 
-  let opacity = (timeMins - min) / (max - min);
 
-  return parseInt(opacity.toFixed(1));
+const calculateOpacity = (dataPt: number): number => {
+
 };
 
 export default function CellColor({
-  timeMins,
-  min,
-  max,
+ 
   color,
 }: {
   timeMins: number;
@@ -26,7 +28,7 @@ export default function CellColor({
       <div
         className={`w-full h-full z-0`}
         style={{
-          opacity: calculateColor(timeMins, max, min),
+          opacity: calculateOpacity(),
           backgroundColor: color,
         }}
       ></div>

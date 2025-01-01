@@ -19,4 +19,11 @@ export type CellData = {
     time_mins: number;
     count: number;
     date: Date | string;
+    cell_stats: CellStats;
+}
+
+export type CellStats = {
+    mean: number;
+    stdDev: number;
+    total_time: number;
 }

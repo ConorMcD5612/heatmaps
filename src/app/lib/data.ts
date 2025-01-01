@@ -1,5 +1,5 @@
 import { sql } from "@vercel/postgres";
-import { HeatmapData, CellData } from "./definitions";
+import { HeatmapData, CellData, CellStats } from "./definitions";
 import { getServerSession } from "next-auth";
 import { options } from "../api/auth/[...nextauth]/options";
 
@@ -70,23 +70,23 @@ export async function fetchMinsAverage(heatmapID: number) {
   }
 }
 
-//max, min for cell color
-export async function fetchMinMax(heatmapID: number) {
+//gets standard deviation and mean
+export async function fetchCellStats(heatmapID: number) {
   const session = await getServerSession(options);
   const userID = session?.user?.email;
 
   try {
-    const data = await sql`
-    SELECT MIN(time_mins) as min_time, MAX(time_mins) as max_time
+    const data = await sql<CellStats>`
+    SELECT SDTEVP(time_mins) AS stdDev, AVG(time_mins) as mean, SUM(time_mins) as total_time
     FROM cell_data
     WHERE heatmap_id=${heatmapID} AND email=${userID}`;
 
-    return data.rows[0];
+    return data.rows;
   } catch (e) {
-    console.error("fetchMaxMin failed");
-    throw new Error("Failed to fetch min max");
+    console.error("fetch stats failed failed");
+    throw new Error("Failed to fetch stats");
   }
-}
+} 
 
 //sum all mins for a heatmap
 export async function fetchTotalTime(heatmapID: number) {
