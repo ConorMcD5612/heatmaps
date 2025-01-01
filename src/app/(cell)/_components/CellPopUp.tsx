@@ -17,27 +17,12 @@ export default function CellPopUp({
   return (
     <>
         <div
-          className={clsx(
-            "absolute",
-            "flex",
-            "place-items-center",
-            "top-[-110%]",
-            "left-[-100%]",
-            "rounded",
-            "bg-black",
-            "w-64",
-            "h-5",
-            "p-1",
-            "text-white",
-            "z-10",
-            "invisible",
-            "group-hover/item:visible",
-            "hover:invisible"
-          )}
+          className={"absolute block top-[-110%] left-[-100%] rounded bg-black p-1 text-white z-10 invisible group-hover/item:visible hover:invisible text-xs whitespace-nowrap"
+          }
         >
-          <div className="w-full text-sm">
+         
             {`${timeMins} minutes of ${mapName} on ${formattedDate}`}
-          </div>
+          
         </div>
    
     </>
