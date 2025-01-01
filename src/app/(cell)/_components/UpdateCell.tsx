@@ -2,19 +2,16 @@
 import { useSearchParams } from "next/navigation";
 import { updateCell } from "@/app/lib/actions";
 import dateToYYYYMMDD from "@/app/lib/utils";
+import Link from "next/link";
 
 export default function UpdateCell() {
   const searchParams = useSearchParams();
+
   const cellDate = searchParams.get("date");
   const mapName = searchParams.get("name");
   const heatmapID = searchParams.get("heatmapID");
 
-  //dont think using state makes sense
-  //dispatch from using save after done, it closes on save
-
-  //need heatmapID in from URL
-
-  const updateCellWithDate = updateCell.bind(cellDate, heatmapID);
+  const updateCellWithDate = updateCell.bind(null, heatmapID, cellDate);
 
   return (
     <div className="flex flex-col p-2 gap-1 border-2 border-black">
@@ -38,7 +35,7 @@ export default function UpdateCell() {
           <button type="submit" className="bg-black text-white w-1/2 rounded-sm">
             Add
           </button>
-          <button className="w-1/2 rounded-sm bg-gray-300">Close</button>
+          <Link href="/dashboard"className="w-1/2 rounded-sm bg-gray-300 text-center">Close</Link>
         </div>
       </form>
       <div></div>

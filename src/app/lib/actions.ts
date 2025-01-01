@@ -80,23 +80,17 @@ const UpdateCell = FormSchema.omit({
 //YOU NEED TO HAVE USER ID AS WELL
 //TODO: Add email
 export async function updateCell(
-  cellID: string | null,
   heatmapID: string | null,
+  date: string | null,
   formData: FormData
 ) {
   //zod to validate type
+  console.log(formData)
   const { hours, mins } = UpdateCell.parse({
     hours: formData.get("hrs"),
     mins: formData.get("mins"),
   });
-
-  if (!cellID || !heatmapID) {
-    console.error("cellID/HeatmapID null in updateCell");
-    return;
-  }
-
-  const numCellID = Number(cellID);
-  const numHeatmapID = Number(heatmapID);
+  console.log(date, "this is date")
   const totalMins = hours * 60 + mins;
 
   const session = await getServerSession(options);
@@ -105,7 +99,7 @@ export async function updateCell(
   try {
     const result = await sql`UPDATE cell_data 
         SET time_mins = time_mins + ${totalMins}
-        WHERE cell_id = ${cellID} AND heatmap_id = ${heatmapID} AND email=${userID};`;
+        WHERE date=${date} AND heatmap_id=${heatmapID} AND email=${userID};`;
   } catch (e) {
     console.error("updateCell error", e);
   }

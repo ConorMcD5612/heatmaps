@@ -20,7 +20,7 @@ export default function CellColor({
   max: number;
   color: string;
 }) {
-  // you can't dynamically do tailwind classes
+
   return (
     <>
       <div
