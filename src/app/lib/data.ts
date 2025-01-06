@@ -77,7 +77,7 @@ export async function fetchCellStats(heatmapID: number) {
 
   try {
     const data = await sql<CellStats>`
-    SELECT SDTEVP(time_mins) AS stdDev, AVG(time_mins) as mean, SUM(time_mins) as total_time
+    SELECT STDDEV(time_mins) AS stdDev, AVG(time_mins) as mean, SUM(time_mins) as total_time
     FROM cell_data
     WHERE heatmap_id=${heatmapID} AND email=${userID}`;
 

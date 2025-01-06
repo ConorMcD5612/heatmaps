@@ -1,17 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-//percentiles are 10% first, 35% second, 60% third 
-let ZScoreHash = {
-  "first": -1.282,
-  "second": -.385,
-  "third": .253,
-}
-
-
-const calculateOpacity = (dataPt: number): number => {
-
-};
 
 export default function CellColor({
  

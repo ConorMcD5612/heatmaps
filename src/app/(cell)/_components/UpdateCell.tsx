@@ -1,7 +1,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { updateCell } from "@/app/lib/actions";
-import dateToYYYYMMDD from "@/app/lib/utils";
+import {dateToYYYYMMDD} from "@/app/lib/utils";
 import Link from "next/link";
 
 export default function UpdateCell() {

@@ -1,6 +1,6 @@
 import React from "react";
 import { clsx } from "clsx";
-import dateToYYYYMMDD from "@/app/lib/utils";
+import {dateToYYYYMMDD} from "@/app/lib/utils";
 
 export default function CellPopUp({
   date,

@@ -1,14 +1,14 @@
-export default function dateToYYYYMMDD(date: Date): string {
+export function dateToYYYYMMDD(date: Date): string {
   let formattedDate =
     date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
   return formattedDate;
 }
 
-const calculateOpacity = (
+export function calculateOpacity(
   dataPt: number,
   mean: number,
   stdDev: number
-): number => {
+): number {
   if (dataPt === 0 || stdDev === 0) {
     return 0;
   }
@@ -24,12 +24,12 @@ const calculateOpacity = (
 
   // Determine opacity based on z-score
   if (zScore < zScoreHash["lowQuartile"]) {
-    return 0.2; 
+    return 0.2;
   } else if (zScore < zScoreHash["midQuartile"]) {
-    return 0.5; 
+    return 0.5;
   } else if (zScore < zScoreHash["highQuartile"]) {
-    return 0.8; 
+    return 0.8;
   } else {
-    return 1; 
+    return 1;
   }
-};
+}
