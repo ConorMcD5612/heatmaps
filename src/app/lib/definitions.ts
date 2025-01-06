@@ -23,6 +23,6 @@ export type CellData = {
 
 export type CellStats = {
     mean: number;
-    stdDev: number;
+    std_dev: number;
     total_time: number;
 }

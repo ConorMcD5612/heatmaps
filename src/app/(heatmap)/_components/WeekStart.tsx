@@ -25,9 +25,9 @@ export default function WeekStart({cellAmount, startDate}: {
   }
 
   return (
-    <div className="grid grid-rows-subgrid grid-cols-subgrid row-span-1 col-span-8 border-t border-r border-l box-border">
+    <div className="grid grid-rows-subgrid grid-cols-subgrid row-span-1 col-span-8 border-t border-r border-l box-border border-black">
         <div className="col-span-1"></div>
-        <div className=" text-sm  col-span-7 border-l box-border grid grid-cols-12 place-items-center">
+        <div className=" text-sm  col-span-7 border-l box-border grid grid-cols-12 place-items-center border-black">
          {dates}
         </div>
     </div>

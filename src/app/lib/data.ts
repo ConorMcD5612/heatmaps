@@ -77,11 +77,11 @@ export async function fetchCellStats(heatmapID: number) {
 
   try {
     const data = await sql<CellStats>`
-    SELECT STDDEV(time_mins) AS stdDev, AVG(time_mins) as mean, SUM(time_mins) as total_time
+    SELECT STDDEV(time_mins) AS std_dev, AVG(time_mins) as mean, SUM(time_mins) as total_time
     FROM cell_data
     WHERE heatmap_id=${heatmapID} AND email=${userID}`;
-
-    return data.rows;
+    
+    return data.rows[0];
   } catch (e) {
     console.error("fetch stats failed failed");
     throw new Error("Failed to fetch stats");

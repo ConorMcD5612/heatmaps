@@ -9,25 +9,30 @@ export function calculateOpacity(
   mean: number,
   stdDev: number
 ): number {
+
   if (dataPt === 0 || stdDev === 0) {
     return 0;
   }
+  
 
   const zScoreHash = {
-    lowQuartile: -1.282, // 10th percentile
-    midQuartile: -0.385, // 35th percentile
-    highQuartile: 0.253, // 60th percentile
+    lowQuartile: -0.674, //25th percentile
+    midQuartile: -0, //50th
+    highQuartile: 0.674,  //75
   };
 
   // Calculate z-score
   const zScore = (dataPt - mean) / stdDev;
-
+  console.log("zScore", zScore)
   // Determine opacity based on z-score
   if (zScore < zScoreHash["lowQuartile"]) {
+    console.log("lowQuart")
     return 0.2;
   } else if (zScore < zScoreHash["midQuartile"]) {
+    console.log("medQuart")
     return 0.5;
   } else if (zScore < zScoreHash["highQuartile"]) {
+    console.log("highQuart")
     return 0.8;
   } else {
     return 1;
