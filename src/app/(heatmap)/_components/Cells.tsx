@@ -3,14 +3,16 @@ import { CellData, HeatmapData } from '@/app/lib/definitions'
 import Cell from '@/app/(cell)/_components/Cell'
 import React from 'react'
 import WeekStart from './WeekStart'
+import { CellStats } from '@/app/lib/definitions'
 
-export default async function Cells({heatmapData}: {
-    heatmapData: HeatmapData
+export default async function Cells({heatmapData, cellStats}: {
+    heatmapData: HeatmapData;
+    cellStats: CellStats;
 }) {
     //filler cells and regular cells 
     //fetch cells 
   const cellData = await fetchCellData(heatmapData.heatmap_id)
-  const cellStats = await fetchCellStats(heatmapData.heatmap_id)
+  
   return (
     <>
     <WeekStart cellAmount={cellData.length} startDate={heatmapData.start_date as Date}/>
