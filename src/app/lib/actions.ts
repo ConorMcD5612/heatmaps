@@ -111,6 +111,9 @@ export async function updateCell(
 const CreateHeatmap = FormSchema.omit({ hours: true, mins: true });
 
 export async function createHeatmap(formData: FormData) {
+  const session = await getServerSession(options);
+  const userID = session?.user?.email;
+
   const { color, type, heatmapName } = CreateHeatmap.parse({
     color: formData.get("color"),
     type: formData.get("type"),
@@ -120,16 +123,19 @@ export async function createHeatmap(formData: FormData) {
   const totalMins = 0;
   const startDate: any = new Date();
 
-  const session = await getServerSession(options);
-  const userID = session?.user?.email;
+  //to addCell when mape created 
+  let dayBefore: any = new Date()
+  dayBefore.setDate(dayBefore.getDate() - 1)
 
+ 
   try {
-    //dont think I need seperate for mins and count
     const result = await sql`INSERT INTO heatmap_data
-    (email, heatmap_name, color, total_mins, type, start_date)
-    VALUES (${userID}, ${heatmapName}, ${color}, ${totalMins}, ${type}, ${startDate} )`;
+    (email, heatmap_name, color, total_mins, type, start_date, last_updated)
+    VALUES (${userID}, ${heatmapName}, ${color}, ${totalMins}, ${type}, ${startDate}, ${dayBefore})`;
+
   } catch (e) {
     console.error("createHeatmap Error");
+    throw new Error("createheatmap Erorr")
   }
 }
 
