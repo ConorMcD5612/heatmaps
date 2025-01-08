@@ -3,11 +3,11 @@ import LoginBtn from "../(dashboard)/_components/LoginBtn";
 import HeatmapContainer from "../(dashboard)/_components/HeatmapContainer";
 import Dialog from "../components/Dialog";
 
-
 import Heatmap from "../(heatmap)/_components/Heatmap";
 import UpdateCell from "../(cell)/_components/UpdateCell";
 import HeatmapOptions from "../(heatmap)/_components/HeatmapOptions";
 import CreateHeatmap from "../(dashboard)/_components/CreateHeatmap";
+import { Settings } from "feather-icons-react";
 
 export default function Page() {
   async function onClose() {
@@ -22,14 +22,14 @@ export default function Page() {
   return (
     <>
       <Suspense fallback={<div>Loading...</div>}>
-      <Dialog modalName="cellModal" onSave={onSave} onClose={onClose}>
-        <UpdateCell />
-      </Dialog>
+        <Dialog modalName="cellModal" onSave={onSave} onClose={onClose}>
+          <UpdateCell />
+        </Dialog>
       </Suspense>
       <Suspense fallback={<div>Loading...</div>}>
-      <Dialog modalName="optionsModal" onSave={onSave} onClose={onClose}>
-        <HeatmapOptions />
-      </Dialog>
+        <Dialog modalName="optionsModal" onSave={onSave} onClose={onClose}>
+          <HeatmapOptions />
+        </Dialog>
       </Suspense>
       <div className="flex flex-col h-screen gap-1">
         <div className="h-[5%] ">
@@ -37,6 +37,10 @@ export default function Page() {
             <h1 className="text-3xl font-extrabold  roundedxl w-3/4">
               heatmaps
             </h1>
+            <div className="flex border gap-1 border-black p-[4px] place-items-center rounded">
+              <Settings size={16} />
+              <h5 className="text-xs">Settings</h5>
+            </div>
             <div className="ml-auto">
               <LoginBtn />
             </div>
