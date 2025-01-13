@@ -3,7 +3,7 @@ import React, { Suspense, useEffect } from "react";
 
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-
+import { IoMdClose } from "react-icons/io";
 import { useState, useRef } from "react";
 
 import { deleteHeatmap, updateHeatmap } from "@/app/lib/actions";
@@ -20,7 +20,7 @@ export default function HeatmapOptions() {
 
   const [color, setColor] = useState<string>(`${colorParam}`);
 
-  const updateHeatmapWithID = updateHeatmap.bind(heatmapID);
+  const updateHeatmapWithID = updateHeatmap.bind(null, heatmapID);
 
   //debouncing triggering 200ms timeOut (setting color) every time onChange fires (clears the previous one so state isn't set)
   //so once user done dragging // 200ms goes by and color is set
@@ -35,12 +35,12 @@ export default function HeatmapOptions() {
   };
 
   return (
-    <div className="w-[25vw] h-[40vh] p-5">
+    <div className="p-5">
       <h1 className="text-4xl text-center mb-1">Heatmap Options</h1>
       <div className="h-[1px] bg-black"></div>
-      <form className="flex flex-col gap-3 mt-5">
+      <form action={updateHeatmapWithID} className="flex flex-col gap-3 mt-5">
         <div className="flex flex-col">
-          <label>Name:</label>
+          <label className="font-light">Name:</label>
           <input
             type="text"
             id="name"
@@ -50,35 +50,33 @@ export default function HeatmapOptions() {
           />
         </div>
         <div className="flex flex-col">
-          <label htmlFor="color">Color:</label>
+          <label className="font-light" htmlFor="color">Color:</label>
           <input
             type="color"
+            name="color"
             value={color}
             onChange={(e) => handleColorChange(e.target.value)}
           />
         </div>
-        <p>
+        <p className="mb-5">
           <button
-            onClick={() => deleteHeatmap(heatmapID)}
+            onDoubleClick={() => deleteHeatmap(heatmapID)}
             className="text-red-600"
           >
             Delete
           </button>{" "}
-          this heatmap
+          this heatmap.
         </p>
-      </form>
 
-      <div className="flex gap-2 absolute right-5 bottom-0">
-        <Link className="p-1 bg-gray-200 border border-black" href="/dashboard">
-          Close
-        </Link>
         <input
-          name="save"
           placeholder="save"
           type="submit"
-          className=" bg-black text-white hover:cursor-grab p-1"
+          className="bg-black text-white hover:cursor-grab p-1"
         />
-      </div>
+      </form>
+      <Link className="absolute top-0 right-0 p-1" href="/dashboard">
+          <IoMdClose size={18} />
+        </Link>
     </div>
   );
 }

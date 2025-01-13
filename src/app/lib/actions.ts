@@ -104,7 +104,7 @@ export async function updateCell(
     console.error("updateCell error", e);
   }
 
-  //dont know what this does
+
   redirect("/dashboard");
 }
 
@@ -123,7 +123,7 @@ export async function createHeatmap(formData: FormData) {
   const totalMins = 0;
   const startDate: any = new Date();
 
-  //to addCell when mape created 
+  //to addCell when map created 
   let dayBefore: any = new Date()
   dayBefore.setDate(dayBefore.getDate() - 1)
 
@@ -158,10 +158,33 @@ export async function deleteHeatmap(heatmapID: number) {
   try {
     const result =
       await sql`DELETE FROM heatmap_data WHERE email=${userID} AND heatmap_id=${heatmapID}`;
-    await deleteCells(heatmapID);
+      await deleteCells(heatmapID);
   } catch (e) {
     console.error("Failed to delete heatmap", e);
   }
 }
 
-export async function updateHeatmap(formData: FormData, heatmapID: number) {}
+
+const UpdateHeatmap = FormSchema.omit({
+  hours: true,
+  mins: true,
+  type: true,
+})
+export async function updateHeatmap(heatmapID: number, formData: FormData) {
+  const session = await getServerSession(options);
+  const userID = session?.user?.email;
+
+  
+  const { color, heatmapName } = UpdateHeatmap.parse({
+    color: formData.get("color"),
+    heatmapName: formData.get("name"),
+  }); 
+  console.log(heatmapName, "heatmapName")
+  try {
+    const result = await sql`UPDATE heatmap_data SET color = ${color}, heatmap_name = ${heatmapName} WHERE heatmap_id=${heatmapID} AND email=${userID}`;
+  } catch (e) {
+    console.error("updateHeatmap failed", e);
+  }
+
+  redirect("/dashboard");
+}

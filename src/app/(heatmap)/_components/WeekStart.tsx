@@ -1,6 +1,20 @@
 import { create } from "domain";
 import React from "react";
 
+
+function getWeekStartDate(
+  start: Date,
+  i: number,
+  daysFromMonday: number
+): string {
+  let daysToAdd = i * 7 - daysFromMonday;
+
+  let date = new Date(start);
+  date.setDate(date.getDate() + daysToAdd);
+
+  return `${date.getMonth() + 1}/${date.getDate() + 1}`;
+}
+
 export default function WeekStart({
   cellAmount,
   startDate,
@@ -10,21 +24,7 @@ export default function WeekStart({
 }) {
   let daysFromMonday = startDate.getDay() == 0 ? 6 : startDate.getDay();
 
-  function getWeekStartDate(
-    start: Date,
-    i: number,
-    daysFromMonday: number
-  ): string {
-    let daysToAdd = i * 7 - daysFromMonday;
-
-    let date = new Date(start);
-    date.setDate(date.getDate() + daysToAdd);
-
-    return `${date.getMonth() + 1}/${date.getDate() + 1}`;
-  }
-
   let numDates = Math.ceil((cellAmount + daysFromMonday) / 7);
-
   const dates = [];
 
   for (let i = 0; i < numDates; i++) {
