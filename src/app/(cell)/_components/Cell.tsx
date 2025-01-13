@@ -23,7 +23,7 @@ export default function Cell({
         color={heatmapData.color}
       />
       <CellPopUp
-        date={cellData.date}
+        date={cellData.date as Date}
         timeMins={cellData.time_mins}
         mapName={heatmapData.heatmap_name}
       />
