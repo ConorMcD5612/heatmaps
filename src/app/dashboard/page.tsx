@@ -7,7 +7,8 @@ import Heatmap from "../(heatmap)/_components/Heatmap";
 import UpdateCell from "../(cell)/_components/UpdateCell";
 import HeatmapOptions from "../(heatmap)/_components/HeatmapOptions";
 import CreateHeatmap from "../(dashboard)/_components/CreateHeatmap";
-import { Settings } from "feather-icons-react";
+
+import { IoMdSettings } from "react-icons/io";
 
 export default function Page() {
   async function onClose() {
@@ -38,7 +39,7 @@ export default function Page() {
               heatmaps
             </h1>
             <div className="flex border gap-1 border-black p-[4px] place-items-center rounded">
-              <Settings size={16} />
+            <IoMdSettings size={16} />
               <h5 className="text-xs">Settings</h5>
             </div>
             <div className="ml-auto">
