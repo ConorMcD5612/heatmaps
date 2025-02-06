@@ -34,9 +34,9 @@ export default function WeekStart({
   }
 
   return (
-    <div className="grid grid-rows-subgrid grid-cols-subgrid row-span-1 col-span-8 border-t border-r border-l box-border border-black">
+    <div className="grid grid-rows-subgrid grid-cols-subgrid row-span-1 col-span-10 border-t border-l box-border  border-black">
       <div className="col-span-1"></div>
-      <div className=" text-sm  col-span-7 border-l box-border grid grid-cols-12 place-items-center border-black">
+      <div className=" text-sm  col-span-9 border-l box-border grid grid-cols-12 place-items-center border-black">
         {dates}
       </div>
     </div>

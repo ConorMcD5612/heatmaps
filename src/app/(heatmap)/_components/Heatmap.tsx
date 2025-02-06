@@ -29,10 +29,12 @@ export default async function Heatmap({
         </Link>
         </div>
       </div>
-      <div className="grid grid-rows-8 grid-cols-8 h-[30%] mb-2 overflow-visible">
+      
+      <div className="grid grid-rows-8 grid-cols-10 mb-2 h-[30vh] border-r border-black">
         <WeekDays />
         <Cells heatmapData={heatmapData} cellStats={cellStats} />
       </div>
+
     </>
   );
 }

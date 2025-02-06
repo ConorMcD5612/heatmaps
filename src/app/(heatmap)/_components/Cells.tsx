@@ -17,7 +17,7 @@ export default async function Cells({heatmapData, cellStats}: {
   return (
     <>
     <WeekStart cellAmount={cellData.length} startDate={heatmapData.start_date as Date}/>
-    <div className='row-span-7 col-span-7 grid border border-black place-items-center grid-cols-12 grid-rows-subgrid grid-flow-col'>
+    <div className='row-span-7 col-span-9 grid border-b border-l border-t border-black place-items-center grid-cols-[repeat(20)] grid-flow-col grid-rows-subgrid '>
         <FillerCells startDate={heatmapData.start_date as Date} />
         {cellData.map((cell: CellData, index: Key) => (
             <Cell cellData={cell} key={index} cellStats={cellStats} heatmapData={heatmapData}  />
