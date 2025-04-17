@@ -16,7 +16,7 @@ export default function Cell({
 }) {
   const formattedDate = dateToYYYYMMDD(cellData.date as Date);
   return (
-    <div className="border border-black h-6 w-6 group/item relative ">
+    <div className="border border-black w-[90%] h-[90%] group/item relative ">
       <CellColor
         cellStats={cellStats}
         timeMins={cellData.time_mins}

@@ -22,3 +22,8 @@
     text-wrap: balance;
   }
 }
+
+
+.gutter {
+  scrollbar-gutter: stable both-edges;
+}

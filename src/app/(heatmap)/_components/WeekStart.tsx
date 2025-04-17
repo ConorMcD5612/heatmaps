@@ -34,11 +34,11 @@ export default function WeekStart({
   }
 
   return (
-    <div className="grid grid-rows-subgrid grid-cols-subgrid row-span-1 col-span-10 border-t border-l box-border  border-black">
-      <div className="col-span-1"></div>
-      <div className=" text-sm  col-span-9 border-l box-border grid grid-cols-12 place-items-center border-black">
+    <div className="col-span-8 row-span-1">
+
+    <div className="grid grid-flow-col grid-cols-[repeat(12,calc(100%/12))] auto-cols-[calc(100%/12)] place-items-center h-full">
         {dates}
-      </div>
+    </div>
     </div>
   );
 }

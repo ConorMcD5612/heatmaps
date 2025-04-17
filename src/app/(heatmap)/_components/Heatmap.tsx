@@ -17,24 +17,32 @@ export default async function Heatmap({
   const cellStats = await fetchCellStats(heatmapData.heatmap_id);
   const { hrs, mins } = hrMins(cellStats.total_time);
   return (
-    <>
+    <div>
       <div className="text-lg flex justify-between w-full place-items-center">
         <div className="flex gap-1 ">
           <div className="font-semibold">{`${heatmapData.heatmap_name.trim()}: `}</div>
           <div className="text-gray-500">{`${hrs}hrs ${mins}mins`}</div>
         </div>
-        <div className="flex border gap-1 border-black p-1 place-items-center rounded" style={{backgroundColor: heatmapData.color}}>
-        <Link href={`/dashboard?optionsModal=y&heatmapID=${heatmapData.heatmap_id}&name=${heatmapData.heatmap_name}&color=${encodeURIComponent(heatmapData.color)}`}>
-        <IoSettingsSharp size="16" stroke="black" />
-        </Link>
+        <div
+          className="flex border gap-1 border-black p-1 place-items-center rounded"
+          style={{ backgroundColor: heatmapData.color }}
+        >
+          <Link
+            href={`/dashboard?optionsModal=y&heatmapID=${
+              heatmapData.heatmap_id
+            }&name=${heatmapData.heatmap_name}&color=${encodeURIComponent(
+              heatmapData.color
+            )}`}
+          >
+            <IoSettingsSharp size="16" stroke="black" />
+          </Link>
         </div>
       </div>
-      
-      <div className="grid grid-rows-8 grid-cols-10 mb-2 h-[30vh] border-r border-black">
-        <WeekDays />
+
+      <div className="grid grid-rows-8 grid-cols-8 grid-flow-col mb-2 w-full h-[30vh] border-r border-black overflow-x-auto">
+        <WeekDays />        
         <Cells heatmapData={heatmapData} cellStats={cellStats} />
       </div>
-
-    </>
+    </div>
   );
 }

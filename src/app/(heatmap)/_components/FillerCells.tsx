@@ -8,6 +8,7 @@ export default function FillerCells({startDate} : {startDate: Date}) {
     for(let i = 0; i < daysFromMonday; i++) {
         fillerCells.push(<div key={i}></div>)
     }
+    
   return (
     <>
     {fillerCells}
