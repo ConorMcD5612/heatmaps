@@ -39,7 +39,7 @@ export default async function Heatmap({
         </div>
       </div>
 
-      <div className="grid grid-rows-8 grid-cols-8 grid-flow-col mb-2 w-full h-[30vh] border-r border-black overflow-x-auto">
+      <div className="grid grid-rows-8 grid-cols-8 grid-flow-col mb-2 w-full h-[30vh] border border-black overflow-x-scroll">
         <WeekDays />        
         <Cells heatmapData={heatmapData} cellStats={cellStats} />
       </div>

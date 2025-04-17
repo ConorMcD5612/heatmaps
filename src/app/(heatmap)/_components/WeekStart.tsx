@@ -29,13 +29,15 @@ export default function WeekStart({
 
   for (let i = 0; i < numDates; i++) {
     dates.push(
-      <div key={i}>{getWeekStartDate(startDate, i, daysFromMonday)}</div>
+      <div className="
+      border-b border-black
+      "
+      key={i}>{getWeekStartDate(startDate, i, daysFromMonday)}</div>
     );
   }
 
   return (
     <div className="col-span-8 row-span-1">
-
     <div className="grid grid-flow-col grid-cols-[repeat(12,calc(100%/12))] auto-cols-[calc(100%/12)] place-items-center h-full">
         {dates}
     </div>
