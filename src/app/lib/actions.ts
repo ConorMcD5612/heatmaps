@@ -170,6 +170,7 @@ const UpdateHeatmap = FormSchema.omit({
   mins: true,
   type: true,
 })
+
 export async function updateHeatmap(heatmapID: number, formData: FormData) {
   const session = await getServerSession(options);
   const userID = session?.user?.email;
