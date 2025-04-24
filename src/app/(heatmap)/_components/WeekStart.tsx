@@ -1,18 +1,21 @@
 import { create } from "domain";
 import React from "react";
+import { DateTime } from "luxon";
 
 
 function getWeekStartDate(
-  start: Date,
+  start: DateTime,
   i: number,
   daysFromMonday: number
 ): string {
+  //get how many days to add
   let daysToAdd = i * 7 - daysFromMonday;
 
-  let date = new Date(start);
-  date.setDate(date.getDate() + daysToAdd);
+  //create a new date with the days added
+  const dt = start.plus({days: daysToAdd})
 
-  return `${date.getMonth() + 1}/${date.getDate() + 1}`;
+  //return a string with month/day
+  return `${dt.month}/${dt.day}`;
 }
 
 export default function WeekStart({
@@ -20,9 +23,10 @@ export default function WeekStart({
   startDate,
 }: {
   cellAmount: number;
-  startDate: Date;
+  startDate: DateTime;
 }) {
-  let daysFromMonday = startDate.getDay() == 0 ? 6 : startDate.getDay();
+  
+  const daysFromMonday = startDate.weekday - 1
 
   let numDates = Math.ceil((cellAmount + daysFromMonday) / 7);
   const dates = [];

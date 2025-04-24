@@ -1,6 +1,9 @@
+import { DateTime } from "luxon";
+
 export type User = {
     user_id: string;
 }
+
 
 export type HeatmapData = {
     email: string;
@@ -8,17 +11,37 @@ export type HeatmapData = {
     heatmap_name: string;
     color: string;
     total_mins: number;
-    type: 'time' | 'count' ;
-    start_date: Date | number
+    type: 'time' | 'count';
+
+    //comes in as a js date from SQL db
+    start_date: Date
     last_updated: Date
 }
 
+export type HeatmapParsed = {
+    email: string;
+    heatmap_id: number;
+    heatmap_name: string;
+    color: string;
+    total_mins: number;
+    type: 'time' | 'count';
+
+    start_date: DateTime,
+    last_updated: DateTime
+}
+
 export type CellData = {
-    //these might not be numbers when I created the table
     heatmap_id: number;
     time_mins: number;
     count: number;
-    date: Date | string;
+    date: Date;
+}
+
+export type CellDataParsed = {
+    heatmap_id: number;
+    time_mins: number;
+    count: number;
+    date: DateTime
 }
 
 export type CellStats = {

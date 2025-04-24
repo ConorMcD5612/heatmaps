@@ -1,31 +1,30 @@
 import { sql } from "@vercel/postgres";
-import { HeatmapData, CellData, CellStats } from "./definitions";
+import { HeatmapData, CellData, CellStats, HeatmapParsed, CellDataParsed } from "./definitions";
 import { getServerSession } from "next-auth";
 import { options } from "../api/auth/[...nextauth]/options";
+import { DateTime } from "luxon";
 
 export async function fetchHeatmapData() {
   //get user's email
   const session = await getServerSession(options);
 
   try {
-    //this has to be based on user though
-    //I think you can just use session provider here.
     const data =
-      await sql<HeatmapData>`SELECT *, EXTRACT(EPOCH FROM start_date) AS start_date
+      await sql<HeatmapData>`SELECT *
       FROM heatmap_data 
       WHERE email=${session?.user?.email}`;
 
-    //why is start_date being turned into number 
-    const rows: any = data.rows.map((row) => ({
+    //SQl to luxon dateTime 
+    const rows: any = data.rows.map((row): HeatmapParsed => ({
       ...row,
-      start_date: new Date((row.start_date as number) * 1000),
+      start_date: DateTime.fromJSDate(row.start_date),
+      last_updated: DateTime.fromJSDate(row.last_updated)
     }));
-    //rows should be array of heatmapData objs
-    //I want data.rows to be type heatmapData
-    //want to return array of obj
     
-    // console.log("heatmap rows", rows);
+    
+    console.log(rows, "rows")
     return rows
+
   } catch (error) {
     console.error("Failed to fetch heatmap data:", error);
     throw new Error("Failed to fetch heatmap data");
@@ -46,7 +45,13 @@ export async function fetchCellData(heatmapID: number) {
       WHERE heatmap_id=${heatmapID} AND email=${userID}
       ORDER BY date
       `;
-    return data.rows;
+    
+    const rows: any = data.rows.map((row): CellDataParsed => ({
+        ...row,
+        date: DateTime.fromJSDate(row.date),
+    }));
+
+    return rows;
   } catch (e) {
     console.error("fetchCellData failed", e);
     throw new Error("Failed to fetch cellData");

@@ -1,7 +1,7 @@
 import React from "react";
 import WeekDays from "./WeekDays";
 import Cells from "./Cells";
-import { HeatmapData } from "@/app/lib/definitions";
+import { HeatmapData, HeatmapParsed } from "@/app/lib/definitions";
 import { addCell } from "@/app/lib/actions";
 import { fetchCellStats } from "@/app/lib/data";
 import { hrMins } from "@/app/lib/utils";
@@ -11,7 +11,7 @@ import Link from "next/link";
 export default async function Heatmap({
   heatmapData,
 }: {
-  heatmapData: HeatmapData;
+  heatmapData: HeatmapParsed;
 }) {
   await addCell(heatmapData.heatmap_id, heatmapData.last_updated);
   const cellStats = await fetchCellStats(heatmapData.heatmap_id);

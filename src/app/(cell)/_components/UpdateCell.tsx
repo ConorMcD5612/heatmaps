@@ -11,7 +11,8 @@ export default function UpdateCell() {
   const mapName = searchParams.get("name");
   const heatmapID = searchParams.get("heatmapID");
 
-  const updateCellWithDate = updateCell.bind(null, heatmapID, cellDate);
+  //would I need to handle null? 
+  const updateCellWithDate = updateCell.bind(null, heatmapID, cellDate as string);
 
   return (
     <div className="flex flex-col p-2 gap-1 border-2 border-black">

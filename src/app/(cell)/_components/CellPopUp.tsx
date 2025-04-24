@@ -1,17 +1,16 @@
 import React from "react";
-import { clsx } from "clsx";
-import {dateToYYYYMMDD} from "@/app/lib/utils";
+import { DateTime } from "luxon";
 
 export default function CellPopUp({
   date,
   timeMins,
   mapName,
 }: {
-  date: Date;
+  date: DateTime;
   timeMins: number;
   mapName: string;
 }) {
-  const formattedDate = dateToYYYYMMDD(date);
+  const formattedDate = date.toISODate();
 
   return (
     <>

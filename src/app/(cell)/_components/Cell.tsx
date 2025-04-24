@@ -1,4 +1,4 @@
-import { CellData, CellStats, HeatmapData } from "@/app/lib/definitions";
+import { CellData, CellDataParsed, CellStats, HeatmapData, HeatmapParsed } from "@/app/lib/definitions";
 import React from "react";
 import CellPopUp from "./CellPopUp";
 import Link from "next/link";
@@ -10,11 +10,11 @@ export default function Cell({
   cellStats,
   heatmapData,
 }: {
-  cellData: CellData;
+  cellData: CellDataParsed;
   cellStats: CellStats;
-  heatmapData: HeatmapData;
+  heatmapData: HeatmapParsed;
 }) {
-  const formattedDate = dateToYYYYMMDD(cellData.date as Date);
+  const formattedDate = cellData.date.toISODate();
   return (
     <div className="border border-black w-[90%] h-[90%] group/item relative ">
       <CellColor
@@ -23,7 +23,7 @@ export default function Cell({
         color={heatmapData.color}
       />
       <CellPopUp
-        date={cellData.date as Date}
+        date={cellData.date}
         timeMins={cellData.time_mins}
         mapName={heatmapData.heatmap_name}
       />

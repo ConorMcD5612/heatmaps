@@ -1,10 +1,11 @@
 import React from 'react'
 import FillerCell from './FillerCell'
+import { DateTime } from 'luxon'
 
-export default function FillerCells({startDate} : {startDate: Date}) {
+export default function FillerCells({startDate} : {startDate: DateTime}) {
     //need start date 
-    const daysFromMonday = startDate.getDay() == 0 ? 6 : startDate.getDay()
-    
+    const daysFromMonday = startDate.weekday - 1
+    console.log(startDate, "Daysfrommonday")
    
   return (
     <>
