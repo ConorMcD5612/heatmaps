@@ -41,7 +41,7 @@ export function calculateOpacity(
 
 
 export function hrMins(totalMins: number): {hrs: number, mins: number} {
-  const hrs = Math.round(totalMins/60) 
+  const hrs = Math.floor(totalMins/60) 
   const mins = totalMins % 60
   return {hrs, mins}
 }
