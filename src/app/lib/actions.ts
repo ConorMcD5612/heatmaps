@@ -6,51 +6,22 @@ import { z } from "zod";
 import { getServerSession } from "next-auth";
 import { options } from "../api/auth/[...nextauth]/options";
 import { Result } from "postcss";
-import { dateToYYYYMMDD } from "./utils";
 import { CellData, CellDataParsed } from "./definitions";
 import { DateTime, Interval } from "luxon";
+import { cellsToAdd } from "./utils";
 
 
-//helper function to get cells between lastUpdated and today
-export function cellsToAdd(heatmapID: number, lastUpdated: DateTime) : CellDataParsed[]{
-  const todayStart = DateTime.now().startOf("day");
-  const lastUpdatedStart = lastUpdated.startOf("day");
-
-  if (todayStart == lastUpdatedStart) return [];
-
-  //calc days between lastUpdated and today
-  const daysBetween = Interval.fromDateTimes(lastUpdatedStart, todayStart)
-  .count('days');  
-
-  const daysToAdd = Math.max(0, Math.floor(daysBetween));  
-
-  let currentDay = lastUpdatedStart;
-  let cellData: CellDataParsed[] = [];
-
-  for (let i = 1; i <= daysToAdd; i++) {
-    currentDay = currentDay.plus({ days: 1 });
-
-    const cell: CellDataParsed = {
-      heatmap_id: heatmapID,
-      time_mins: 0,
-      count: 0,
-      date: currentDay,
-    };
-
-    cellData.push(cell);
-  }
-  return cellData
-}
 
 //called on heatmap render, adds cell if new day.
 export async function addCell(heatmapID: number, lastUpdated: DateTime) {
-
-  const todayStart = DateTime.now().startOf("day");
+  const todayStart = DateTime.now().startOf("day").toISO();
 
   const session = await getServerSession(options);
   const userID = session?.user?.email;
 
-  const cellData = cellsToAdd(heatmapID, lastUpdated)
+  const cellData = cellsToAdd(heatmapID, lastUpdated);
+  if (cellData.length === 0) return;
+
   //make a cell in DB for each dayBetween lastUpdated and today
   try {
     const cellsToInsert = cellData.map(
@@ -60,13 +31,9 @@ export async function addCell(heatmapID: number, lastUpdated: DateTime) {
     VALUES (${userID}, ${cell.heatmap_id}, 0,0, ${cell.date.toISO()})`
     );
 
-    const result =
-      await sql`UPDATE heatmap_data SET last_updated = ${todayStart.toISO()} WHERE heatmap_id=${heatmapID} and email=${userID}`.then(
-        async (result) => {
-          await Promise.all(cellsToInsert);
-          console.log(`added ${cellsToInsert.length} cells`);
-        }
-      );
+    await sql`UPDATE heatmap_data SET last_updated = ${todayStart} WHERE heatmap_id=${heatmapID} and email=${userID}`;
+    
+    await Promise.all(cellsToInsert);
   } catch (e) {
     console.error("addCell failed", e);
   }

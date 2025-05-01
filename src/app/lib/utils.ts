@@ -1,8 +1,5 @@
-export function dateToYYYYMMDD(date: Date): string {
-  let formattedDate =
-    date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-  return formattedDate;
-}
+import { CellDataParsed } from "./definitions";
+import { DateTime, Interval } from "luxon";
 
 export function calculateOpacity(
   dataPt: number,
@@ -44,4 +41,39 @@ export function hrMins(totalMins: number): {hrs: number, mins: number} {
   const hrs = Math.floor(totalMins/60) 
   const mins = totalMins % 60
   return {hrs, mins}
+}
+
+
+//helper function to get cells between lastUpdated and today
+export function cellsToAdd(
+  heatmapID: number,
+  lastUpdated: DateTime
+): CellDataParsed[] {
+  const todayStart = DateTime.now().startOf("day");
+  const lastUpdatedStart = lastUpdated.startOf("day");
+
+  //calc days between lastUpdated and today
+  const daysBetween = Interval.fromDateTimes(
+    lastUpdatedStart,
+    todayStart
+  ).count("days");
+
+  const daysToAdd = Math.max(0, Math.floor(daysBetween));
+
+  
+  let cellData: CellDataParsed[] = [];
+
+  for (let i = 1; i <= daysToAdd; i++) {
+    const currentDay = lastUpdated.plus({ days: i});
+
+    const cell: CellDataParsed = {
+      heatmap_id: heatmapID,
+      time_mins: 0,
+      count: 0,
+      date: currentDay,
+    };
+
+    cellData.push(cell);
+  }
+  return cellData;
 }

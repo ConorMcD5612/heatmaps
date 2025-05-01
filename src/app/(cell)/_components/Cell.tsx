@@ -2,7 +2,6 @@ import { CellData, CellDataParsed, CellStats, HeatmapData, HeatmapParsed } from 
 import React from "react";
 import CellPopUp from "./CellPopUp";
 import Link from "next/link";
-import { dateToYYYYMMDD, calculateOpacity } from "@/app/lib/utils";
 import CellColor from "./CellColor";
 
 export default function Cell({
