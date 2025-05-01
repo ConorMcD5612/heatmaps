@@ -23,7 +23,7 @@ export function calculateOpacity(
 
   // Calculate z-score
   const zScore = (dataPt - mean) / stdDev;
-  console.log("zScore", zScore)
+  
   // Determine opacity based on z-score
   if (zScore < zScoreHash["lowQuartile"]) {
     console.log("lowQuart")

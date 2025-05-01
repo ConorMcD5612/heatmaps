@@ -10,30 +10,25 @@ import { dateToYYYYMMDD } from "./utils";
 import { CellData, CellDataParsed } from "./definitions";
 import { DateTime, Interval } from "luxon";
 
-//called on heatmap render, adds cell if new day.
-export async function addCell(heatmapID: number, lastUpdated: DateTime) {
+
+//helper function to get cells between lastUpdated and today
+export function cellsToAdd(heatmapID: number, lastUpdated: DateTime) : CellDataParsed[]{
   const todayStart = DateTime.now().startOf("day");
   const lastUpdatedStart = lastUpdated.startOf("day");
 
-  if (todayStart == lastUpdatedStart) return;
-
-  const session = await getServerSession(options);
-  const userID = session?.user?.email;
+  if (todayStart == lastUpdatedStart) return [];
 
   //calc days between lastUpdated and today
-  const daysBetween: number | undefined = Interval.fromDateTimes(
-    lastUpdatedStart,
-    todayStart
-  )
-    .toDuration("days")
-    .toObject().days;
-  const daysToAdd = daysBetween ? daysBetween : 0;
+  const daysBetween = Interval.fromDateTimes(lastUpdatedStart, todayStart)
+  .count('days');  
 
-  let currentDay = lastUpdated;
+  const daysToAdd = Math.max(0, Math.floor(daysBetween));  
+
+  let currentDay = lastUpdatedStart;
   let cellData: CellDataParsed[] = [];
 
   for (let i = 1; i <= daysToAdd; i++) {
-    currentDay.plus({ days: 1 });
+    currentDay = currentDay.plus({ days: 1 });
 
     const cell: CellDataParsed = {
       heatmap_id: heatmapID,
@@ -44,7 +39,18 @@ export async function addCell(heatmapID: number, lastUpdated: DateTime) {
 
     cellData.push(cell);
   }
+  return cellData
+}
 
+//called on heatmap render, adds cell if new day.
+export async function addCell(heatmapID: number, lastUpdated: DateTime) {
+
+  const todayStart = DateTime.now().startOf("day");
+
+  const session = await getServerSession(options);
+  const userID = session?.user?.email;
+
+  const cellData = cellsToAdd(heatmapID, lastUpdated)
   //make a cell in DB for each dayBetween lastUpdated and today
   try {
     const cellsToInsert = cellData.map(

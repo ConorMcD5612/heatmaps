@@ -12,7 +12,8 @@ export async function fetchHeatmapData() {
     const data =
       await sql<HeatmapData>`SELECT *
       FROM heatmap_data 
-      WHERE email=${session?.user?.email}`;
+      WHERE email=${session?.user?.email}
+      ORDER BY start_date DESC, heatmap_id ASC`;
 
     //SQl to luxon dateTime 
     const rows: any = data.rows.map((row): HeatmapParsed => ({
@@ -21,7 +22,7 @@ export async function fetchHeatmapData() {
       last_updated: DateTime.fromJSDate(row.last_updated)
     }));
     
-    
+  
     console.log(rows, "rows")
     return rows
 
