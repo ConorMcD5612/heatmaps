@@ -1,17 +1,35 @@
 "use client";
 import React from "react";
 import { createHeatmap } from "../../lib/actions";
+import { useEffect, useState } from "react";
 
 export default function CreateHeatmap({
   closeModal,
 }: {
   closeModal: () => void;
 }) {
+
+  const [countSelected, setCountSelected] = useState<boolean>(false)
+
   //color input val is hex no matter what
   const formSubmit = (formData: FormData): void => {
     createHeatmap(formData);
     closeModal();
   };
+
+  //this is for graying out unit input untill count is selected
+  const handleRadioSelect = (e: React.FormEvent<HTMLFieldSetElement>) => {
+    if(e.target.value == "Count") {
+      setCountSelected(true)
+    } else {
+      setCountSelected(false)
+    }
+  }
+
+  const opacityStyle = {
+    selected: "opacity-100",
+    unSelected: "opacity-50 pointer-events-none"
+  }
 
   return (
     
@@ -34,11 +52,11 @@ export default function CreateHeatmap({
         </div>
         <hr />
         <div className="font-semibold text-lg">Type of Heatmap: </div>
-        <fieldset className="">
+        <fieldset onChange={(e) => handleRadioSelect(e)} className="">
           <legend className="font-medium">Tracking:</legend>
           <div>
             <div className="font-light text-base">
-              <input name="type" type="radio" value="Count" />
+              <input name="type" type="radio" value="Count"  />
               <label className="ml-1">Count (Interger) </label>
             </div>
 
@@ -48,7 +66,7 @@ export default function CreateHeatmap({
             </div>
           </div>
         </fieldset>
-        <div className="flex flex-col">
+        <div className={`flex flex-col ${opacityStyle[countSelected ? "selected" : "unSelected"]}`}>
           <label className="font-medium">Unit:</label>
           <input
             className="text-lg border-2 border-black"
