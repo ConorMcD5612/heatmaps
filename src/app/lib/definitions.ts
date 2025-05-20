@@ -12,12 +12,15 @@ export type HeatmapData = {
     color: string;
     total_mins: number;
     type: 'Time' | 'Count';
+    unit: string;
 
     //comes in as a js date from SQL db
     start_date: Date
     last_updated: Date
 }
 
+
+//TODO: fix duplicating types parsing with ZOD
 export type HeatmapParsed = {
     email: string;
     heatmap_id: number;
@@ -25,6 +28,7 @@ export type HeatmapParsed = {
     color: string;
     total_mins: number;
     type: 'Time' | 'Count';
+    unit: string;
 
     start_date: DateTime,
     last_updated: DateTime

@@ -6,10 +6,12 @@ export const HeatmapTotal = ({
   cellStats,
   heatmapName,
   type,
+  unit
 }: {
   cellStats: CellStats;
   heatmapName: string;
   type: HeatmapType;
+  unit: string;
 }) => {
   //for displaying total time
 
@@ -22,7 +24,7 @@ export const HeatmapTotal = ({
       <div className="font-semibold">{`${heatmapName.trim()}: `}</div>
 
       <div className="text-gray-500">
-        {type == "Time" ? `${hrs}hrs ${mins}mins` : cellStats.total_time}
+        {type == "Time" ? `${hrs}hrs ${mins}mins` : `${cellStats.total_time}${unit}`}
       </div>
     </div>
   );
