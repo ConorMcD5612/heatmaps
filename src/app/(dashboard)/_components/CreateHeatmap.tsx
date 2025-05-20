@@ -14,21 +14,28 @@ export default function CreateHeatmap({
   };
 
   return (
-    <div className="border-2 border-black text-lg">
-      <form action={formSubmit} className="flex items-center m-5 gap-4">
-        <input
-          className="text-4xl focus:outline-none focus:border-b-2 focus:border-black w-6/12 h-1/4 "
-          type="text"
-          name="heatmapName"
-          placeholder="Heatmap name?"
-          required
-        />
-        <div className="flex flex-col w-2/12 self-start h-full">
-          <label>Cell Color:</label>
+    
+    <div className="border-2 border-black">
+      <h2 className="text-3xl font-bold m-5">Add Heatmap:</h2>
+      <form action={formSubmit} className="flex flex-col m-5 gap-4">
+        <hr />
+        <div className="flex flex-col">
+          <label className="font-semibold text-lg">Name:</label>
+          <input
+            className="text-4xl border-2 border-black"
+            type="text"
+            name="heatmapName"
+            required
+          />
+        </div>
+        <div className="flex flex-col">
+          <label className="font-semibold text-lg">Cell Color:</label>
           <input className="w-full h-12" name="color" type="color" />
         </div>
-        <fieldset className="w-3/12 self-start">
-          <legend>Measure:</legend>
+        <hr />
+        <div className="font-semibold text-lg">Type of Heatmap: </div>
+        <fieldset className="">
+          <legend className="font-medium">Tracking:</legend>
           <div>
             <div className="font-light text-base">
               <input name="type" type="radio" value="Count" />
@@ -41,14 +48,23 @@ export default function CreateHeatmap({
             </div>
           </div>
         </fieldset>
-        <div className="w-2/12 flex flex-col">
+        <div className="flex flex-col">
+          <label className="font-medium">Unit:</label>
           <input
-            className=" bg-gray-200 hover:cursor-grab"
-            type="submit"
-            value="Save"
+            className="text-lg border-2 border-black"
+            type="text"
+            name="unit"
+            placeholder="E.g g/ml/times/sets"
           />
-          <button onClick={closeModal}>Close</button>
         </div>
+        <hr />
+        <div className="flex right-10 bottom-10 gap-1 justify-end">
+          <button className="p-2" onClick={closeModal}>Close</button>
+           <button type="submit" className="p-2 bg-black text-white rounded-sm">
+            Add
+          </button>
+        </div>
+        
       </form>
     </div>
   );
