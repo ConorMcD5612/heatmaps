@@ -48,6 +48,7 @@ const FormSchema = z.object({
   heatmapName: z.coerce.string(),
   color: z.coerce.string().length(7),
   type: MeasureSchema,
+  unit: z.coerce.string().max(5)
 });
 
 const UpdateCell = FormSchema.omit({
@@ -92,10 +93,11 @@ export async function createHeatmap(formData: FormData) {
   const session = await getServerSession(options);
   const userID = session?.user?.email;
 
-  const { color, type, heatmapName } = CreateHeatmap.parse({
+  const { color, type, heatmapName, unit } = CreateHeatmap.parse({
     color: formData.get("color"),
     type: formData.get("type"),
     heatmapName: formData.get("heatmapName"),
+    unit: formData.get("unit")
   });
 
   const totalMins = 0;
@@ -107,11 +109,11 @@ export async function createHeatmap(formData: FormData) {
 
   try {
     const result = await sql`INSERT INTO heatmap_data
-    (email, heatmap_name, color, total_mins, type, start_date, last_updated)
-    VALUES (${userID}, ${heatmapName}, ${color}, ${totalMins}, ${type}, ${dt.toISO()}, ${dayBefore})`;
+    (email, heatmap_name, color, total_mins, type, unit, start_date, last_updated)
+    VALUES (${userID}, ${heatmapName}, ${color}, ${totalMins}, ${type}, ${unit}, ${dt.toISO()}, ${dayBefore})`;
   } catch (e) {
     console.error("createHeatmap Error");
-    throw new Error("createheatmap Erorr");
+    throw new Error("createheatmap Error");
   }
 }
 
