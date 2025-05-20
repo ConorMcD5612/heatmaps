@@ -11,7 +11,7 @@ export type HeatmapData = {
     heatmap_name: string;
     color: string;
     total_mins: number;
-    type: 'time' | 'count';
+    type: 'Time' | 'Count';
 
     //comes in as a js date from SQL db
     start_date: Date
@@ -24,7 +24,7 @@ export type HeatmapParsed = {
     heatmap_name: string;
     color: string;
     total_mins: number;
-    type: 'time' | 'count';
+    type: 'Time' | 'Count';
 
     start_date: DateTime,
     last_updated: DateTime
@@ -49,3 +49,5 @@ export type CellStats = {
     std_dev: number;
     total_time: number;
 }
+
+export type HeatmapType = "Time" | "Count"

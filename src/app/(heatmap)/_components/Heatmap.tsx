@@ -4,25 +4,26 @@ import Cells from "./Cells";
 import { HeatmapData, HeatmapParsed } from "@/app/lib/definitions";
 import { addCell } from "@/app/lib/actions";
 import { fetchCellStats } from "@/app/lib/data";
-import { hrMins } from "@/app/lib/utils";
 import { IoSettingsSharp } from "react-icons/io5";
 import Link from "next/link";
+import { HeatmapTotal } from "./HeatmapTotal";
 
 export default async function Heatmap({
   heatmapData,
 }: {
   heatmapData: HeatmapParsed;
 }) {
+
+  //check if heatmap cells are up to date, add cells to todays date if not
   await addCell(heatmapData.heatmap_id, heatmapData.last_updated);
+
+  //for opacity calculation
   const cellStats = await fetchCellStats(heatmapData.heatmap_id);
-  const { hrs, mins } = hrMins(cellStats.total_time);
+
   return (
     <div>
       <div className="text-lg flex justify-between w-full place-items-center">
-        <div className="flex gap-1 ">
-          <div className="font-semibold">{`${heatmapData.heatmap_name.trim()}: `}</div>
-          <div className="text-gray-500">{`${hrs}hrs ${mins}mins`}</div>
-        </div>
+      <HeatmapTotal cellStats={cellStats} heatmapName={heatmapData.heatmap_name} type={heatmapData.type}/>
         <div
           className="flex border gap-1 border-black p-1 place-items-center rounded"
           style={{ backgroundColor: heatmapData.color }}
