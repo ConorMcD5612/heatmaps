@@ -10,8 +10,6 @@ import { CellData, CellDataParsed } from "./definitions";
 import { DateTime, Interval } from "luxon";
 import { cellsToAdd } from "./utils";
 
-
-
 //called on heatmap render, adds cell if new day.
 export async function addCell(heatmapID: number, lastUpdated: DateTime) {
   const todayStart = DateTime.now().startOf("day").toISO();
@@ -32,7 +30,7 @@ export async function addCell(heatmapID: number, lastUpdated: DateTime) {
     );
 
     await sql`UPDATE heatmap_data SET last_updated = ${todayStart} WHERE heatmap_id=${heatmapID} and email=${userID}`;
-    
+
     await Promise.all(cellsToInsert);
   } catch (e) {
     console.error("addCell failed", e);
@@ -48,7 +46,7 @@ const FormSchema = z.object({
   heatmapName: z.coerce.string(),
   color: z.coerce.string().length(7),
   type: MeasureSchema,
-  unit: z.coerce.string().max(5)
+  unit: z.coerce.string(),
 });
 
 const UpdateCell = FormSchema.omit({
@@ -97,7 +95,7 @@ export async function createHeatmap(formData: FormData) {
     color: formData.get("color"),
     type: formData.get("type"),
     heatmapName: formData.get("heatmapName"),
-    unit: formData.get("unit")
+    unit: formData.get("unit"),
   });
 
   const totalMins = 0;
@@ -158,8 +156,7 @@ export async function updateHeatmap(heatmapID: number, formData: FormData) {
   });
   console.log(heatmapName, "heatmapName");
   try {
-    const result =
-      await sql`UPDATE heatmap_data SET color = ${color}, heatmap_name = ${heatmapName} WHERE heatmap_id=${heatmapID} AND email=${userID}`;
+    await sql`UPDATE heatmap_data SET color = ${color}, heatmap_name = ${heatmapName} WHERE heatmap_id=${heatmapID} AND email=${userID}`;
   } catch (e) {
     console.error("updateHeatmap failed", e);
   }
