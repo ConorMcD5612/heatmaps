@@ -52,7 +52,7 @@ const FormSchema = z.object({
 const UpdateCell = FormSchema.omit({
   heatmapName: true,
   color: true,
-  type: true,
+  type: true, 
 });
 
 // date comes in as a string as updateCell componenet gets it from the URL

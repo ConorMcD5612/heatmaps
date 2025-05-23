@@ -9,6 +9,9 @@ export default function UpdateCell() {
   const cellDate = searchParams.get("date");
   const mapName = searchParams.get("name");
   const heatmapID = searchParams.get("heatmapID");
+  const unit = searchParams.get("unit")
+  const type = searchParams.get("type")
+  console.log(type)
 
   //would I need to handle null? 
   const updateCellWithDate = updateCell.bind(null, heatmapID, cellDate as string);
@@ -20,6 +23,8 @@ export default function UpdateCell() {
       <div className="text-s font-medium text-gray-400 ">{cellDate}</div>
       </div>
       <form className="flex flex-col gap-1" action={updateCellWithDate}>
+        {
+          type == "Time" ? 
         <div className="flex gap-2">
           <div className="flex flex-col">
             <label className="h-5">Hrs</label>
@@ -31,6 +36,15 @@ export default function UpdateCell() {
             <input min="0" className="w-12 bg-gray-300 rounded-sm p-1" placeholder="00" name="mins" type="number" />
           </div>
         </div>
+        :
+          <div className="flex">
+           
+            <input min="0" className="w-12 bg-gray-300 rounded-sm p-1" placeholder="00" name="mins" type="number" />
+            <label className="h-5">{unit}</label>
+          </div>
+
+        }
+       
         <div className="flex gap-1">
           <button type="submit" className="bg-black text-white w-1/2 rounded-sm">
             Add

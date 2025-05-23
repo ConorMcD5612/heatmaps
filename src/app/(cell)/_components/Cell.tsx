@@ -28,7 +28,7 @@ export default function Cell({
       />
       <Link
         className="absolute inset-0 block z-10"
-        href={`/dashboard?cellModal=y&name=${heatmapData.heatmap_name}&date=${formattedDate}&heatmapID=${cellData.heatmap_id}`}
+        href={`/dashboard?cellModal=y&name=${heatmapData.heatmap_name}&date=${formattedDate}&heatmapID=${cellData.heatmap_id}&type=${heatmapData.type}&unit=${heatmapData.unit}`}
       >
         &nbsp;
       </Link>
