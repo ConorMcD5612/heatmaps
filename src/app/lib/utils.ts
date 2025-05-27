@@ -5,49 +5,47 @@ export function calculateOpacity(
   dataPt: number,
   mean: number,
   stdDev: number,
-  inverse: boolean,
+  inverse: boolean
 ): number {
-
   if (dataPt === 0 && !inverse) {
     return 0;
   }
-  
 
   const zScoreHash = {
     lowQuartile: -0.674, //25th percentile
     midQuartile: -0, //50th
-    highQuartile: 0.674,  //75
+    highQuartile: 0.674, //75
   };
 
   // Calculate z-score
   const zScore = (dataPt - mean) / stdDev;
-  let opacity = 0
-  
+  let opacity = 0;
+
   // Determine opacity based on z-score
   if (zScore < zScoreHash["lowQuartile"]) {
-    console.log("lowQuart")
-    opacity = 0.2
+    console.log("lowQuart");
+    opacity = 0.2;
   } else if (zScore < zScoreHash["midQuartile"]) {
-    console.log("medQuart")
-    opacity = 0.5
+    console.log("medQuart");
+    opacity = 0.5;
   } else if (zScore < zScoreHash["highQuartile"]) {
-    console.log("highQuart")
-    opacity = 0.8
+    console.log("highQuart");
+    opacity = 0.8;
   } else {
-    opacity = 1
+    opacity = 1;
   }
 
-  if(inverse) (1-opacity);
-  return opacity 
+  if (inverse) {
+    opacity = 1 - opacity
+  }
+  return opacity;
 }
 
-
-export function hrMins(totalMins: number): {hrs: number, mins: number} {
-  const hrs = Math.floor(totalMins/60) 
-  const mins = totalMins % 60
-  return {hrs, mins}
+export function hrMins(totalMins: number): { hrs: number; mins: number } {
+  const hrs = Math.floor(totalMins / 60);
+  const mins = totalMins % 60;
+  return { hrs, mins };
 }
-
 
 //helper function to get cells between lastUpdated and today
 export function cellsToAdd(
@@ -65,11 +63,10 @@ export function cellsToAdd(
 
   const daysToAdd = Math.max(0, Math.floor(daysBetween));
 
-  
   let cellData: CellDataParsed[] = [];
 
   for (let i = 1; i <= daysToAdd; i++) {
-    const currentDay = lastUpdated.plus({ days: i});
+    const currentDay = lastUpdated.plus({ days: i });
 
     const cell: CellDataParsed = {
       heatmap_id: heatmapID,
