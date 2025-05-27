@@ -2,6 +2,7 @@
 import React from "react";
 import { createHeatmap } from "../../lib/actions";
 import { useEffect, useState } from "react";
+import { Switch } from "@/app/components/Switch";
 
 export default function CreateHeatmap({
   closeModal,
@@ -10,6 +11,7 @@ export default function CreateHeatmap({
 }) {
 
   const [countSelected, setCountSelected] = useState<boolean>(false)
+  const [inverseSelected, setInverseSelected] = useState<boolean>(false)
 
   //color input val is hex no matter what
   const formSubmit = (formData: FormData): void => {
@@ -74,6 +76,10 @@ export default function CreateHeatmap({
             name="unit"
             placeholder="E.g g/ml/times/sets"
           />
+        </div>
+        <div className="flex"> 
+          Inverse Color: 
+          <Switch selected={inverseSelected} setSelected={setInverseSelected}/>
         </div>
         <hr />
         <div className="flex right-10 bottom-10 gap-1 justify-end">
