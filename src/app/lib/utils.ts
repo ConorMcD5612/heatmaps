@@ -4,10 +4,11 @@ import { DateTime, Interval } from "luxon";
 export function calculateOpacity(
   dataPt: number,
   mean: number,
-  stdDev: number
+  stdDev: number,
+  inverse: boolean,
 ): number {
 
-  if (dataPt === 0 || stdDev === 0) {
+  if (dataPt === 0 && !inverse) {
     return 0;
   }
   
@@ -20,20 +21,24 @@ export function calculateOpacity(
 
   // Calculate z-score
   const zScore = (dataPt - mean) / stdDev;
+  let opacity = 0
   
   // Determine opacity based on z-score
   if (zScore < zScoreHash["lowQuartile"]) {
     console.log("lowQuart")
-    return 0.2;
+    opacity = 0.2
   } else if (zScore < zScoreHash["midQuartile"]) {
     console.log("medQuart")
-    return 0.5;
+    opacity = 0.5
   } else if (zScore < zScoreHash["highQuartile"]) {
     console.log("highQuart")
-    return 0.8;
+    opacity = 0.8
   } else {
-    return 1;
+    opacity = 1
   }
+
+  if(inverse) (1-opacity);
+  return opacity 
 }
 
 

@@ -15,13 +15,15 @@ export default function CreateHeatmap({
 
   //color input val is hex no matter what
   const formSubmit = (formData: FormData): void => {
+    formData.append("inverse", inverseSelected.toString())
     createHeatmap(formData);
     closeModal();
   };
 
   //this is for graying out unit input untill count is selected
   const handleRadioSelect = (e: React.FormEvent<HTMLFieldSetElement>) => {
-    if(e.target.value == "Count") {
+    const target = e.target as HTMLInputElement
+    if(target.value == "Count") {
       setCountSelected(true)
     } else {
       setCountSelected(false)
@@ -77,8 +79,8 @@ export default function CreateHeatmap({
             placeholder="E.g g/ml/times/sets"
           />
         </div>
-        <div className="flex"> 
-          Inverse Color: 
+        <div className="font-semibold">
+          <label>Inverse Color:</label>
           <Switch selected={inverseSelected} setSelected={setInverseSelected}/>
         </div>
         <hr />

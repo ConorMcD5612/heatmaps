@@ -47,6 +47,7 @@ const FormSchema = z.object({
   color: z.coerce.string().length(7),
   type: MeasureSchema,
   unit: z.coerce.string(),
+  inverse: z.coerce.boolean()
 });
 
 const UpdateCell = FormSchema.omit({
@@ -91,11 +92,12 @@ export async function createHeatmap(formData: FormData) {
   const session = await getServerSession(options);
   const userID = session?.user?.email;
 
-  const { color, type, heatmapName, unit } = CreateHeatmap.parse({
+  const { color, type, heatmapName, unit, inverse } = CreateHeatmap.parse({
     color: formData.get("color"),
     type: formData.get("type"),
     heatmapName: formData.get("heatmapName"),
     unit: formData.get("unit"),
+    inverse: formData.get("inverse") == "true"
   });
 
   const totalMins = 0;
@@ -104,11 +106,12 @@ export async function createHeatmap(formData: FormData) {
 
   //make last updated the day before so a cell will be created
   let dayBefore = dt.minus({ day: 1 }).toISO();
+  
 
   try {
     const result = await sql`INSERT INTO heatmap_data
-    (email, heatmap_name, color, total_mins, type, unit, start_date, last_updated)
-    VALUES (${userID}, ${heatmapName}, ${color}, ${totalMins}, ${type}, ${unit}, ${dt.toISO()}, ${dayBefore})`;
+    (email, heatmap_name, color, total_mins, type, unit, start_date, last_updated, inverse)
+    VALUES (${userID}, ${heatmapName}, ${color}, ${totalMins}, ${type}, ${unit}, ${dt.toISO()}, ${dayBefore}, ${inverse})`;
   } catch (e) {
     console.error("createHeatmap Error");
     throw new Error("createheatmap Error");

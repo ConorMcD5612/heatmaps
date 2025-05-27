@@ -20,6 +20,7 @@ export default function Cell({
         cellStats={cellStats}
         timeMins={cellData.time_mins}
         color={heatmapData.color}
+        inverse={heatmapData.inverse}
       />
       <CellPopUp
         date={cellData.date}

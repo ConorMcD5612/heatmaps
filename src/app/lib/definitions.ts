@@ -13,6 +13,8 @@ export type HeatmapData = {
     total_mins: number;
     type: 'Time' | 'Count';
     unit: string;
+    //this might be string
+    inverse: boolean;
 
     //comes in as a js date from SQL db
     start_date: Date
@@ -29,6 +31,7 @@ export type HeatmapParsed = {
     total_mins: number;
     type: 'Time' | 'Count';
     unit: string;
+    inverse: boolean;
 
     start_date: DateTime,
     last_updated: DateTime

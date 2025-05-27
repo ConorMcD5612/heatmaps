@@ -1,6 +1,6 @@
 "use client"
-import React, { Dispatch, SetStateAction } from 'react'
-import { useState } from 'react'
+import React, { Dispatch, SetStateAction, useEffect } from 'react'
+import { useState,  } from 'react'
 
 export const Switch = ({selected, setSelected} : {
     selected: boolean;
@@ -12,9 +12,14 @@ export const Switch = ({selected, setSelected} : {
     "unSelected": "bg-gray-500 justify-start" 
   }
 
+  useEffect(() => {
+    console.log(selected)
+  }, [selected])
+
 
   return (
-    <div onClick={() =>  setSelected(!selected)} className={`flex items-center cursor-grab rounded-full w-16 h-8
+    
+    <div onClick={() =>  setSelected(!selected)} className={`flex border-2 border-black items-center cursor-grab rounded-full w-16 h-8
     ${selected ? sliderStyles["selected"] : sliderStyles["unSelected"]}`}>
     {/* oval */}
    
@@ -22,5 +27,6 @@ export const Switch = ({selected, setSelected} : {
 
     </div>
     </div>
+    
   )
 }

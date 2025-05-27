@@ -7,11 +7,13 @@ import { calculateOpacity } from "@/app/lib/utils";
 export default function CellColor({
   timeMins,
   color,
-  cellStats
+  cellStats,
+  inverse
 }: {
  cellStats: CellStats;
  color: string
  timeMins: number;
+ inverse: boolean;
 }) {
 
   return (
@@ -19,7 +21,7 @@ export default function CellColor({
       <div
         className={`w-full h-full z-0`}
         style={{
-          opacity: calculateOpacity(timeMins, cellStats.mean, cellStats.std_dev),
+          opacity: calculateOpacity(timeMins, cellStats.mean, cellStats.std_dev, inverse),
           backgroundColor: color,
         }}
       ></div>
