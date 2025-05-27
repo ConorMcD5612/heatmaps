@@ -11,6 +11,10 @@ export function calculateOpacity(
     return 0;
   }
 
+  if(dataPt === 0 && inverse) {
+    return 1;
+  }
+
   const zScoreHash = {
     lowQuartile: -0.674, //25th percentile
     midQuartile: -0, //50th
