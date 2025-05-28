@@ -22,16 +22,14 @@ export async function addCell(heatmapID: number, lastUpdated: DateTime) {
 
   //make a cell in DB for each dayBetween lastUpdated and today
   try {
-    const cellsToInsert = cellData.map(
-      (
-        cell
-      ) => sql`INSERT INTO cell_data (email, heatmap_id, time_mins, count, date)
-    VALUES (${userID}, ${cell.heatmap_id}, 0,0, ${cell.date.toISO()})`
-    );
+    for (const cell of cellData) {
+      await sql`
+        INSERT INTO cell_data (email, heatmap_id, time_mins, count, date)
+        VALUES (${userID}, ${cell.heatmap_id}, 0, 0, ${cell.date.toISODate()})
+        ON CONFLICT (email, heatmap_id, date) DO NOTHING
+      `;
+}
 
-    await sql`UPDATE heatmap_data SET last_updated = ${todayStart} WHERE heatmap_id=${heatmapID} and email=${userID}`;
-
-    await Promise.all(cellsToInsert);
   } catch (e) {
     console.error("addCell failed", e);
   }
