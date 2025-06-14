@@ -1,8 +1,11 @@
+"use client"
 import { CellData, CellDataParsed, CellStats, HeatmapData, HeatmapParsed } from "@/app/lib/definitions";
-import React from "react";
+import React, {useState} from "react";
 import CellPopUp from "./CellPopUp";
 import Link from "next/link";
 import CellColor from "./CellColor";
+import UpdateCell from "./UpdateCell";
+import ModalWrapper from "@/app/components/ModalWrapper";
 
 export default function Cell({
   cellData,
@@ -13,7 +16,13 @@ export default function Cell({
   cellStats: CellStats;
   heatmapData: HeatmapParsed;
 }) {
-  const formattedDate = cellData.date.toISODate();
+  const [open, setModalOpen] = useState(false)
+
+  
+  const onClose = () => {
+
+  }
+
   return (
     <div className="border border-black w-[90%] h-[90%] group/item relative ">
       <CellColor
@@ -27,12 +36,9 @@ export default function Cell({
         timeMins={cellData.time_mins}
         mapName={heatmapData.heatmap_name}
       />
-      <Link
-        className="absolute inset-0 block z-10"
-        href={`/dashboard?cellModal=y&name=${heatmapData.heatmap_name}&date=${formattedDate}&heatmapID=${cellData.heatmap_id}&type=${heatmapData.type}&unit=${heatmapData.unit}`}
-      >
-        &nbsp;
-      </Link>
+    <ModalWrapper onClose={onClose} open={open}>
+      <UpdateCell heatmapData={heatmapData} cellData={cellData}/>
+    </ModalWrapper>
     </div>
   );
 }

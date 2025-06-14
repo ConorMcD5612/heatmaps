@@ -28,8 +28,10 @@ export async function addCell(heatmapID: number, lastUpdated: DateTime) {
         VALUES (${userID}, ${cell.heatmap_id}, 0, 0, ${cell.date.toISODate()})
         ON CONFLICT (email, heatmap_id, date) DO NOTHING
       `;
-}
-
+      }
+      //change lastupdated to today
+      await sql`UPDATE heatmap_data SET last_updated = ${todayStart} WHERE heatmap_id=${heatmapID} and email=${userID}`;
+    
   } catch (e) {
     console.error("addCell failed", e);
   }
@@ -45,19 +47,19 @@ const FormSchema = z.object({
   color: z.coerce.string().length(7),
   type: MeasureSchema,
   unit: z.coerce.string(),
-  inverse: z.coerce.boolean()
+  inverse: z.coerce.boolean(),
 });
 
 const UpdateCell = FormSchema.omit({
   heatmapName: true,
   color: true,
-  type: true, 
+  type: true,
 });
 
 // date comes in as a string as updateCell componenet gets it from the URL
 export async function updateCell(
-  heatmapID: string | null,
-  date: string,
+  heatmapID: number,
+  date: DateTime,
   formData: FormData
 ) {
   //zod to validate type
@@ -76,7 +78,7 @@ export async function updateCell(
   try {
     const result = await sql`UPDATE cell_data 
         SET time_mins = time_mins + ${totalMins}
-        WHERE date=${date} AND heatmap_id=${heatmapID} AND email=${userID};`;
+        WHERE date=${date.toISODate()} AND heatmap_id=${heatmapID} AND email=${userID};`;
   } catch (e) {
     console.error("updateCell error", e);
   }
@@ -95,7 +97,7 @@ export async function createHeatmap(formData: FormData) {
     type: formData.get("type"),
     heatmapName: formData.get("heatmapName"),
     unit: formData.get("unit"),
-    inverse: formData.get("inverse") == "true"
+    inverse: formData.get("inverse") == "true",
   });
 
   const totalMins = 0;
@@ -104,7 +106,6 @@ export async function createHeatmap(formData: FormData) {
 
   //make last updated the day before so a cell will be created
   let dayBefore = dt.minus({ day: 1 }).toISO();
-  
 
   try {
     const result = await sql`INSERT INTO heatmap_data

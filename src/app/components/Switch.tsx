@@ -24,7 +24,7 @@ export const Switch = ({selected, setSelected} : {
     {/* oval */}
    
     <div className='rounded-full w-7 h-7 bg-white'>
-
+      
     </div>
     </div>
     

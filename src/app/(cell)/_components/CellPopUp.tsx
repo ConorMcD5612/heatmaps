@@ -1,5 +1,6 @@
 import React from "react";
 import { DateTime } from "luxon";
+import { format } from "path";
 
 export default function CellPopUp({
   date,
@@ -11,6 +12,7 @@ export default function CellPopUp({
   mapName: string;
 }) {
   const formattedDate = date.toISODate();
+  console.log(formattedDate)
 
   return (
     <>

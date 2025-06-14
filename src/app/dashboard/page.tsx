@@ -23,11 +23,6 @@ export default function Page() {
   return (
     <>
       <Suspense fallback={<div>Loading...</div>}>
-        <Dialog modalName="cellModal" onSave={onSave} onClose={onClose}>
-          <UpdateCell />
-        </Dialog>
-      </Suspense>
-      <Suspense fallback={<div>Loading...</div>}>
         <Dialog modalName="optionsModal" onSave={onSave} onClose={onClose}>
           <HeatmapOptions />
         </Dialog>
