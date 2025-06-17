@@ -25,7 +25,7 @@ export async function addCell(heatmapID: number, lastUpdated: DateTime) {
     for (const cell of cellData) {
       await sql`
         INSERT INTO cell_data (email, heatmap_id, time_mins, count, date)
-        VALUES (${userID}, ${cell.heatmap_id}, 0, 0, ${cell.date.toISODate()})
+        VALUES (${userID}, ${cell.heatmap_id}, 0, 0, ${cell.date})
         ON CONFLICT (email, heatmap_id, date) DO NOTHING
       `;
       }
@@ -59,7 +59,7 @@ const UpdateCell = FormSchema.omit({
 // date comes in as a string as updateCell componenet gets it from the URL
 export async function updateCell(
   heatmapID: number,
-  date: DateTime,
+  date: string,
   formData: FormData
 ) {
   //zod to validate type
@@ -78,7 +78,7 @@ export async function updateCell(
   try {
     const result = await sql`UPDATE cell_data 
         SET time_mins = time_mins + ${totalMins}
-        WHERE date=${date.toISODate()} AND heatmap_id=${heatmapID} AND email=${userID};`;
+        WHERE date=${date} AND heatmap_id=${heatmapID} AND email=${userID};`;
   } catch (e) {
     console.error("updateCell error", e);
   }

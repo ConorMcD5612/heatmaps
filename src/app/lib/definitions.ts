@@ -41,14 +41,14 @@ export type CellData = {
     heatmap_id: number;
     time_mins: number;
     count: number;
-    date: Date;
+    date: string;
 }
 
 export type CellDataParsed = {
     heatmap_id: number;
     time_mins: number;
     count: number;
-    date: DateTime
+    date: string
 }
 
 export type CellStats = {

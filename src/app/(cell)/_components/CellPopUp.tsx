@@ -7,12 +7,12 @@ export default function CellPopUp({
   timeMins,
   mapName,
 }: {
-  date: DateTime;
+  date: string | null;
   timeMins: number;
   mapName: string;
 }) {
-  const formattedDate = date.toISODate();
-  console.log(formattedDate)
+
+
 
   return (
     <>
@@ -21,7 +21,7 @@ export default function CellPopUp({
           "absolute block top-[-115%] left-1/2 transform -translate-x-1/2 rounded bg-black p-1 text-white z-10 invisible group-hover/item:visible hover:invisible text-xs whitespace-nowrap  "
         }
       >
-        {`${timeMins} minutes of ${mapName} on ${formattedDate}`}
+        {`${timeMins} minutes of ${mapName} on ${date}`}
       </div>
     </>
   );

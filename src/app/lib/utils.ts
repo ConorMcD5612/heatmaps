@@ -76,7 +76,7 @@ export function cellsToAdd(
       heatmap_id: heatmapID,
       time_mins: 0,
       count: 0,
-      date: currentDay,
+      date: currentDay.toISODate() as string,
     };
 
     cellData.push(cell);

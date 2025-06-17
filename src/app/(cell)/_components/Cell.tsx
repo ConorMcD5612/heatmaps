@@ -12,7 +12,7 @@ export default function Cell({
   cellStats,
   heatmapData,
 }: {
-  cellData: CellDataParsed;
+  cellData: CellData;
   cellStats: CellStats;
   heatmapData: HeatmapParsed;
 }) {

@@ -17,7 +17,7 @@ export default async function Cells({
 }) {
   //filler cells and regular cells
   //fetch cells
-  const cellData: CellDataParsed[] = await fetchCellData(heatmapData.heatmap_id);
+  const cellData: CellData[] = await fetchCellData(heatmapData.heatmap_id);
 
   return (
     <>
@@ -28,7 +28,7 @@ export default async function Cells({
         
         <div className="grid grid-rows-7 grid-flow-col grid-cols-[repeat(12,calc(100%/12))] auto-cols-[calc(100%/12)] place-items-center h-full">
         <FillerCells startDate={heatmapData.start_date} />
-        {cellData.map((cell: CellDataParsed, index: Key) => (
+        {cellData.map((cell: CellData, index: Key) => (
           <Cell
             cellData={cell}
             key={index}

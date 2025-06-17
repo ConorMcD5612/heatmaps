@@ -2,12 +2,12 @@
 import { useSearchParams } from "next/navigation";
 import { updateCell } from "@/app/lib/actions";
 import Link from "next/link";
-import { HeatmapParsed, CellDataParsed } from "@/app/lib/definitions";
+import { HeatmapParsed, CellData } from "@/app/lib/definitions";
 
 
 export default function UpdateCell({heatmapData, cellData}: 
   {
-  heatmapData: HeatmapParsed; cellData:  CellDataParsed;}) {
+  heatmapData: HeatmapParsed; cellData:  CellData}) {
  
 
   const cellDate = cellData.date;
@@ -15,7 +15,7 @@ export default function UpdateCell({heatmapData, cellData}:
   const heatmapID = heatmapData.heatmap_id;
   const unit = heatmapData.unit
   const type = heatmapData.type
-  console.log(type)
+  console.log(cellDate)
 
   //would I need to handle null? 
   const updateCellWithDate = updateCell.bind(null, heatmapID, cellDate);
@@ -24,7 +24,7 @@ export default function UpdateCell({heatmapData, cellData}:
     <div className="flex flex-col p-2 gap-1 border-2 border-black">
       <div>
       <div className="text-3xl font-bold h-7">{mapName}</div>
-      <div className="text-s font-medium text-gray-400 ">{cellDate.toISODate()}</div>
+      <div className="text-s font-medium text-gray-400 ">{cellDate}</div>
       </div>
       <form className="flex flex-col gap-1" action={updateCellWithDate}>
         {
