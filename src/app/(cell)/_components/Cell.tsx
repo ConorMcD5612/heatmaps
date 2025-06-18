@@ -29,7 +29,8 @@ export default function Cell({
     <div className="border border-black w-[90%] h-[90%] group/item relative"
     >
       {/*need this so we can close modal in updateCell (can't be on parent div) */}
-      <button onClick={() => setModalOpen(true)} className="w-full h-full"></button>
+      <button onClick={() => setModalOpen(true)} className="absolute inset-0 z-10 cursor-pointer bg-transparent p-0 m-0 border-0"></button>
+
       <CellColor
         cellStats={cellStats}
         timeMins={cellData.time_mins}
@@ -41,6 +42,7 @@ export default function Cell({
         timeMins={cellData.time_mins}
         mapName={heatmapData.heatmap_name}
       />
+   
     <ModalWrapper onClose={onClose} open={open}>
       <UpdateCell setModalOpen={setModalOpen} heatmapData={heatmapData} cellData={cellData}/>
     </ModalWrapper>
