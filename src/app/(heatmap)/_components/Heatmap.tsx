@@ -4,9 +4,9 @@ import Cells from "./Cells";
 import { HeatmapData, HeatmapParsed } from "@/app/lib/definitions";
 import { addCell } from "@/app/lib/actions";
 import { fetchCellStats } from "@/app/lib/data";
-import { IoSettingsSharp } from "react-icons/io5";
 import Link from "next/link";
 import { HeatmapTotal } from "./HeatmapTotal";
+import { OptionsBtn } from "./OptionsBtn";
 
 export default async function Heatmap({
   heatmapData,
@@ -28,15 +28,7 @@ export default async function Heatmap({
           className="flex border gap-1 border-black p-1 place-items-center rounded"
           style={{ backgroundColor: heatmapData.color }}
         >
-          <Link
-            href={`/dashboard?optionsModal=y&heatmapID=${
-              heatmapData.heatmap_id
-            }&name=${heatmapData.heatmap_name}&color=${encodeURIComponent(
-              heatmapData.color
-            )}`}
-          >
-            <IoSettingsSharp size="16" stroke="black" />
-          </Link>
+          <OptionsBtn heatmapData={heatmapData}/>
         </div>
       </div>
 

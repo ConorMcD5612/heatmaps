@@ -4,12 +4,11 @@
 import React, { useRef, useEffect } from "react";
 
 type Props = {
-  onClose: () => void;
   children: React.ReactNode;
   open: boolean;
 };
 
-export default function ModalWrapper({ onClose, open, children }: Props) {
+export default function ModalWrapper({ open, children }: Props) {
   if (!open) return null;
 
   return (

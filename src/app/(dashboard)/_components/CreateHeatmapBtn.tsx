@@ -3,6 +3,7 @@ import React from "react";
 import FeatherIcon from "feather-icons-react";
 import CreateHeatmap from "./CreateHeatmap";
 import { useState } from "react";
+import ModalWrapper from "@/app/components/ModalWrapper";
 
 export default function CreateHeatmapBtn() {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
@@ -12,20 +13,22 @@ export default function CreateHeatmapBtn() {
   };
 
   const openModal = (): void => {
-    setModalOpen(true)
-  }
-  console.log
+    setModalOpen(true);
+  };
 
   return (
     <>
-      {modalOpen ? (
+      <ModalWrapper open={modalOpen}>
         <CreateHeatmap closeModal={closeModal} />
-      ) : (
-        <div onClick={() => openModal()} className="border-2 opacity-50 border-black border-dashed flex gap-1 justify-center p-1">
-          <FeatherIcon className="my-auto" size={20} icon="plus-circle" />
-          <h4 className="my-auto">Add Heatmap</h4>
-        </div>
-      )}
+      </ModalWrapper>
+
+      <div
+        onClick={() => openModal()}
+        className="border-2 opacity-50 border-black border-dashed flex gap-1 justify-center p-1"
+      >
+        <FeatherIcon className="my-auto" size={20} icon="plus-circle" />
+        <h4 className="my-auto">Add Heatmap</h4>
+      </div>
     </>
   );
 }

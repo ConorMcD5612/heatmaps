@@ -90,7 +90,6 @@ export default function CreateHeatmap({
             Add
           </button>
         </div>
-        
       </form>
     </div>
   );

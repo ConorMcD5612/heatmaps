@@ -8,17 +8,24 @@ import { useState, useRef } from "react";
 
 import { deleteHeatmap, updateHeatmap } from "@/app/lib/actions";
 
-export default function HeatmapOptions() {
-  //I think form seperate component? Maybe both would make sense
-  const searchParams = useSearchParams();
-  const heatmapID = Number(searchParams.get("heatmapID"));
-  const name = searchParams.get("name");
-  const colorParam = searchParams.get("color");
+export default function HeatmapOptions({
+  heatmapID,
+  name,
+  colorProp,
+  setOptionsOpen
+}: {
+  heatmapID: number;
+  name: string;
+  color: string;
+  setOptionsOpen: (open: boolean) => void
+}) {
+  
+ 
 
   //refs persist through renders
   const debounceTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const [color, setColor] = useState<string>(`${colorParam}`);
+  const [color, setColor] = useState<string>(`${colorProp}`);
 
   const updateHeatmapWithID = updateHeatmap.bind(null, heatmapID);
 
@@ -73,10 +80,12 @@ export default function HeatmapOptions() {
           type="submit"
           className="bg-black text-white hover:cursor-grab p-1"
         />
+        <button type="button" onClick={() => setOptionsOpen(false)} >
+          Close
+        </button>
+        
       </form>
-      <Link className="absolute top-0 right-0 p-1" href="/dashboard">
-          <IoMdClose size={18} />
-        </Link>
+      
     </div>
   );
 }

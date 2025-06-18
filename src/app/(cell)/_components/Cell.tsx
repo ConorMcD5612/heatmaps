@@ -43,7 +43,7 @@ export default function Cell({
         mapName={heatmapData.heatmap_name}
       />
    
-    <ModalWrapper onClose={onClose} open={open}>
+    <ModalWrapper open={open}>
       <UpdateCell setModalOpen={setModalOpen} heatmapData={heatmapData} cellData={cellData}/>
     </ModalWrapper>
     </div>
