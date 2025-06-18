@@ -10,30 +10,17 @@ type Props = {
 };
 
 export default function ModalWrapper({ onClose, open, children }: Props) {
-  const dialogRef = useRef<HTMLDialogElement>(null);
+  if (!open) return null;
 
-  useEffect(() => {
-    const dialog = dialogRef.current;
-    if (!dialog) return;
-
-    if (open && !dialog.open) {
-      dialog.showModal();
-    } else if (!open && dialog.open) {
-      dialog.close();
-    }
-  }, [open]);
-
-  //make this closable from here. 
-  //everything has a submit button, so we can just make it here?
-  //no because it need sto be in the form 
   return (
-    <dialog
-      ref={dialogRef}
-      className="rounded-md shadow-xl p-4"
-      onClose={onClose}
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
     >
-      {children}
-     
-    </dialog>
+      <div
+        className="bg-white rounded-md shadow-xl "
+      >
+        {children}
+      </div>
+    </div>
   );
 }

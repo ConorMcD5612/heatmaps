@@ -1,6 +1,6 @@
 "use client"
 import { CellData, CellDataParsed, CellStats, HeatmapData, HeatmapParsed } from "@/app/lib/definitions";
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import CellPopUp from "./CellPopUp";
 import Link from "next/link";
 import CellColor from "./CellColor";
@@ -18,13 +18,18 @@ export default function Cell({
 }) {
   const [open, setModalOpen] = useState(false)
 
-  
+  useEffect(() => {
+  console.log("Modal open state:", open);
+}, [open]);
   const onClose = () => {
-
+     setModalOpen(false);
   }
 
   return (
-    <div className="border border-black w-[90%] h-[90%] group/item relative ">
+    <div className="border border-black w-[90%] h-[90%] group/item relative"
+    >
+      {/*need this so we can close modal in updateCell (can't be on parent div) */}
+      <button onClick={() => setModalOpen(true)} className="w-full h-full"></button>
       <CellColor
         cellStats={cellStats}
         timeMins={cellData.time_mins}
@@ -37,7 +42,7 @@ export default function Cell({
         mapName={heatmapData.heatmap_name}
       />
     <ModalWrapper onClose={onClose} open={open}>
-      <UpdateCell heatmapData={heatmapData} cellData={cellData}/>
+      <UpdateCell setModalOpen={setModalOpen} heatmapData={heatmapData} cellData={cellData}/>
     </ModalWrapper>
     </div>
   );
