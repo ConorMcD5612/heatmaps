@@ -3,6 +3,7 @@ import { useSearchParams } from "next/navigation";
 import { updateCell } from "@/app/lib/actions";
 import Link from "next/link";
 import { HeatmapParsed, CellData } from "@/app/lib/definitions";
+import { useRouter } from "next/navigation";
 
 export default function UpdateCell({
   heatmapData,
@@ -13,16 +14,23 @@ export default function UpdateCell({
   cellData: CellData;
   setModalOpen: (open: boolean) => void;
 }) {
+  //TODO: think its better to just pass these as props 
   const cellDate = cellData.date;
   const mapName = heatmapData.heatmap_name;
   const heatmapID = heatmapData.heatmap_id;
   const unit = heatmapData.unit;
   const type = heatmapData.type;
-  console.log(cellDate);
+  const router = useRouter()
   
-
+  const formSubmit = async (formData: FormData) => {
+    //TODO: figure this out with bind 
+    const updateCellWithDate = updateCell.bind(null, heatmapID, cellDate);
+    await updateCellWithDate(formData)
+    router.refresh()
+    setModalOpen(false)
+  }
   //would I need to handle null?
-  const updateCellWithDate = updateCell.bind(null, heatmapID, cellDate);
+  
 
   return (
     <div className="flex flex-col p-2 gap-1 border-2 border-black">
@@ -30,7 +38,7 @@ export default function UpdateCell({
         <div className="text-3xl font-bold h-7">{mapName}</div>
         <div className="text-s font-medium text-gray-400 ">{cellDate}</div>
       </div>
-      <form className="flex flex-col gap-1" action={updateCellWithDate}>
+      <form className="flex flex-col gap-1" action={formSubmit}>
         {type == "Time" ? (
           <div className="flex gap-2">
             <div className="flex flex-col">
