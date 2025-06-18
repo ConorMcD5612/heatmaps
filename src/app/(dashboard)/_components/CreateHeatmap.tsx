@@ -3,20 +3,22 @@ import React from "react";
 import { createHeatmap } from "../../lib/actions";
 import { useEffect, useState } from "react";
 import { Switch } from "@/app/components/Switch";
+import { useRouter } from "next/navigation";
 
 export default function CreateHeatmap({
   closeModal,
 }: {
   closeModal: () => void;
 }) {
-
+  const router = useRouter()
   const [countSelected, setCountSelected] = useState<boolean>(false)
   const [inverseSelected, setInverseSelected] = useState<boolean>(false)
 
   //color input val is hex no matter what
-  const formSubmit = (formData: FormData): void => {
+  const formSubmit = async (formData: FormData) => {
     formData.append("inverse", inverseSelected.toString())
-    createHeatmap(formData);
+    await createHeatmap(formData);
+    router.refresh()
     closeModal();
   };
 

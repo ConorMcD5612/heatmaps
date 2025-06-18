@@ -11,7 +11,7 @@ import { deleteHeatmap, updateHeatmap } from "@/app/lib/actions";
 export default function HeatmapOptions({
   heatmapID,
   name,
-  colorProp,
+  color,
   setOptionsOpen
 }: {
   heatmapID: number;
@@ -25,7 +25,7 @@ export default function HeatmapOptions({
   //refs persist through renders
   const debounceTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const [color, setColor] = useState<string>(`${colorProp}`);
+  const [selectedColor, setColor] = useState<string>(`${color}`);
 
   const updateHeatmapWithID = updateHeatmap.bind(null, heatmapID);
 
@@ -61,7 +61,7 @@ export default function HeatmapOptions({
           <input
             type="color"
             name="color"
-            value={color}
+            value={selectedColor}
             onChange={(e) => handleColorChange(e.target.value)}
           />
         </div>

@@ -22,11 +22,6 @@ export default function Page() {
   }
   return (
     <>
-      <Suspense fallback={<div>Loading...</div>}>
-        <Dialog modalName="optionsModal" onSave={onSave} onClose={onClose}>
-          <HeatmapOptions />
-        </Dialog>
-      </Suspense>
       <div className="flex flex-col h-screen gap-1">
         <div className="h-[5%] ">
           <div className="flex shadow-[0px_1px_1px_-1px_rgba(0,0,0,1)]">
