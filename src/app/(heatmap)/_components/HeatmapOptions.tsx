@@ -7,6 +7,7 @@ import { IoMdClose } from "react-icons/io";
 import { useState, useRef } from "react";
 
 import { deleteHeatmap, updateHeatmap } from "@/app/lib/actions";
+import { useRouter } from "next/navigation";
 
 export default function HeatmapOptions({
   heatmapID,
@@ -27,7 +28,14 @@ export default function HeatmapOptions({
 
   const [selectedColor, setColor] = useState<string>(`${color}`);
 
-  const updateHeatmapWithID = updateHeatmap.bind(null, heatmapID);
+  const router = useRouter()
+
+  const formSubmit = async (formData: FormData) => {
+    const updateHeatmapWithID = updateHeatmap.bind(null, heatmapID);
+    await updateHeatmapWithID(formData)
+    router.refresh()
+    setOptionsOpen(false)
+  } 
 
   //debouncing triggering 200ms timeOut (setting color) every time onChange fires (clears the previous one so state isn't set)
   //so once user done dragging // 200ms goes by and color is set
@@ -45,7 +53,7 @@ export default function HeatmapOptions({
     <div className="p-5">
       <h1 className="text-4xl text-center mb-1">Heatmap Options</h1>
       <div className="h-[1px] bg-black"></div>
-      <form action={updateHeatmapWithID} className="flex flex-col gap-3 mt-5">
+      <form action={formSubmit} className="flex flex-col gap-3 mt-5">
         <div className="flex flex-col">
           <label className="font-light">Name:</label>
           <input
