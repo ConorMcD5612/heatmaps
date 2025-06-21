@@ -22,11 +22,12 @@ export default async function Heatmap({
 
   return (
     <div>
+      <div className=""></div>
       <div className="text-lg flex justify-between w-full place-items-center">
       <HeatmapTotal cellStats={cellStats} heatmapName={heatmapData.heatmap_name} unit={heatmapData.unit} type={heatmapData.type}/>
         <div
-          className="flex border gap-1 border-black p-1 place-items-center rounded"
-          style={{ backgroundColor: heatmapData.color }}
+          className="flex  gap-1 border-black p-1 place-items-center rounded"
+         
         >
           <OptionsBtn heatmapData={heatmapData}/>
         </div>

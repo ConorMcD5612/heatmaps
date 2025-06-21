@@ -49,30 +49,27 @@ export default function HeatmapOptions({
     }, 200);
   };
 
+  //if its form why would you need to debounce? other form deosn't do this 
+
   return (
     <div className="p-5">
       <h1 className="text-4xl text-center mb-1">Heatmap Options</h1>
       <div className="h-[1px] bg-black"></div>
       <form action={formSubmit} className="flex flex-col gap-3 mt-5">
         <div className="flex flex-col">
-          <label className="font-light">Name:</label>
+          <label className="font-semibold text-lg">Name:</label>
           <input
+            className="text-4xl border-2 border-black"
             type="text"
-            id="name"
-            name="name"
-            className=""
+            name="heatmapName"
             placeholder={`${name}`}
           />
         </div>
         <div className="flex flex-col">
-          <label className="font-light" htmlFor="color">Color:</label>
-          <input
-            type="color"
-            name="color"
-            value={selectedColor}
-            onChange={(e) => handleColorChange(e.target.value)}
-          />
+          <label className="font-semibold text-lg">Cell Color:</label>
+          <input defaultValue={color} onChange={(e) => handleColorChange(e.target.value)} className="w-full h-12" name="color" type="color" />
         </div>
+        <hr />
         <p className="mb-5">
           <button
             onDoubleClick={() => deleteHeatmap(heatmapID)}
