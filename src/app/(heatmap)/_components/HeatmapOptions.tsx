@@ -13,29 +13,26 @@ export default function HeatmapOptions({
   heatmapID,
   name,
   color,
-  setOptionsOpen
+  setOptionsOpen,
 }: {
   heatmapID: number;
   name: string;
   color: string;
-  setOptionsOpen: (open: boolean) => void
+  setOptionsOpen: (open: boolean) => void;
 }) {
-  
- 
-
   //refs persist through renders
   const debounceTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const [selectedColor, setColor] = useState<string>(`${color}`);
 
-  const router = useRouter()
+  const router = useRouter();
 
   const formSubmit = async (formData: FormData) => {
     const updateHeatmapWithID = updateHeatmap.bind(null, heatmapID);
-    await updateHeatmapWithID(formData)
-    router.refresh()
-    setOptionsOpen(false)
-  } 
+    await updateHeatmapWithID(formData);
+    router.refresh();
+    setOptionsOpen(false);
+  };
 
   //debouncing triggering 200ms timeOut (setting color) every time onChange fires (clears the previous one so state isn't set)
   //so once user done dragging // 200ms goes by and color is set
@@ -49,12 +46,12 @@ export default function HeatmapOptions({
     }, 200);
   };
 
-  //if its form why would you need to debounce? other form deosn't do this 
+  //if its form why would you need to debounce? other form deosn't do this
 
   return (
     <div className="p-5">
-      <h1 className="text-4xl text-center mb-1">Heatmap Options</h1>
-      <div className="h-[1px] bg-black"></div>
+      <h1 className="text-3xl font-extrabold mb-3">Heatmap Settings: </h1>
+    <hr />
       <form action={formSubmit} className="flex flex-col gap-3 mt-5">
         <div className="flex flex-col">
           <label className="font-semibold text-lg">Name:</label>
@@ -67,10 +64,16 @@ export default function HeatmapOptions({
         </div>
         <div className="flex flex-col">
           <label className="font-semibold text-lg">Cell Color:</label>
-          <input defaultValue={color} onChange={(e) => handleColorChange(e.target.value)} className="w-full h-12" name="color" type="color" />
+          <input
+            defaultValue={color}
+            onChange={(e) => handleColorChange(e.target.value)}
+            className="w-full h-12"
+            name="color"
+            type="color"
+          />
         </div>
         <hr />
-        <p className="mb-5">
+        <p className="">
           <button
             onDoubleClick={() => deleteHeatmap(heatmapID)}
             className="text-red-600"
@@ -79,18 +82,16 @@ export default function HeatmapOptions({
           </button>{" "}
           this heatmap.
         </p>
-
-        <input
-          placeholder="save"
-          type="submit"
-          className="bg-black text-white hover:cursor-grab p-1"
-        />
-        <button type="button" onClick={() => setOptionsOpen(false)} >
-          Close
-        </button>
-        
+        <hr />
+        <div className="flex right-10 bottom-10 gap-1 justify-end">
+          <button className="p-2" onClick={() => setOptionsOpen(false)}>
+            Close
+          </button>
+          <button type="submit" className="p-2 bg-black text-white rounded-sm">
+            Submit
+          </button>
+        </div>
       </form>
-      
     </div>
   );
 }
