@@ -28,8 +28,15 @@ export default function HeatmapOptions({
   const router = useRouter();
 
   const formSubmit = async (formData: FormData) => {
-    const updateHeatmapWithID = updateHeatmap.bind(null, heatmapID);
-    await updateHeatmapWithID(formData);
+    
+    const formName = formData.get("heatmapName");
+    const formColor = formData.get("color");
+
+    if (formName || formColor != color) {
+      const updateHeatmapWithID = updateHeatmap.bind(null, heatmapID);
+      await updateHeatmapWithID(formData);
+    }
+
     router.refresh();
     setOptionsOpen(false);
   };
@@ -51,7 +58,7 @@ export default function HeatmapOptions({
   return (
     <div className="p-5">
       <h1 className="text-3xl font-extrabold mb-3">Heatmap Settings: </h1>
-    <hr />
+      <hr />
       <form action={formSubmit} className="flex flex-col gap-3 mt-5">
         <div className="flex flex-col">
           <label className="font-semibold text-lg">Name:</label>
