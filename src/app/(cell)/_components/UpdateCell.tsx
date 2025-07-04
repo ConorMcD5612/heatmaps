@@ -5,6 +5,11 @@ import Link from "next/link";
 import { HeatmapParsed, CellData } from "@/app/lib/definitions";
 import { useRouter } from "next/navigation";
 
+import { InputRenderer } from "./InputRenderer";
+
+
+
+
 export default function UpdateCell({
   heatmapData,
   cellData,
@@ -39,42 +44,7 @@ export default function UpdateCell({
         <div className="text-s font-medium text-gray-400 ">{cellDate}</div>
       </div>
       <form className="flex flex-col gap-1" action={formSubmit}>
-        {type == "Time" ? (
-          <div className="flex gap-2">
-            <div className="flex flex-col">
-              <label className="h-5">Hrs</label>
-              <input
-                min="0"
-                className="w-12 bg-gray-300 rounded-sm p-1"
-                placeholder="00"
-                name="hrs"
-                type="number"
-              />
-            </div>
-
-            <div className="flex flex-col">
-              <label className="h-5">Mins</label>
-              <input
-                min="0"
-                className="w-12 bg-gray-300 rounded-sm p-1"
-                placeholder="00"
-                name="mins"
-                type="number"
-              />
-            </div>
-          </div>
-        ) : (
-          <div className="flex">
-            <input
-              min="0"
-              className="w-12 bg-gray-300 rounded-sm p-1"
-              placeholder="00"
-              name="mins"
-              type="number"
-            />
-            <label className="h-5">{unit}</label>
-          </div>
-        )}
+        <InputRenderer unit={unit} type={type}></InputRenderer>
 
         <div className="flex gap-1">
           <button
