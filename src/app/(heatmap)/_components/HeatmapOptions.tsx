@@ -8,6 +8,9 @@ import { useState, useRef } from "react";
 
 import { deleteHeatmap, updateHeatmap } from "@/app/lib/actions";
 import { useRouter } from "next/navigation";
+import { DeleteHeatmapModal } from "./DeleteHeatmap";
+import ModalWrapper from "@/app/components/ModalWrapper";
+import { setDefaultAutoSelectFamily } from "net";
 
 export default function HeatmapOptions({
   heatmapID,
@@ -22,7 +25,7 @@ export default function HeatmapOptions({
 }) {
   //refs persist through renders
   const debounceTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
-
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false)
   const [selectedColor, setColor] = useState<string>(`${color}`);
 
   const router = useRouter();
@@ -80,15 +83,9 @@ export default function HeatmapOptions({
           />
         </div>
         <hr />
-        <p className="">
-          <button
-            onDoubleClick={() => deleteHeatmap(heatmapID)}
-            className="text-red-600"
-          >
-            Delete
-          </button>{" "}
-          this heatmap.
-        </p>
+       <button className="w-12 text-red-500" type="button" onClick={() => setDeleteModalOpen(true)}>
+        Delete
+       </button>
         <hr />
         <div className="flex right-10 bottom-10 gap-1 justify-end">
           <button className="p-2" onClick={() => setOptionsOpen(false)}>
@@ -99,6 +96,9 @@ export default function HeatmapOptions({
           </button>
         </div>
       </form>
+      <ModalWrapper open={deleteModalOpen}>
+        <DeleteHeatmapModal heatmapID={heatmapID} setOpen={setDeleteModalOpen} setOptionsOpen={setOptionsOpen} />
+      </ModalWrapper>
     </div>
   );
 }
