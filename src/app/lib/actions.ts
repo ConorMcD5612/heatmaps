@@ -37,7 +37,7 @@ export async function addCell(heatmapID: number, lastUpdated: DateTime) {
   }
 }
 
-const MeasureSchema = z.enum(["Count", "Time"]);
+const MeasureSchema = z.enum(["Count", "Time", "Binary"]);
 //can add messages
 //for hrs and mins do gt than 0 validation then return if validation fails
 const FormSchema = z.object({
@@ -60,6 +60,7 @@ const UpdateCell = FormSchema.omit({
 export async function updateCell(
   heatmapID: number,
   date: string,
+  type: string,
   formData: FormData
 ) {
   //zod to validate type
@@ -73,7 +74,14 @@ export async function updateCell(
   const session = await getServerSession(options);
   const userID = session?.user?.email;
 
-  console.log("this is data time whne updating");
+  //mins will be true or false when coming in, zod coerce to 0 or 1
+  if (type == "Binary") {
+    await sql`UPDATE cell_data 
+        SET time_mins = ${mins}
+        WHERE date=${date} AND heatmap_id=${heatmapID} AND email=${userID};`
+    return
+  }
+
 
   try {
     const result = await sql`UPDATE cell_data 

@@ -70,6 +70,11 @@ export default function CreateHeatmap({
               <input name="type" required type="radio" value="Time" />
               <label className="ml-1">Time (Hr, Mins)</label>
             </div>
+
+            <div className="font-light text-base">
+              <input name="type" required type="radio" value="Binary" />
+              <label className="ml-1">Binary (0 or 1)</label>
+            </div>
           </div>
         </fieldset>
         <div className={`flex flex-col ${opacityStyle[countSelected ? "selected" : "unSelected"]}`}>

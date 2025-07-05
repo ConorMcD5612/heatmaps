@@ -2,7 +2,7 @@ import React from 'react'
 
 export const CountInput = ({unit}: {unit: string}) => {
   return (
-     <div className="flex items-end">
+     <div className="flex">
             <input
               min="0"
               className="w-12 bg-gray-300 rounded-sm p-1"
@@ -10,8 +10,7 @@ export const CountInput = ({unit}: {unit: string}) => {
               name="mins"
               type="number"
             />
-            <label className="">{unit}</label>
+            <label className="flex">{unit}</label>
     </div>
   )
 }
-    

@@ -29,7 +29,7 @@ export default function UpdateCell({
 
   const formSubmit = async (formData: FormData) => {
     //TODO: figure this out with bind
-    const updateCellWithDate = updateCell.bind(null, heatmapID, cellDate);
+    const updateCellWithDate = updateCell.bind(null, heatmapID, cellDate, type);
     await updateCellWithDate(formData);
     router.refresh();
     setModalOpen(false);

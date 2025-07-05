@@ -29,7 +29,7 @@ export type HeatmapParsed = {
     heatmap_name: string;
     color: string;
     total_mins: number;
-    type: 'Time' | 'Count';
+    type: 'Time' | 'Count' | 'Binary';
     unit: string;
     inverse: boolean;
 
