@@ -2,7 +2,7 @@ import React from 'react'
 
 export const BinaryInput = ({unit}: {unit: string}) => {
   return (
-   
+
     <div>
     {/* has to be either 0 or 1*/}
      <input
