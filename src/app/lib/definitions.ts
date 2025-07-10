@@ -57,4 +57,4 @@ export type CellStats = {
     total_time: number;
 }
 
-export type HeatmapType = "Time" | "Count" | "Binary"
+export type HeatmapType = "Time" | "Count" | "Binary"   

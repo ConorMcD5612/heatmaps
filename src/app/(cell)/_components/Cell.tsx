@@ -41,6 +41,8 @@ export default function Cell({
         date={cellData.date}
         timeMins={cellData.time_mins}
         mapName={heatmapData.heatmap_name}
+        type={heatmapData.type}
+        unit={heatmapData.unit}
       />
    
     <ModalWrapper open={open}>

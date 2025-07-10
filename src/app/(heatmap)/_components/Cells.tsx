@@ -15,7 +15,6 @@ export default async function Cells({
   heatmapData: HeatmapParsed;
   cellStats: CellStats;
 }) {
-  //filler cells and regular cells
   //fetch cells
   const cellData: CellData[] = await fetchCellData(heatmapData.heatmap_id);
 
