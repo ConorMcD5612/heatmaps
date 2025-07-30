@@ -19,7 +19,7 @@ export default function CellColor({
   return (
     <>
       <div
-        className={`w-full h-full z-0`}
+        className={`w-full h-full z-0 `}
         style={{
           opacity: calculateOpacity(timeMins, cellStats.mean, cellStats.std_dev, inverse),
           backgroundColor: color,

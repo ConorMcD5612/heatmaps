@@ -37,7 +37,7 @@ export default function UpdateCell({
   //would I need to handle null?
 
   return (
-    <div className="flex flex-col p-2 gap-1 border-2 border-black">
+    <div className="flex flex-col p-2 gap-1 border-2 border-white">
       <div>
         <div className="text-4xl font-extrabold ">{mapName}</div>
         <div className="text-s font-medium text-gray-400">{formattedDate}</div>

@@ -34,7 +34,7 @@ export default function WeekStart({
   for (let i = 0; i < numDates; i++) {
     dates.push(
       <div className="
-      border-b border-black
+      border-b border-gray-400 text-gray-400
       "
       key={i}>{getWeekStartDate(startDate, i, daysFromMonday)}</div>
     );

@@ -26,14 +26,15 @@ export default async function Heatmap({
       <div className="text-lg flex justify-between w-full place-items-center">
       <HeatmapTotal cellStats={cellStats} heatmapName={heatmapData.heatmap_name} unit={heatmapData.unit} type={heatmapData.type}/>
         <div
-          className="flex  gap-1 border-black p-1 place-items-center rounded"
+          className="flex  gap-1 border-white p-1 place-items-center rounded"
          
         >
           <OptionsBtn heatmapData={heatmapData}/>
         </div>
       </div>
 
-      <div className="grid grid-rows-8 grid-cols-8 grid-flow-col mb-2 w-full h-[30vh] border border-black overflow-x-scroll">
+      <div className="grid grid-rows-8 grid-cols-8 grid-flow-col mb-2 w-full h-[30vh]  border border-white border-opacity-50
+      scrollbar-gray-500 overflow-x-scroll">
         <WeekDays />        
         <Cells heatmapData={heatmapData} cellStats={cellStats} />
       </div>

@@ -66,7 +66,7 @@ export default function HeatmapOptions({
         <div className="flex flex-col">
           <label className="font-semibold text-lg">Name:</label>
           <input
-            className="text-4xl border-2 border-black"
+            className="text-4xl border-2 border-white"
             type="text"
             name="heatmapName"
             placeholder={`${name}`}

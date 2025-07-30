@@ -39,14 +39,14 @@ export default function CreateHeatmap({
 
   return (
     
-    <div className="border-2 border-black">
+    <div className="border-2 border-white">
       <h2 className="text-3xl font-bold m-5">Add Heatmap:</h2>
       <form action={formSubmit} className="flex flex-col m-5 gap-4">
         <hr />
         <div className="flex flex-col">
           <label className="font-semibold text-lg">Name:</label>
           <input
-            className="text-4xl border-2 border-black"
+            className="text-4xl border-2 border-white"
             type="text"
             name="heatmapName"
             required
@@ -80,7 +80,7 @@ export default function CreateHeatmap({
         <div className={`flex flex-col ${opacityStyle[countSelected ? "selected" : "unSelected"]}`}>
           <label className="font-medium">Unit:</label>
           <input
-            className="text-lg border-2 border-black"
+            className="text-lg border-2 border-white"
             type="text"
             name="unit"
             placeholder="E.g g/ml/times/sets"

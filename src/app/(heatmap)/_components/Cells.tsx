@@ -22,7 +22,7 @@ export default async function Cells({
     <>
       <WeekStart cellAmount={cellData.length} startDate={heatmapData.start_date}/>
       <div
-        className="w-full row-start-2 row-span-7 col-span-12 h-full "
+        className="w-full row-start-2 row-span-7 col-span-12 h-full  "
       >
         
         <div className="grid grid-rows-7 grid-flow-col grid-cols-[repeat(12,calc(100%/12))] auto-cols-[calc(100%/12)] place-items-center h-full">
