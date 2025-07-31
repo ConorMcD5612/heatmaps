@@ -25,7 +25,6 @@ export default function HeatmapOptions({
   setOptionsOpen: (open: boolean) => void;
 }) {
   //refs persist through renders
-  const debounceTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
   const [selectedColor, setColor] = useState<string>(`${color}`);
 
@@ -33,31 +32,21 @@ export default function HeatmapOptions({
 
   const formSubmit = async (formData: FormData) => {
     
-    const formName = formData.get("heatmapName");
-    const formColor = formData.get("color");
+    
+    //its a bunch of code bloat to parse null vals on serverside so just
+    //gonna send original val if input not populated  
+    formData.set("name", formData.get("name") || name);
+    formData.set("color", formData.get("color") || color);
 
-    if (formName || formColor != color) {
-      const updateHeatmapWithID = updateHeatmap.bind(null, heatmapID);
-      await updateHeatmapWithID(formData);
-    }
+  
+    const updateHeatmapWithID = updateHeatmap.bind(null, heatmapID);
+    await updateHeatmapWithID(formData);
+    
 
     router.refresh();
     setOptionsOpen(false);
   };
 
-  //debouncing triggering 200ms timeOut (setting color) every time onChange fires (clears the previous one so state isn't set)
-  //so once user done dragging // 200ms goes by and color is set
-  const handleColorChange = (newColor: string) => {
-    if (debounceTimeout.current) {
-      clearTimeout(debounceTimeout.current);
-    }
-
-    debounceTimeout.current = setTimeout(() => {
-      setColor(newColor);
-    }, 200);
-  };
-
-  //if its form why would you need to debounce? other form deosn't do this
 
   return (
     <div className="p-5">

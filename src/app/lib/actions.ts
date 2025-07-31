@@ -38,11 +38,10 @@ export async function addCell(heatmapID: number, lastUpdated: DateTime) {
 }
 
 const MeasureSchema = z.enum(["Count", "Time", "Binary"]);
-//can add messages
-//for hrs and mins do gt than 0 validation then return if validation fails
+
 const FormSchema = z.object({
-  hours: z.coerce.number(),
-  mins: z.coerce.number(),
+  hours: z.coerce.number().positive(),
+  mins: z.coerce.number().positive(),
   heatmapName: z.coerce.string(),
   color: z.coerce.string().length(7),
   type: MeasureSchema,
@@ -54,6 +53,7 @@ const UpdateCell = FormSchema.omit({
   heatmapName: true,
   color: true,
   type: true,
+  unit: true,
 });
 
 // date comes in as a string as updateCell componenet gets it from the URL
@@ -154,7 +154,11 @@ const UpdateHeatmap = FormSchema.omit({
   hours: true,
   mins: true,
   type: true,
-});
+  inverse: true,
+  unit: true,
+})
+
+
 
 export async function updateHeatmap(heatmapID: number, formData: FormData) {
   const session = await getServerSession(options);
@@ -162,11 +166,13 @@ export async function updateHeatmap(heatmapID: number, formData: FormData) {
 
   const { color, heatmapName } = UpdateHeatmap.parse({
     color: formData.get("color"),
-    heatmapName: formData.get("name"),
+    heatmapName: formData.get("name")
   });
-  console.log(heatmapName, "heatmapName");
+
   try {
-    await sql`UPDATE heatmap_data SET color = ${color}, heatmap_name = ${heatmapName} WHERE heatmap_id=${heatmapID} AND email=${userID}`;
+    await sql`UPDATE heatmap_data SET 
+    color = ${color}, heatmap_name = ${heatmapName} 
+    WHERE heatmap_id=${heatmapID} AND email=${userID}`;
   } catch (e) {
     console.error("updateHeatmap failed", e);
   }
