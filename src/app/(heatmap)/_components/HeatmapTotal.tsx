@@ -18,7 +18,6 @@ export const HeatmapTotal = ({
   const { hrs, mins } = hrMins(cellStats.total_time);
 
   //total_mins will represent count until I change name
-
   return (
     <div className="flex gap-1 ">
       <div className="font-semibold">{`${heatmapName.trim()}: `}</div>

@@ -49,40 +49,45 @@ export default function HeatmapOptions({
 
 
   return (
-    <div className="p-5">
-      <h1 className="text-3xl font-extrabold mb-3">Heatmap Settings: </h1>
-      <hr />
-      <form action={formSubmit} className="flex flex-col gap-3 mt-5">
+
+     <>
+      <form action={formSubmit} className="flex flex-col p-3 gap-3 border border-white">
+         <h1 className="text-3xl font-extrabold">Heatmap Settings: </h1>
+
         <div className="flex flex-col">
           <label className="font-semibold text-lg">Name:</label>
           <input
-            className="text-4xl border-2 border-white"
+            className="text-4xl border-2 border-white text-black"
             type="text"
             name="heatmapName"
             placeholder={`${name}`}
           />
         </div>
+  
         <div className="flex flex-col">
           <label>Cell Color:</label>
           <ColorPicker selectedColor={selectedColor} setColor={setColor}/>
         </div>
-        <hr />
-       <button className="w-12 text-red-500" type="button" onClick={() => setDeleteModalOpen(true)}>
-        Delete
+        <hr className="mt-6" />
+        <div className="flex gap-1 justify-between px-2">
+        <button className="px-4 py-2 justify-self-start rounded text-red-500 hover:text-red-400 border border-red-500" type="button" onClick={() => setDeleteModalOpen(true)}>
+        Delete 
        </button>
-        <hr />
-        <div className="flex right-10 bottom-10 gap-1 justify-end">
-          <button className="p-2" onClick={() => setOptionsOpen(false)}>
+       <div className="flex gap-3">
+    
+          <button className="px-4 py-2" onClick={() => setOptionsOpen(false)}>
             Close
           </button>
-          <button type="submit" className="p-2 bg-black text-white rounded-sm">
+          <button type="submit" style={{backgroundColor: color}} className={`px-4 py-2 rounded-sm text-black`}>
             Submit
           </button>
         </div>
+            
+       </div>
       </form>
       <ModalWrapper open={deleteModalOpen}>
         <DeleteHeatmapModal heatmapID={heatmapID} setOpen={setDeleteModalOpen} setOptionsOpen={setOptionsOpen} />
       </ModalWrapper>
-    </div>
+    </>
   );
 }

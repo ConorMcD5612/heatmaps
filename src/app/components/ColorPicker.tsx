@@ -24,11 +24,11 @@ export const ColorPicker = ({
     unselected: "border-white border-opacity-50",
   };
 
-  //selected when selectedColor is  == color
+
   return (
     <fieldset
       onChange={(e) => setColor((e.target as HTMLInputElement).value)}
-      className={`grid grid-rows-3
+      className={`grid grid-rows-2
        grid-cols-3 gap-2
         border border-black
         w-40`}
