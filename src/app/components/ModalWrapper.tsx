@@ -16,7 +16,7 @@ export default function ModalWrapper({ open, children }: Props) {
       className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
     >
       <div
-        className="bg-white rounded-md shadow-xl "
+        className="rounded-md shadow-xl bg-black "
       >
         {children}
       </div>

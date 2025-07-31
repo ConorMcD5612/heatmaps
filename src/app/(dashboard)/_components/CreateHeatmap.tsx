@@ -63,7 +63,7 @@ export default function CreateHeatmap({
           <div>
             <div className="font-light text-base">
               <input name="type" type="radio" value="Count"  />
-              <label className="ml-1">Count (Interger) </label>
+              <label className="ml-1">Count (Integer) </label>
             </div>
 
             <div className="font-light text-base">

@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { DeleteHeatmapModal } from "./DeleteHeatmap";
 import ModalWrapper from "@/app/components/ModalWrapper";
 import { setDefaultAutoSelectFamily } from "net";
+import { ColorPicker } from "@/app/components/ColorPicker";
 
 export default function HeatmapOptions({
   heatmapID,
@@ -73,14 +74,8 @@ export default function HeatmapOptions({
           />
         </div>
         <div className="flex flex-col">
-          <label className="font-semibold text-lg">Cell Color:</label>
-          <input
-            defaultValue={color}
-            onChange={(e) => handleColorChange(e.target.value)}
-            className="w-full h-12"
-            name="color"
-            type="color"
-          />
+          <label>Cell Color:</label>
+          <ColorPicker selectedColor={selectedColor} setColor={setColor}/>
         </div>
         <hr />
        <button className="w-12 text-red-500" type="button" onClick={() => setDeleteModalOpen(true)}>
