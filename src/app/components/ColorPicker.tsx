@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { colors } from "../lib/definitions"
 
 
 //form needs to get "color"
@@ -10,14 +11,7 @@ export const ColorPicker = ({
   selectedColor: string;
   setColor: (val: string) => void;
 }) => {
-  const colors = {
-    pink: "#FF4F9A",
-    green: "#39FF14",
-    blue: "#00FFFF",
-    yellow: "#FFFF33",
-    purple: "#9D00FF",
-    orange: "#FFA500",
-  };
+
 
   const styles = {
     selected: "border-white",

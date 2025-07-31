@@ -58,3 +58,13 @@ export type CellStats = {
 }
 
 export type HeatmapType = "Time" | "Count" | "Binary"   
+
+
+export const colors = {
+    pink: "#FF4F9A",
+    green: "#39FF14",
+    blue: "#00FFFF",
+    yellow: "#FFFF33",
+    purple: "#9D00FF",
+    orange: "#FFA500",
+  };

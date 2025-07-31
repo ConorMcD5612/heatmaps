@@ -51,7 +51,7 @@ export default function HeatmapOptions({
   return (
 
      <>
-      <form action={formSubmit} className="flex flex-col p-3 gap-3 border border-white">
+      <form action={formSubmit} className="flex flex-col p-5 gap-5 border border-white">
          <h1 className="text-3xl font-extrabold">Heatmap Settings: </h1>
 
         <div className="flex flex-col">
@@ -68,8 +68,10 @@ export default function HeatmapOptions({
           <label>Cell Color:</label>
           <ColorPicker selectedColor={selectedColor} setColor={setColor}/>
         </div>
-        <hr className="mt-6" />
-        <div className="flex gap-1 justify-between px-2">
+
+        <hr className="border-white/20 mt-6" />
+        <div className="flex justify-between items-center py-3">
+        
         <button className="px-4 py-2 justify-self-start rounded text-red-500 hover:text-red-400 border border-red-500" type="button" onClick={() => setDeleteModalOpen(true)}>
         Delete 
        </button>
@@ -78,7 +80,7 @@ export default function HeatmapOptions({
           <button className="px-4 py-2" onClick={() => setOptionsOpen(false)}>
             Close
           </button>
-          <button type="submit" style={{backgroundColor: color}} className={`px-4 py-2 rounded-sm text-black`}>
+          <button type="submit" style={{backgroundColor: color}} className={`px-4 py-2 rounded-sm text-black border border-light-black`}>
             Submit
           </button>
         </div>

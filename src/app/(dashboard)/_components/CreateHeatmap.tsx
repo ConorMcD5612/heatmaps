@@ -4,6 +4,8 @@ import { createHeatmap } from "../../lib/actions";
 import { useEffect, useState } from "react";
 import { Switch } from "@/app/components/Switch";
 import { useRouter } from "next/navigation";
+import { ColorPicker } from "@/app/components/ColorPicker";
+import { colors } from "../../lib/definitions"
 
 export default function CreateHeatmap({
   closeModal,
@@ -13,6 +15,7 @@ export default function CreateHeatmap({
   const router = useRouter()
   const [countSelected, setCountSelected] = useState<boolean>(false)
   const [inverseSelected, setInverseSelected] = useState<boolean>(false)
+  const [selectedColor, setColor] = useState(colors["green"])
 
   //color input val is hex no matter what
   const formSubmit = async (formData: FormData) => {
@@ -41,7 +44,7 @@ export default function CreateHeatmap({
     
     <div className="border-2 border-white">
       <h2 className="text-3xl font-bold m-5">Add Heatmap:</h2>
-      <form action={formSubmit} className="flex flex-col m-5 gap-4">
+      <form action={formSubmit} className="flex flex-col m-5 gap-5">
         <hr />
         <div className="flex flex-col">
           <label className="font-semibold text-lg">Name:</label>
@@ -54,7 +57,7 @@ export default function CreateHeatmap({
         </div>
         <div className="flex flex-col">
           <label className="font-semibold text-lg">Cell Color:</label>
-          <input className="w-full h-12" name="color" type="color" />
+         <ColorPicker selectedColor={selectedColor} setColor={setColor}/>
         </div>
         <hr />
         <div className="font-semibold text-lg">Type of Heatmap: </div>
