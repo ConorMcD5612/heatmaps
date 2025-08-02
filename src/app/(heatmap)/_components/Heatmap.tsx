@@ -24,7 +24,7 @@ export default async function Heatmap({
     <div>
       <div className=""></div>
       <div className="text-lg flex justify-between w-full place-items-center">
-      <HeatmapTotal cellStats={cellStats} heatmapName={heatmapData.heatmap_name} unit={heatmapData.unit} type={heatmapData.type}/>
+      <HeatmapTotal cellStats={cellStats} heatmapName={heatmapData.heatmap_name} unit={heatmapData.unit} type={heatmapData.type} color={heatmapData.color}/>
         <div
           className="flex  gap-1 border-white p-1 place-items-center rounded"
          

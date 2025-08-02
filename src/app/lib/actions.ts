@@ -40,8 +40,8 @@ export async function addCell(heatmapID: number, lastUpdated: DateTime) {
 const MeasureSchema = z.enum(["Count", "Time", "Binary"]);
 
 const FormSchema = z.object({
-  hours: z.coerce.number().positive(),
-  mins: z.coerce.number().positive(),
+  hours: z.coerce.number(),
+  mins: z.coerce.number(),
   heatmapName: z.coerce.string(),
   color: z.coerce.string().length(7),
   type: MeasureSchema,
