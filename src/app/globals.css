@@ -44,3 +44,45 @@
 ::-webkit-scrollbar-track {
   background-color:black; /* Tailwind gray-800 or your bg */
 }
+
+#btn-gradient {
+  position: relative;
+  padding: 10px 50px;
+  font-size: 30px;
+  background: black;
+  color: white;
+  border-radius: 5px;
+  z-index: 1;
+}
+
+#btn-gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 5px;
+  padding: 2px;
+  background: linear-gradient(to right,
+    #FF4F9A 0%, #FF4F9A 20%,
+    #39FF14 20%, #39FF14 40%,
+    #00FFFF 40%, #00FFFF 60%,
+    #FFFF33 60%, #FFFF33 80%,
+    #9D00FF 80%, #9D00FF 100%
+  );
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+  z-index: -2;
+}
+
+#btn-gradient::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px dashed black;
+  border-radius: 5px;
+  pointer-events: none;
+  z-index: -1;
+}

@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} bg-black text-white`}>
         <div className="flex items-center justify-center min-h-screen">
-          <div className="container p-[1vw] rounded center min-h-screen w-[45rem]">
+          <div className="p-[1vw] rounded center min-h-screen w-[45rem]">
             <Providers>{children}</Providers>
           </div>
         </div>
