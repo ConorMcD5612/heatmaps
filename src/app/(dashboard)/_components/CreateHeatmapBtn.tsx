@@ -17,9 +17,6 @@ export default function CreateHeatmapBtn() {
     setModalOpen(true);
   };
 
-  const createGradient = (): void => {
-
-  }
 
   return (
     <>
@@ -35,6 +32,8 @@ export default function CreateHeatmapBtn() {
         <FeatherIcon className="my-auto" size={20} icon="plus-circle" />
         <h4 className="my-auto text-sm">Add Heatmap</h4>
       </div>
+      {/* div so I can move btn up a bit */}
+      <div className="mt-5 h-1"></div>
     </>
   );
 }
