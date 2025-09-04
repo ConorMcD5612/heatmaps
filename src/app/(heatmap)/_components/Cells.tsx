@@ -25,16 +25,26 @@ export default async function Cells({
         className="w-full row-start-2 row-span-7 col-span-12 h-full  "
       >
         
-        <div className="grid grid-rows-7 grid-flow-col grid-cols-[repeat(12,calc(100%/12))] auto-cols-[calc(100%/12)] place-items-center h-full">
+        <div className="grid 
+        grid-rows-7 
+        grid-flow-col 
+        grid-cols-[repeat(12,calc(100%/12))] 
+        auto-cols-[calc(100%/12)] 
+        place-items-center
+        h-full
+        ">
         <FillerCells startDate={heatmapData.start_date} />
-        {cellData.map((cell: CellData, index: Key) => (
-          <Cell
+        {cellData.map((cell: CellData, index: Key) => {
+          const isTopCell: boolean = index as number % 7 == 0
+
+          return (<Cell
             cellData={cell}
             key={index}
             cellStats={cellStats}
             heatmapData={heatmapData}
-          />
-        ))}
+            snap={isTopCell}
+          />)
+        })}
          </div>
       </div>
     </>

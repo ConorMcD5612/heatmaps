@@ -61,13 +61,28 @@
   inset: 0;
   border-radius: 5px;
   padding: 2px;
+  /* TODO: make function to make this using colors in definition.ts */
   background: linear-gradient(to right,
-    #FF4F9A 0%, #FF4F9A 20%,
-    #39FF14 20%, #39FF14 40%,
-    #00FFFF 40%, #00FFFF 60%,
-    #FFFF33 60%, #FFFF33 80%,
-    #9D00FF 80%, #9D00FF 100%
-  );
+  #FF4F9A 0%,        /* pink */
+  #FF4F9A 16.67%,
+
+  #FFA500 16.67%,    /* orange */
+  #FFA500 33.34%,
+
+  #FFFF33 33.34%,    /* yellow */
+  #FFFF33 50%,
+
+  #39FF14 50%,       /* green */
+  #39FF14 66.67%,
+
+  #00FFFF 66.67%,    /* cyan */
+  #00FFFF 83.34%,
+
+  #9D00FF 83.34%,    /* purple */
+  #9D00FF 100%
+);
+
+
   -webkit-mask: 
     linear-gradient(#fff 0 0) content-box, 
     linear-gradient(#fff 0 0);
