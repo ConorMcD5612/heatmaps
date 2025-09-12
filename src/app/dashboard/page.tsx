@@ -14,7 +14,7 @@ export default function Page() {
               heatmaps
             </h1>
             <div className="flex gap-1">
-              <button className="flex border gap-1 border-white p-[4px] place-items-center rounded">
+              <button className="flex border gap-1 border-white border-opacity-50 bg-[#1a1a1a]  p-[4px] place-items-center rounded">
                 <h5 className="text-xs">Settings</h5>
                 <FeatherIcon size={16} icon="settings" />
               </button>
@@ -22,6 +22,7 @@ export default function Page() {
             </div>
           </div>
         </div>
+        <hr className="opacity-50"></hr>
         <div className="flex flex-col h-[95%]">
           <HeatmapContainer />
         </div>
