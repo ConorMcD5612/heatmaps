@@ -8,7 +8,7 @@ export default function LoginBtn() {
   if (session) {
     return (
       <button
-        className="flex border bg-[#1a1a1a] border-opacity-50 border-white p-[4px] place-items-center gap-1 rounded"
+        className="flex border justify-between w-full h-full bg-[#1a1a1a] border-opacity-50 border-white/15 p-[4px] place-items-center gap-1 rounded-sm"
         onClick={() => signOut()}
       >
         <span className="text-xs">Sign Out</span>
@@ -18,7 +18,7 @@ export default function LoginBtn() {
   }
   return (
     <button
-      className="flex border bg-[#1a1a1a] border-opacity-50 border-white p-[4px] place-items-center gap-1 rounded"
+      className="flex border justify-between w-full h-full bg-[#1a1a1a] border-opacity-50 border-white/15 p-[4px] place-items-center gap-1 rounded-sm"
       onClick={() => signIn()}
     >
       <span className="text-xs">Sign In</span>

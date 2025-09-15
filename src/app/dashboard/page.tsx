@@ -3,22 +3,23 @@ import LoginBtn from "../(dashboard)/_components/LoginBtn";
 import HeatmapContainer from "../(dashboard)/_components/HeatmapContainer";
 import FeatherIcon from "feather-icons-react";
 
-
 export default function Page() {
   return (
     <>
       <div className="flex flex-col h-screen gap-1 ">
         <div className="h-[5%] ">
           <div className="flex shadow-[0px_1px_1px_-1px_rgba(0,0,0,1)]">
-            <h1 className="text-3xl font-extrabold  roundedxl w-3/4">
+            <h1 className="text-3xl font-extrabold roundedxl w-3/4">
               heatmaps
             </h1>
-            <div className="flex gap-1">
-              <button className="flex border gap-1 border-white border-opacity-50 bg-[#1a1a1a]  p-[4px] place-items-center rounded">
-                <h5 className="text-xs">Settings</h5>
+            <div className="flex gap-1 w-1/4">
+              <button className="flex w-1/2 rounded-sm border justify-between gap-1 border-white/15 opacity-50  bg-[#1a1a1a]  p-[4px] place-items-center">
+                <h5 className="text-sm">Settings</h5>
                 <FeatherIcon size={16} icon="settings" />
               </button>
-              <LoginBtn />
+              <div className="w-1/2 h-full">
+                <LoginBtn />
+              </div>
             </div>
           </div>
         </div>
