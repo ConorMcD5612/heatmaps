@@ -2,6 +2,7 @@ import React, { Suspense } from "react";
 import LoginBtn from "../(dashboard)/_components/LoginBtn";
 import HeatmapContainer from "../(dashboard)/_components/HeatmapContainer";
 import FeatherIcon from "feather-icons-react";
+import { IconBtn } from "../components/IconBtn";
 
 export default function Page() {
   return (
@@ -13,13 +14,9 @@ export default function Page() {
               heatmaps
             </h1>
             <div className="flex gap-1 w-1/4">
-              <button className="flex w-1/2 rounded-sm border justify-between gap-1 border-white/15 opacity-50  bg-[#1a1a1a]  p-[4px] place-items-center">
-                <h5 className="text-sm">Settings</h5>
-                <FeatherIcon size={16} icon="settings" />
-              </button>
-              <div className="w-1/2 h-full">
-                <LoginBtn />
-              </div>
+              <IconBtn disabled={true} iconName="settings" text="Settings" />
+              {/* Rename this to LoginBtns*/}
+              <LoginBtn />
             </div>
           </div>
         </div>
