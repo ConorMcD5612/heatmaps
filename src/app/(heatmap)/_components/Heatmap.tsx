@@ -1,3 +1,4 @@
+
 import React from "react";
 import WeekDays from "./WeekDays";
 import Cells from "./Cells";
@@ -7,13 +8,13 @@ import { fetchCellStats } from "@/app/lib/data";
 import Link from "next/link";
 import { HeatmapTotal } from "./HeatmapTotal";
 import { OptionsBtn } from "./OptionsBtn";
+import { Calendar } from "./Calendar";
 
 export default async function Heatmap({
   heatmapData,
 }: {
   heatmapData: HeatmapParsed;
 }) {
-
   //check if heatmap cells are up to date, add cells to todays date if not
   await addCell(heatmapData.heatmap_id, heatmapData.last_updated);
 
@@ -24,20 +25,21 @@ export default async function Heatmap({
     <div>
       <div className=""></div>
       <div className="text-lg flex justify-between w-full place-items-center">
-      <HeatmapTotal cellStats={cellStats} heatmapName={heatmapData.heatmap_name} unit={heatmapData.unit} type={heatmapData.type} color={heatmapData.color}/>
-        <div
-          className="flex  gap-1 border-white p-1 place-items-center rounded"
-         
-        >
-          <OptionsBtn heatmapData={heatmapData}/>
+        <HeatmapTotal
+          cellStats={cellStats}
+          heatmapName={heatmapData.heatmap_name}
+          unit={heatmapData.unit}
+          type={heatmapData.type}
+          color={heatmapData.color}
+        />
+        <div className="flex gap-1 border-white p-1 place-items-center rounded">
+          <OptionsBtn heatmapData={heatmapData} />
         </div>
       </div>
 
-      <div className="grid grid-rows-8 grid-cols-8 grid-flow-col mb-2 w-full h-[30vh] border border-white border-opacity-50
-      scrollbar-gray-500 overflow-x-scroll snap-x snap-mandatory scroll-pl-9" >
-        <WeekDays />        
-        <Cells heatmapData={heatmapData} cellStats={cellStats} />
-      </div>
+
+      {/*make this a component, then can useClient to make it scroll */ }
+      <Calendar heatmapData={heatmapData} cellStats={cellStats} />
     </div>
   );
 }
