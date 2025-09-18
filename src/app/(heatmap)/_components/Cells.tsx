@@ -1,3 +1,4 @@
+
 import { fetchCellData, fetchCellStats } from "@/app/lib/data";
 import { CellData, CellDataParsed, HeatmapData } from "@/app/lib/definitions";
 import Cell from "@/app/(cell)/_components/Cell";
