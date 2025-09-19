@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import { HeatmapParsed, CellStats } from "@/app/lib/definitions";
+import { HeatmapParsed, CellStats, CellData } from "@/app/lib/definitions";
 import WeekDays from './WeekDays';
 import Cells from './Cells';
 import { useRef, useEffect } from 'react';
@@ -8,13 +8,15 @@ import { useRef, useEffect } from 'react';
 export const Calendar = ({
   heatmapData,
   cellStats,
+  cellData
 }: {
   heatmapData: HeatmapParsed;
   cellStats: CellStats;
+  cellData: CellData[];
 }) => {
   const ref = useRef<HTMLDivElement>(null)
 
-
+    
   useEffect(() => {
     const element = ref.current
     if (!element) return;
@@ -27,7 +29,7 @@ export const Calendar = ({
       scrollbar-gray-500 overflow-x-scroll snap-x snap-mandatory scroll-pl-9"
       >
         <WeekDays />
-        <Cells heatmapData={heatmapData} cellStats={cellStats} />
+        <Cells heatmapData={heatmapData} cellStats={cellStats} cellData={cellData} />
     </div>
   )
 }

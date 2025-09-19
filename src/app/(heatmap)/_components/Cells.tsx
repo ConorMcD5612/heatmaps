@@ -9,16 +9,17 @@ import FillerCells from "./FillerCells";
 import WeekDays from "./WeekDays";
 import { HeatmapParsed } from "@/app/lib/definitions";
 
-export default async function Cells({
+export default function Cells({
   heatmapData,
   cellStats,
+  cellData
 }: {
   heatmapData: HeatmapParsed;
   cellStats: CellStats;
+  cellData: CellData[];
 }) {
-  //fetch cells
-  const cellData: CellData[] = await fetchCellData(heatmapData.heatmap_id);
 
+  console.log(cellData, "THIS IS CELL DATA")
   return (
     <>
       <WeekStart cellAmount={cellData.length} startDate={heatmapData.start_date}/>
@@ -43,7 +44,7 @@ export default async function Cells({
             key={index}
             cellStats={cellStats}
             heatmapData={heatmapData}
-            snap={isTopCell}
+       
           />)
         })}
          </div>

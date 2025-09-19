@@ -2,13 +2,14 @@
 import React from "react";
 import WeekDays from "./WeekDays";
 import Cells from "./Cells";
-import { HeatmapData, HeatmapParsed } from "@/app/lib/definitions";
+import { HeatmapData, HeatmapParsed, CellData } from "@/app/lib/definitions";
 import { addCell } from "@/app/lib/actions";
 import { fetchCellStats } from "@/app/lib/data";
 import Link from "next/link";
 import { HeatmapTotal } from "./HeatmapTotal";
 import { OptionsBtn } from "./OptionsBtn";
 import { Calendar } from "./Calendar";
+import { fetchCellData } from "@/app/lib/data";
 
 export default async function Heatmap({
   heatmapData,
@@ -20,6 +21,8 @@ export default async function Heatmap({
 
   //for opacity calculation
   const cellStats = await fetchCellStats(heatmapData.heatmap_id);
+  
+  const cellData: CellData[] = await fetchCellData(heatmapData.heatmap_id);
 
   return (
     <div>
@@ -39,7 +42,7 @@ export default async function Heatmap({
 
 
       {/*make this a component, then can useClient to make it scroll */ }
-      <Calendar heatmapData={heatmapData} cellStats={cellStats} />
+      <Calendar heatmapData={heatmapData} cellStats={cellStats} cellData={cellData} />
     </div>
   );
 }
