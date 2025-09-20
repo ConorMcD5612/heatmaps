@@ -1,5 +1,5 @@
 import { create } from "domain";
-import React from "react";
+import React, { RefObject } from "react";
 import { DateTime } from "luxon";
 
 
@@ -21,9 +21,11 @@ function getWeekStartDate(
 export default function WeekStart({
   cellAmount,
   isoStartDate,
+  endCellRef
 }: {
   cellAmount: number;
   isoStartDate: string | null;
+  endCellRef: RefObject<HTMLDivElement>;
 }) {
   
   const luxDate = DateTime.fromISO(isoStartDate as string)
@@ -34,8 +36,12 @@ export default function WeekStart({
 
   for (let i = 0; i < numDates; i++) {
     dates.push(
-      <div className="
-      border-b border-gray-400 text-gray-400 snap-center snap-always
+      <div ref={i == numDates - 1 ? endCellRef : null} className="
+      border-b 
+      border-gray-400 
+      text-gray-400 
+      snap-center 
+      snap-always
       "
       key={i}>{getWeekStartDate(luxDate, i, daysFromMonday)}</div>
     );

@@ -1,7 +1,7 @@
 import { fetchCellData, fetchCellStats } from "@/app/lib/data";
 import { CellData, CellDataParsed, HeatmapData } from "@/app/lib/definitions";
 import Cell from "@/app/(cell)/_components/Cell";
-import React, { Key } from "react";
+import React, { Key, RefObject } from "react";
 import WeekStart from "./WeekStart";
 import { CellStats } from "@/app/lib/definitions";
 import FillerCells from "./FillerCells";
@@ -13,11 +13,13 @@ export default function Cells({
   cellStats,
   cellData,
   isoStartDate,
+  endCellRef
 }: {
   heatmapData: HeatmapParsed;
   cellStats: CellStats;
   cellData: CellData[];
   isoStartDate: string | null;
+  endCellRef: RefObject<HTMLDivElement>;
 }) {
   console.log(cellData, "THIS IS CELL DATA");
   return (
@@ -25,6 +27,7 @@ export default function Cells({
       <WeekStart
         cellAmount={cellData.length}
         isoStartDate={isoStartDate}
+        endCellRef={endCellRef}
       />
       <div className="w-full row-start-2 row-span-7 col-span-12 h-full  ">
         <div
