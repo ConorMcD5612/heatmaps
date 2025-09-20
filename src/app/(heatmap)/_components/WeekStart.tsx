@@ -20,13 +20,14 @@ function getWeekStartDate(
 
 export default function WeekStart({
   cellAmount,
-  startDate,
+  isoStartDate,
 }: {
   cellAmount: number;
-  startDate: DateTime;
+  isoStartDate: string | null;
 }) {
   
-  const daysFromMonday = startDate.weekday - 1
+  const luxDate = DateTime.fromISO(isoStartDate as string)
+  const daysFromMonday = luxDate.weekday - 1
 
   let numDates = Math.ceil((cellAmount + daysFromMonday) / 7);
   const dates = [];
@@ -36,7 +37,7 @@ export default function WeekStart({
       <div className="
       border-b border-gray-400 text-gray-400 snap-center snap-always
       "
-      key={i}>{getWeekStartDate(startDate, i, daysFromMonday)}</div>
+      key={i}>{getWeekStartDate(luxDate, i, daysFromMonday)}</div>
     );
   }
 

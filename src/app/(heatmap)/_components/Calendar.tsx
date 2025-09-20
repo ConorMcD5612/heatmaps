@@ -29,6 +29,7 @@ export const Calendar = ({
     <div
         className="grid grid-rows-8 grid-cols-8 grid-flow-col mb-2 w-full h-[30vh] border border-white border-opacity-50
       scrollbar-gray-500 overflow-x-scroll snap-x snap-mandatory scroll-pl-9"
+      ref={ref}
       >
         <WeekDays />
         <Cells heatmapData={heatmapData} cellStats={cellStats} cellData={cellData} isoStartDate={isoStartDate} />
