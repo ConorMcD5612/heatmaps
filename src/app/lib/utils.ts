@@ -27,13 +27,13 @@ export function calculateOpacity(
 
   // Determine opacity based on z-score
   if (zScore < zScoreHash["lowQuartile"]) {
-    console.log("lowQuart");
+    
     opacity = 0.2;
   } else if (zScore < zScoreHash["midQuartile"]) {
-    console.log("medQuart");
+    
     opacity = 0.5;
   } else if (zScore < zScoreHash["highQuartile"]) {
-    console.log("highQuart");
+    
     opacity = 0.8;
   } else {
     opacity = 1;

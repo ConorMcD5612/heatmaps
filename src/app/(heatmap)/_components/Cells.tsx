@@ -13,7 +13,7 @@ export default function Cells({
   cellStats,
   cellData,
   isoStartDate,
-  endCellRef
+  endCellRef,
 }: {
   heatmapData: HeatmapParsed;
   cellStats: CellStats;
@@ -21,7 +21,6 @@ export default function Cells({
   isoStartDate: string | null;
   endCellRef: RefObject<HTMLDivElement>;
 }) {
-  console.log(cellData, "THIS IS CELL DATA");
   return (
     <>
       <WeekStart

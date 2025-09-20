@@ -29,7 +29,7 @@ export async function fetchHeatmapData() {
       })
     );
 
-    console.log(rows, "rows");
+    
     return rows;
   } catch (error) {
     console.error("Failed to fetch heatmap data:", error);

@@ -26,7 +26,7 @@ export async function GET(request: Request) {
     date DATE
   );
   `
-  console.log("Table creation result:", result)
+  
      
   return NextResponse.json({result}, {status: 200})
    

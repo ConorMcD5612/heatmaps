@@ -13,7 +13,7 @@ export const Switch = ({selected, setSelected} : {
   }
 
   useEffect(() => {
-    console.log(selected)
+    
   }, [selected])
 
 

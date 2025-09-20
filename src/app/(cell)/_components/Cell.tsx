@@ -1,6 +1,12 @@
-"use client"
-import { CellData, CellDataParsed, CellStats, HeatmapData, HeatmapParsed } from "@/app/lib/definitions";
-import React, {useState, useEffect} from "react";
+"use client";
+import {
+  CellData,
+  CellDataParsed,
+  CellStats,
+  HeatmapData,
+  HeatmapParsed,
+} from "@/app/lib/definitions";
+import React, { useState, useEffect } from "react";
 import CellPopUp from "./CellPopUp";
 import Link from "next/link";
 import CellColor from "./CellColor";
@@ -16,24 +22,24 @@ export default function Cell({
   cellData: CellData;
   cellStats: CellStats;
   heatmapData: HeatmapParsed;
-
 }) {
-  const [open, setModalOpen] = useState(false)
+  const [open, setModalOpen] = useState(false);
 
-  useEffect(() => {
-  console.log("Modal open state:", open);
-}, [open]);
-
-
-  const onClose = () => {
-     setModalOpen(false);
-  }
-
-  const needsBorder = calculateOpacity(cellData.time_mins, cellStats.mean, cellStats.std_dev, heatmapData.inverse)
+  const needsBorder = calculateOpacity(
+    cellData.time_mins,
+    cellStats.mean,
+    cellStats.std_dev,
+    heatmapData.inverse
+  );
 
   return (
-    <div className={`
-      ${needsBorder ? "border-[1px] border-white border-opacity-30" : "border-[1px] border-[#1a1a1a]" }
+    <div
+      className={`
+      ${
+        needsBorder
+          ? "border-[1px] border-white border-opacity-30"
+          : "border-[1px] border-[#1a1a1a]"
+      }
        bg-[#1a1a1a] 
        w-[85%] 
        h-[85%] 
@@ -41,7 +47,10 @@ export default function Cell({
        `}
     >
       {/*need this so we can close modal in updateCell (can't be on parent div) */}
-      <button onClick={() => setModalOpen(true)} className="absolute inset-0 z-10 cursor-pointer bg-transparent p-0 m-0 border-0"></button>
+      <button
+        onClick={() => setModalOpen(true)}
+        className="absolute inset-0 z-10 cursor-pointer bg-transparent p-0 m-0 border-0"
+      ></button>
 
       <CellColor
         cellStats={cellStats}
@@ -56,10 +65,14 @@ export default function Cell({
         type={heatmapData.type}
         unit={heatmapData.unit}
       />
-   
-    <ModalWrapper open={open}>
-      <UpdateCell setModalOpen={setModalOpen} heatmapData={heatmapData} cellData={cellData}/>
-    </ModalWrapper>
+
+      <ModalWrapper open={open}>
+        <UpdateCell
+          setModalOpen={setModalOpen}
+          heatmapData={heatmapData}
+          cellData={cellData}
+        />
+      </ModalWrapper>
     </div>
   );
 }
