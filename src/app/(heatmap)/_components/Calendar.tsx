@@ -8,15 +8,17 @@ import { useRef, useEffect } from 'react';
 export const Calendar = ({
   heatmapData,
   cellStats,
-  cellData
+  cellData,
+  isoStartDate
 }: {
   heatmapData: HeatmapParsed;
   cellStats: CellStats;
   cellData: CellData[];
+  isoStartDate: string | null;
 }) => {
   const ref = useRef<HTMLDivElement>(null)
 
-    
+
   useEffect(() => {
     const element = ref.current
     if (!element) return;
@@ -29,7 +31,7 @@ export const Calendar = ({
       scrollbar-gray-500 overflow-x-scroll snap-x snap-mandatory scroll-pl-9"
       >
         <WeekDays />
-        <Cells heatmapData={heatmapData} cellStats={cellStats} cellData={cellData} />
+        <Cells heatmapData={heatmapData} cellStats={cellStats} cellData={cellData} isoStartDate={isoStartDate} />
     </div>
   )
 }

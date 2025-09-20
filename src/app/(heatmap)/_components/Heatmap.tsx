@@ -21,7 +21,7 @@ export default async function Heatmap({
 
   //for opacity calculation
   const cellStats = await fetchCellStats(heatmapData.heatmap_id);
-  
+
   const cellData: CellData[] = await fetchCellData(heatmapData.heatmap_id);
 
   return (
@@ -42,7 +42,7 @@ export default async function Heatmap({
 
 
       {/*make this a component, then can useClient to make it scroll */ }
-      <Calendar heatmapData={heatmapData} cellStats={cellStats} cellData={cellData} />
+      <Calendar heatmapData={heatmapData} isoStartDate={heatmapData.start_date.toISO()} cellStats={cellStats} cellData={cellData} />
     </div>
   );
 }

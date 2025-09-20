@@ -12,11 +12,13 @@ import { HeatmapParsed } from "@/app/lib/definitions";
 export default function Cells({
   heatmapData,
   cellStats,
-  cellData
+  cellData,
+  isoStartDate
 }: {
   heatmapData: HeatmapParsed;
   cellStats: CellStats;
   cellData: CellData[];
+  isoStartDate: string | null;
 }) {
 
   console.log(cellData, "THIS IS CELL DATA")
@@ -35,7 +37,7 @@ export default function Cells({
         place-items-center
         h-full
         ">
-        <FillerCells startDate={heatmapData.start_date} />
+        <FillerCells isoStartDate={isoStartDate} />
         {cellData.map((cell: CellData, index: Key) => {
           const isTopCell: boolean = index as number % 7 == 0
 
