@@ -3,6 +3,20 @@ import LoginBtn from "../(dashboard)/_components/LoginBtn";
 import HeatmapContainer from "../(dashboard)/_components/HeatmapContainer";
 import FeatherIcon from "feather-icons-react";
 import { IconBtn } from "../components/IconBtn";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Heatmaps",
+  description: "Heatmap habit tracking app",
+  icons: {
+    icon: [
+      { url: "../favicon.ico" }, 
+      { url: "../favicon-16x16.png", sizes: "16x16" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+    shortcut: ["/favicon.ico"],
+  },
+};
 
 export default function Page() {
   return (
