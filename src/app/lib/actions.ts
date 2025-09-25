@@ -91,7 +91,6 @@ export async function updateCell(
     console.error("updateCell error", e);
   }
 
-  redirect("/dashboard");
 }
 
 const CreateHeatmap = FormSchema.omit({ hours: true, mins: true });
@@ -159,7 +158,6 @@ const UpdateHeatmap = FormSchema.omit({
 })
 
 
-
 export async function updateHeatmap(heatmapID: number, formData: FormData) {
   const session = await getServerSession(options);
   const userID = session?.user?.email;
@@ -177,5 +175,5 @@ export async function updateHeatmap(heatmapID: number, formData: FormData) {
     console.error("updateHeatmap failed", e);
   }
 
-  redirect("/dashboard");
+ 
 }
