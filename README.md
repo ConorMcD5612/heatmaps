@@ -1,7 +1,6 @@
 # <a href="https://heatmaps.dev">Heatmaps</a>
 
-Heatmaps is a flexible habit tracking app (or general tracking app) designed to help users **quickly visualize progress over long periods of time**.  
-It supports multiple ways to track your progress so you can measure habits in the way that makes the most sense for you.
+Heatmaps is a flexible habit tracking app (or general tracking app) designed to help users **quickly visualize progress over long periods of time**. It supports multiple ways to track your progress so you can measure habits in the way that makes the most sense for you.
 
 ---
 
