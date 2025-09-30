@@ -8,7 +8,7 @@ export default function FillerCells({isoStartDate} : {isoStartDate: string | nul
     //need start date 
     const luxDate = DateTime.fromISO(isoStartDate as string, {zone: 'utc'})
     const daysFromMonday = luxDate.weekday - 1
-    //TODO: for some reason this works in dev but not on prod
+    
   return (
     <>
     {[...Array(daysFromMonday)].map((_, index) => (

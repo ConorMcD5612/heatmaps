@@ -16,25 +16,26 @@ export default function UpdateCell({
   cellData: CellData;
   setModalOpen: (open: boolean) => void;
 }) {
-  //TODO: think its better to just pass these as props
+  
   const cellDate = cellData.date;
-  const formattedDate = DateTime.fromISO(cellDate)
-    .setLocale("en")
-    .toFormat("cccc, LLLL d yyyy");
   const mapName = heatmapData.heatmap_name;
   const heatmapID = heatmapData.heatmap_id;
   const unit = heatmapData.unit;
   const type = heatmapData.type;
+
+  const formattedDate = DateTime.fromISO(cellDate)
+    .setLocale("en")
+    .toFormat("cccc, LLLL d yyyy");
+
   const router = useRouter();
 
   const formSubmit = async (formData: FormData) => {
-    //TODO: figure this out with bind
     const updateCellWithDate = updateCell.bind(null, heatmapID, cellDate, type);
     await updateCellWithDate(formData);
     router.refresh();
     setModalOpen(false);
   };
-  //would I need to handle null?
+
 
   return (
     <div className="flex flex-col p-2 gap-1 border-2 border-white">

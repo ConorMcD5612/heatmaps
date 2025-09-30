@@ -4,10 +4,12 @@ import FeatherIcon from "feather-icons-react";
 import CreateHeatmap from "./CreateHeatmap";
 import { useState } from "react";
 import ModalWrapper from "@/app/components/ModalWrapper";
-import { colors } from "@/app/lib/definitions";
+import { useSession } from "next-auth/react";
+
 
 export default function CreateHeatmapBtn() {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const {status} = useSession()
 
   const closeModal = (): void => {
     setModalOpen(false);
@@ -17,15 +19,15 @@ export default function CreateHeatmapBtn() {
     setModalOpen(true);
   };
 
-
   return (
     <>
       <ModalWrapper open={modalOpen}>
         <CreateHeatmap closeModal={closeModal} />
       </ModalWrapper>
-
+      <button disabled={status != "authenticated"} className="w-full">
+        
       <div
-        onClick={() => openModal()}
+         onClick={() => openModal()}
         className=" w-full mt-6  flex items-center justify-center gap-2"
         id="btn-gradient"
       >
@@ -34,6 +36,7 @@ export default function CreateHeatmapBtn() {
       </div>
       {/* div so I can move btn up a bit */}
       <div className="mt-5 h-1"></div>
+      </button>
     </>
   );
 }

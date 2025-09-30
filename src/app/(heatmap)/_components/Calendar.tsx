@@ -3,7 +3,7 @@ import React from "react";
 import { HeatmapParsed, CellStats, CellData } from "@/app/lib/definitions";
 import WeekDays from "./WeekDays";
 import Cells from "./Cells";
-import { useRef, useEffect } from "react";
+import { useRef, useLayoutEffect } from "react";
 
 export const Calendar = ({
   heatmapData,
@@ -19,10 +19,9 @@ export const Calendar = ({
   const endCellRef = useRef<HTMLDivElement>(null);
 
   //ref on the last element calc width from start to end of element, scroll to that width
-  useEffect(() => {
+  useLayoutEffect(() => {
     const element = endCellRef.current;
     if (!element) return;
-    const width = element.scrollWidth - element.scrollWidth / 2;
 
     element.scrollIntoView({ block: "nearest", inline: "end" });
   }, []);
