@@ -26,8 +26,8 @@ export default function CreateHeatmapBtn() {
       <button disabled={status != "authenticated"} className="w-full">
         <div
           onClick={() => openModal()}
-          className="mt-6 flex w-full items-center justify-center gap-2"
-          id="btn-gradient"
+          className="btn-gradient mt-6 flex w-full items-center justify-center gap-2"
+          
         >
           <FeatherIcon className="my-auto" size={20} icon="plus-circle" />
           <h4 className="my-auto text-sm">Add Heatmap</h4>

@@ -43,7 +43,7 @@
   background-color: black; /* Tailwind gray-800 or your bg */
 }
 
-#btn-gradient {
+.btn-gradient {
   position: relative;
   padding: 10px 50px;
   font-size: 30px;
@@ -53,7 +53,7 @@
   z-index: 1;
 }
 
-#btn-gradient::before {
+.btn-gradient::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -90,7 +90,7 @@
   z-index: -2;
 }
 
-#btn-gradient::after {
+.btn-gradient::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -98,4 +98,30 @@
   border-radius: 5px;
   pointer-events: none;
   z-index: -1;
+}
+
+.btn-gradient-filled {
+   border-width: 1px;
+  border-style: solid;
+  border-image: linear-gradient(
+    to right,
+    #ff4f9a 0%,
+    /* pink */ #ff4f9a 16.67%,
+
+    #ffa500 16.67%,
+    /* orange */ #ffa500 33.34%,
+
+    #ffff33 33.34%,
+    /* yellow */ #ffff33 50%,
+
+    #39ff14 50%,
+    /* green */ #39ff14 66.67%,
+
+    #00ffff 66.67%,
+    /* cyan */ #00ffff 83.34%,
+
+    #9d00ff 83.34%,
+    /* purple */ #9d00ff 100%
+  );
+  border-image-slice: 1;
 }

@@ -20,7 +20,6 @@ export default function HeatmapOptions({
   //refs persist through renders
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [selectedColor, setColor] = useState<string>(`${color}`);
-
   const router = useRouter();
 
   const formSubmit = async (formData: FormData) => {
@@ -40,7 +39,7 @@ export default function HeatmapOptions({
     <>
       <form
         action={formSubmit}
-        className="flex flex-col gap-5 border border-white p-5"
+        className="flex flex-col gap-5 border border-white border-opacity-50 p-5 rounded-sm"
       >
         <h1 className="text-3xl font-extrabold">Heatmap Settings: </h1>
 
@@ -60,22 +59,22 @@ export default function HeatmapOptions({
         </div>
 
         <hr className="mt-6 border-white/20" />
-        <div className="flex items-center justify-between py-3">
+        <div className="flex items-center justify-between ">
           <button
-            className="justify-self-start rounded border border-red-500 px-4 py-2 text-red-500 hover:text-red-400"
+            className="justify-self-start opacity-70 rounded border border-red-500 px-4 py-2 text-red-500 hover:text-red-400 hover:opacity-100"
             type="button"
             onClick={() => setDeleteModalOpen(true)}
           >
             Delete
           </button>
           <div className="flex gap-3">
-            <button className="px-4 py-2" onClick={() => setOptionsOpen(false)}>
+            <button className="px-3 py-2" onClick={() => setOptionsOpen(false)}>
               Close
             </button>
             <button
               type="submit"
-              style={{ backgroundColor: color }}
-              className={`rounded-sm border border-light-black px-4 py-2 text-black`}
+              style={{borderColor: color}}
+              className={`rounded-sm border px-3 py-2 `}
             >
               Submit
             </button>

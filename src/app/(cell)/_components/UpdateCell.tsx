@@ -21,6 +21,7 @@ export default function UpdateCell({
   const heatmapID = heatmapData.heatmap_id;
   const unit = heatmapData.unit;
   const type = heatmapData.type;
+  const color = heatmapData.color
 
   const formattedDate = DateTime.fromISO(cellDate)
     .setLocale("en")
@@ -36,26 +37,25 @@ export default function UpdateCell({
   };
 
   return (
-    <div className="flex flex-col gap-1 border-2 border-white p-2">
+    <div className="flex flex-col gap-1 p-3 border-[1px] border-white border-opacity-50">
       <div>
         <div className="text-4xl font-extrabold">{mapName}</div>
         <div className="text-s font-medium text-gray-400">{formattedDate}</div>
       </div>
-      <hr className="m-1" />
+      <hr className="mb-5 opacity-50" />
       <form className="flex flex-col gap-1" action={formSubmit}>
-        <h2 className="text-lg font-semibold">Add To Cell:</h2>
+        <h2 className="text-xl font-semibold">Add To Cell:</h2>
         <InputRenderer unit={unit} type={type}></InputRenderer>
-        <hr className="m-1" />
+        <hr className="mt-5 opacity-50" />
         <div className="bottom-10 right-10 flex justify-end gap-1">
-          <button className="p-2" onClick={() => setModalOpen(false)}>
+          <button className="p-2 my-3" onClick={() => setModalOpen(false)}>
             Close
           </button>
-          <button type="submit" className="rounded-sm bg-black p-2 text-white">
+          <button type="submit" style={{borderColor: color}} className="rounded-sm my-3 border bg-black p-2 text-white">
             Submit
           </button>
         </div>
       </form>
-      <div></div>
     </div>
   );
 }

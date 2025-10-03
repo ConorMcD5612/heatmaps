@@ -42,10 +42,10 @@ export default function CreateHeatmap({
 
   
   return (
-    <div className="border-2 border-white">
-      <h2 className="m-5 text-3xl font-bold">Add Heatmap:</h2>
+    <div className="border border-white border-opacity-50">
+      <h2 className="m-5 text-3xl font-bold">Create Heatmap:</h2>
       <form action={formSubmit} className="m-5 flex flex-col gap-5">
-        <hr />
+        <hr className="opacity-50" />
         <div className="flex flex-col">
           <label className="text-lg font-semibold">Name:</label>
           <input
@@ -59,7 +59,7 @@ export default function CreateHeatmap({
           <label className="text-lg font-semibold">Cell Color:</label>
           <ColorPicker selectedColor={selectedColor} setColor={setColor} />
         </div>
-        <hr />
+        <hr className="opacity-50" />
         <div className="text-lg font-semibold">Type of Heatmap: </div>
         <fieldset onChange={(e) => handleRadioSelect(e)} className="">
           <legend className="font-medium">Tracking:</legend>
@@ -95,13 +95,13 @@ export default function CreateHeatmap({
           <label>Inverse Color:</label>
           <Switch selected={inverseSelected} setSelected={setInverseSelected} />
         </div>
-        <hr />
+        <hr className="opacity-50" />
         <div className="bottom-10 right-10 flex justify-end gap-1">
-          <button className="p-2" onClick={closeModal}>
+          <button className="p-2 w-24" onClick={closeModal}>
             Close
           </button>
-          <button type="submit" className="rounded-sm bg-black p-2 text-white">
-            Add
+          <button type="submit" className="w-24 rounded-sm border border-white bg-black p-2 text-white opacity-95">
+            Create
           </button>
         </div>
       </form>

@@ -4,7 +4,7 @@ export const TimeInput = ({ unit }: { unit: string }) => {
   return (
     <div className="flex gap-2">
       <div className="flex flex-col">
-        <label className="h-5">Hrs</label>
+        <label className="h-5 font-light">Hrs</label>
         <input
           min="0"
           className="w-12 rounded-sm bg-gray-300 p-1"
@@ -15,7 +15,7 @@ export const TimeInput = ({ unit }: { unit: string }) => {
       </div>
 
       <div className="flex flex-col">
-        <label className="h-5">Mins</label>
+        <label className="h-5 font-light">Mins</label>
         <input
           min="0"
           className="w-12 rounded-sm bg-gray-300 p-1"
