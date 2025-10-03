@@ -3,25 +3,28 @@ import { useState, useEffect } from "react";
 import { CellStats } from "@/app/lib/definitions";
 import { calculateOpacity } from "@/app/lib/utils";
 
-
 export default function CellColor({
   timeMins,
   color,
   cellStats,
-  inverse
+  inverse,
 }: {
- cellStats: CellStats;
- color: string
- timeMins: number;
- inverse: boolean;
+  cellStats: CellStats;
+  color: string;
+  timeMins: number;
+  inverse: boolean;
 }) {
-
   return (
     <>
       <div
-        className={`w-full h-full z-0 `}
+        className={`border-opacity-50 h-full w-full`}
         style={{
-          opacity: calculateOpacity(timeMins, cellStats.mean, cellStats.std_dev, inverse),
+          opacity: calculateOpacity(
+            timeMins,
+            cellStats.mean,
+            cellStats.std_dev,
+            inverse,
+          ),
           backgroundColor: color,
         }}
       ></div>

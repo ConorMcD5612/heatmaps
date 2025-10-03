@@ -27,10 +27,7 @@ export const Calendar = ({
   }, []);
 
   return (
-    <div
-      className="grid grid-rows-8 grid-cols-8 grid-flow-col mb-2 w-full h-[30vh] border border-white border-opacity-50
-      scrollbar-gray-500 overflow-x-scroll snap-x snap-mandatory scroll-pl-9"
-    >
+    <div className="scrollbar-gray-500 mb-2 grid h-[30vh] w-full snap-x snap-mandatory scroll-pl-9 grid-flow-col grid-cols-8 grid-rows-8 overflow-x-scroll border border-white border-opacity-50">
       <WeekDays />
       <Cells
         endCellRef={endCellRef}

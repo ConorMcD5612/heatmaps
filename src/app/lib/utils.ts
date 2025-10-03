@@ -5,13 +5,13 @@ export function calculateOpacity(
   dataPt: number,
   mean: number,
   stdDev: number,
-  inverse: boolean
+  inverse: boolean,
 ): number {
   if (dataPt === 0 && !inverse) {
     return 0;
   }
 
-  if(dataPt === 0 && inverse) {
+  if (dataPt === 0 && inverse) {
     return 1;
   }
 
@@ -27,20 +27,17 @@ export function calculateOpacity(
 
   // Determine opacity based on z-score
   if (zScore < zScoreHash["lowQuartile"]) {
-    
     opacity = 0.2;
   } else if (zScore < zScoreHash["midQuartile"]) {
-    
     opacity = 0.5;
   } else if (zScore < zScoreHash["highQuartile"]) {
-    
     opacity = 0.8;
   } else {
     opacity = 1;
   }
 
   if (inverse) {
-    opacity = 1 - opacity
+    opacity = 1 - opacity;
   }
   return opacity;
 }
@@ -54,7 +51,7 @@ export function hrMins(totalMins: number): { hrs: number; mins: number } {
 //helper function to get cells between lastUpdated and today
 export function cellsToAdd(
   heatmapID: number,
-  lastUpdated: DateTime
+  lastUpdated: DateTime,
 ): CellDataParsed[] {
   const todayStart = DateTime.now().startOf("day");
   const lastUpdatedStart = lastUpdated.startOf("day");
@@ -62,7 +59,7 @@ export function cellsToAdd(
   //calc days between lastUpdated and today
   const daysBetween = Interval.fromDateTimes(
     lastUpdatedStart,
-    todayStart
+    todayStart,
   ).count("days");
 
   const daysToAdd = Math.max(0, Math.floor(daysBetween));

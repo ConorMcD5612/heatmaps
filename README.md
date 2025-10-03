@@ -12,8 +12,7 @@ Heatmaps is a flexible habit tracking app (or general tracking app) designed to 
   - **Binary** – Track habits as simple yes/no (did it or not).
   - **Time** – Track hours and minutes spent on activities.
 - 🎨 **Inverse color mode**:
-  - Use when *less is better* (e.g., smoking, screen time).
+  - Use when _less is better_ (e.g., smoking, screen time).
 - 📊 **Daily habit tracking** Progress visualized using heatmaps
 
 ---
-

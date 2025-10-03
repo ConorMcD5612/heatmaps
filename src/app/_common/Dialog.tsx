@@ -19,6 +19,7 @@ export default function Dialog({
 }: Props) {
   const searchParams = useSearchParams();
   const dialogRef = useRef<null | HTMLDialogElement>(null);
+  
   const showDialog = searchParams.get(modalName);
 
   useEffect(() => {
@@ -40,7 +41,11 @@ export default function Dialog({
   };
 
   const dialog: JSX.Element | null =
-    showDialog === "y" ? <dialog className="" ref={dialogRef}>{children}</dialog> : null;
+    showDialog === "y" ? (
+      <dialog className="" ref={dialogRef}>
+        {children}
+      </dialog>
+    ) : null;
 
   //"This will ensure the page does not de-opt to client-side rendering."
   return dialog;

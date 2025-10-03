@@ -17,12 +17,11 @@ export const Switch = ({
   return (
     <div
       onClick={() => setSelected(!selected)}
-      className={`flex border-2 border-white items-center cursor-grab rounded-full w-16 h-8
-    ${selected ? sliderStyles["selected"] : sliderStyles["unSelected"]}`}
+      className={`flex h-8 w-16 cursor-grab items-center rounded-full border-2 border-white ${selected ? sliderStyles["selected"] : sliderStyles["unSelected"]}`}
     >
       {/* oval */}
 
-      <div className="rounded-full w-7 h-7 bg-white"></div>
+      <div className="h-7 w-7 rounded-full bg-white"></div>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import { DateTime } from "luxon";
 function getWeekStartDate(
   start: DateTime,
   i: number,
-  daysFromMonday: number
+  daysFromMonday: number,
 ): string {
   //get how many days to add
   let daysToAdd = i * 7 - daysFromMonday;
@@ -36,23 +36,17 @@ export default function WeekStart({
     dates.push(
       <div
         ref={i == numDates - 1 ? endCellRef : null}
-        className="
-      border-b 
-      border-gray-400 
-      text-gray-400 
-      snap-center 
-      snap-always
-      "
+        className="snap-center snap-always border-b border-gray-400 text-gray-400"
         key={i}
       >
         {getWeekStartDate(luxDate, i, daysFromMonday)}
-      </div>
+      </div>,
     );
   }
 
   return (
     <div className="col-span-8 row-span-1">
-      <div className="grid grid-flow-col grid-cols-[repeat(12,calc(100%/12))] auto-cols-[calc(100%/12)] place-items-center h-full">
+      <div className="grid h-full auto-cols-[calc(100%/12)] grid-flow-col grid-cols-[repeat(12,calc(100%/12))] place-items-center">
         {dates}
       </div>
     </div>

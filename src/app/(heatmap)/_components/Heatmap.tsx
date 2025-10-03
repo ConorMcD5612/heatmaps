@@ -1,11 +1,7 @@
-
 import React from "react";
-import WeekDays from "./WeekDays";
-import Cells from "./Cells";
-import { HeatmapData, HeatmapParsed, CellData } from "@/app/lib/definitions";
+import { HeatmapParsed, CellData } from "@/app/lib/definitions";
 import { addCell } from "@/app/lib/actions";
 import { fetchCellStats } from "@/app/lib/data";
-import Link from "next/link";
 import { HeatmapTotal } from "./HeatmapTotal";
 import { OptionsBtn } from "./OptionsBtn";
 import { Calendar } from "./Calendar";
@@ -25,9 +21,8 @@ export default async function Heatmap({
   const cellData: CellData[] = await fetchCellData(heatmapData.heatmap_id);
 
   return (
-    <div>
-      <div className=""></div>
-      <div className="text-lg flex justify-between w-full place-items-center">
+    <div className="mb-3 mt-3 ">
+      <div className="flex w-full place-items-center justify-between text-lg">
         <HeatmapTotal
           cellStats={cellStats}
           heatmapName={heatmapData.heatmap_name}
@@ -35,14 +30,18 @@ export default async function Heatmap({
           type={heatmapData.type}
           color={heatmapData.color}
         />
-        <div className="flex gap-1 border-white p-1 place-items-center rounded">
+        <div className="flex place-items-center gap-1 rounded border-white p-1">
           <OptionsBtn heatmapData={heatmapData} />
         </div>
       </div>
 
-
-      {/*make this a component, then can useClient to make it scroll */ }
-      <Calendar heatmapData={heatmapData} isoStartDate={heatmapData.start_date.toISO()} cellStats={cellStats} cellData={cellData} />
+      {/*make this a component, then can useClient to make it scroll */}
+      <Calendar
+        heatmapData={heatmapData}
+        isoStartDate={heatmapData.start_date.toISO()}
+        cellStats={cellStats}
+        cellData={cellData}
+      />
     </div>
   );
 }

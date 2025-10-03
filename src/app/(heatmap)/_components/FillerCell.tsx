@@ -1,7 +1,5 @@
-import React from 'react'
+import React from "react";
 
 export default function FillerCell() {
-  return (
-    <div className=' w-[85%] h-[85%]'></div>
-  )
+  return <div className="h-[85%] w-[85%]"></div>;
 }

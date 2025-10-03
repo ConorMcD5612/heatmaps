@@ -28,17 +28,8 @@ export default function Cells({
         isoStartDate={isoStartDate}
         endCellRef={endCellRef}
       />
-      <div className="w-full row-start-2 row-span-7 col-span-12 h-full  ">
-        <div
-          className="grid 
-        grid-rows-7 
-        grid-flow-col 
-        grid-cols-[repeat(12,calc(100%/12))] 
-        auto-cols-[calc(100%/12)] 
-        place-items-center
-        h-full
-        "
-        >
+      <div className="col-span-12 row-span-7 row-start-2 h-full w-full">
+        <div className="grid h-full auto-cols-[calc(100%/12)] grid-flow-col grid-cols-[repeat(12,calc(100%/12))] grid-rows-7 place-items-center">
           <FillerCells isoStartDate={isoStartDate} />
           {cellData.map((cell: CellData, index: Key) => {
             return (

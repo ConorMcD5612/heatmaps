@@ -14,21 +14,10 @@ export const IconBtn = ({
 }) => {
   return (
     <button
-      className={`flex 
-     w-1/2 
-     rounded-sm 
-     border 
-     gap-1
-     ${disabled && "opacity-50"}
-     border-white/50
-     bg-[#1a1a1a]  
-     p-[4px] 
-     place-items-center
-     max-h-10
-     whitespace-nowrap`}
-     onClick={onClickCallback}
+      className={`flex w-1/2 gap-1 rounded-sm border ${disabled && "opacity-50"} max-h-10 place-items-center whitespace-nowrap border-white/50 bg-[#1a1a1a] p-[4px]`}
+      onClick={onClickCallback}
     >
-      <FeatherIcon  size={16} icon={iconName} />
+      <FeatherIcon size={16} icon={iconName} />
       <h5 className="text-sm">{text}</h5>
     </button>
   );

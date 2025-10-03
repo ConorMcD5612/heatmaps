@@ -28,10 +28,9 @@ export async function addCell(heatmapID: number, lastUpdated: DateTime) {
         VALUES (${userID}, ${cell.heatmap_id}, 0, 0, ${cell.date})
         ON CONFLICT (email, heatmap_id, date) DO NOTHING
       `;
-      }
-      //change lastupdated to today
-      await sql`UPDATE heatmap_data SET last_updated = ${todayStart} WHERE heatmap_id=${heatmapID} and email=${userID}`;
-    
+    }
+    //change lastupdated to today
+    await sql`UPDATE heatmap_data SET last_updated = ${todayStart} WHERE heatmap_id=${heatmapID} and email=${userID}`;
   } catch (e) {
     console.error("addCell failed", e);
   }
@@ -61,7 +60,7 @@ export async function updateCell(
   heatmapID: number,
   date: string,
   type: string,
-  formData: FormData
+  formData: FormData,
 ) {
   //zod to validate type
   const { hours, mins } = UpdateCell.parse({
@@ -78,10 +77,9 @@ export async function updateCell(
   if (type == "Binary") {
     await sql`UPDATE cell_data 
         SET time_mins = ${mins}
-        WHERE date=${date} AND heatmap_id=${heatmapID} AND email=${userID};`
-    return
+        WHERE date=${date} AND heatmap_id=${heatmapID} AND email=${userID};`;
+    return;
   }
-
 
   try {
     const result = await sql`UPDATE cell_data 
@@ -90,7 +88,6 @@ export async function updateCell(
   } catch (e) {
     console.error("updateCell error", e);
   }
-
 }
 
 const CreateHeatmap = FormSchema.omit({ hours: true, mins: true });
@@ -155,8 +152,7 @@ const UpdateHeatmap = FormSchema.omit({
   type: true,
   inverse: true,
   unit: true,
-})
-
+});
 
 export async function updateHeatmap(heatmapID: number, formData: FormData) {
   const session = await getServerSession(options);
@@ -164,7 +160,7 @@ export async function updateHeatmap(heatmapID: number, formData: FormData) {
 
   const { color, heatmapName } = UpdateHeatmap.parse({
     color: formData.get("color"),
-    heatmapName: formData.get("name")
+    heatmapName: formData.get("name"),
   });
 
   try {
@@ -174,6 +170,4 @@ export async function updateHeatmap(heatmapID: number, formData: FormData) {
   } catch (e) {
     console.error("updateHeatmap failed", e);
   }
-
- 
 }

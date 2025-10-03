@@ -7,7 +7,7 @@ export const HeatmapTotal = ({
   heatmapName,
   type,
   unit,
-  color
+  color,
 }: {
   cellStats: CellStats;
   heatmapName: string;
@@ -21,11 +21,13 @@ export const HeatmapTotal = ({
 
   //total_mins will represent count until I change name
   return (
-    <div className="flex gap-1 ">
+    <div className="flex gap-1">
       <div className="font-semibold">{`${heatmapName.trim()}: `}</div>
 
-      <div style={{color: color}} className="font-bold text-lg">
-        {type == "Time" ? `${hrs}hrs ${mins}mins` : `${cellStats.total_time}${unit}`}
+      <div style={{ color: color }} className="text-lg font-bold">
+        {type == "Time"
+          ? `${hrs}hrs ${mins}mins`
+          : `${cellStats.total_time}${unit}`}
       </div>
     </div>
   );

@@ -16,13 +16,11 @@
   }
 }
 
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
 }
-
 
 .gutter {
   scrollbar-gutter: stable both-edges;
@@ -42,7 +40,7 @@
 
 /* Optional: scroll track background */
 ::-webkit-scrollbar-track {
-  background-color:black; /* Tailwind gray-800 or your bg */
+  background-color: black; /* Tailwind gray-800 or your bg */
 }
 
 #btn-gradient {
@@ -62,32 +60,32 @@
   border-radius: 5px;
   padding: 2px;
   /* TODO: make function to make this using colors in definition.ts */
-  background: linear-gradient(to right,
-  #FF4F9A 0%,        /* pink */
-  #FF4F9A 16.67%,
+  background: linear-gradient(
+    to right,
+    #ff4f9a 0%,
+    /* pink */ #ff4f9a 16.67%,
 
-  #FFA500 16.67%,    /* orange */
-  #FFA500 33.34%,
+    #ffa500 16.67%,
+    /* orange */ #ffa500 33.34%,
 
-  #FFFF33 33.34%,    /* yellow */
-  #FFFF33 50%,
+    #ffff33 33.34%,
+    /* yellow */ #ffff33 50%,
 
-  #39FF14 50%,       /* green */
-  #39FF14 66.67%,
+    #39ff14 50%,
+    /* green */ #39ff14 66.67%,
 
-  #00FFFF 66.67%,    /* cyan */
-  #00FFFF 83.34%,
+    #00ffff 66.67%,
+    /* cyan */ #00ffff 83.34%,
 
-  #9D00FF 83.34%,    /* purple */
-  #9D00FF 100%
-);
+    #9d00ff 83.34%,
+    /* purple */ #9d00ff 100%
+  );
 
-
-  -webkit-mask: 
-    linear-gradient(#fff 0 0) content-box, 
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
     linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
-          mask-composite: exclude;
+  mask-composite: exclude;
   pointer-events: none;
   z-index: -2;
 }

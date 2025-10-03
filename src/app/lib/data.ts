@@ -26,10 +26,9 @@ export async function fetchHeatmapData() {
         ...row,
         start_date: DateTime.fromJSDate(row.start_date),
         last_updated: DateTime.fromJSDate(row.last_updated),
-      })
+      }),
     );
 
-    
     return rows;
   } catch (error) {
     console.error("Failed to fetch heatmap data:", error);

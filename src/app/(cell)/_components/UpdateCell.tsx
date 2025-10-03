@@ -16,7 +16,6 @@ export default function UpdateCell({
   cellData: CellData;
   setModalOpen: (open: boolean) => void;
 }) {
-  
   const cellDate = cellData.date;
   const mapName = heatmapData.heatmap_name;
   const heatmapID = heatmapData.heatmap_id;
@@ -36,23 +35,22 @@ export default function UpdateCell({
     setModalOpen(false);
   };
 
-
   return (
-    <div className="flex flex-col p-2 gap-1 border-2 border-white">
+    <div className="flex flex-col gap-1 border-2 border-white p-2">
       <div>
-        <div className="text-4xl font-extrabold ">{mapName}</div>
+        <div className="text-4xl font-extrabold">{mapName}</div>
         <div className="text-s font-medium text-gray-400">{formattedDate}</div>
       </div>
-      <hr className="m-1"/>
+      <hr className="m-1" />
       <form className="flex flex-col gap-1" action={formSubmit}>
-        <h2 className="font-semibold text-lg">Add To Cell:</h2>
+        <h2 className="text-lg font-semibold">Add To Cell:</h2>
         <InputRenderer unit={unit} type={type}></InputRenderer>
-        <hr className="m-1"/>
-        <div className="flex right-10 bottom-10 gap-1 justify-end">
+        <hr className="m-1" />
+        <div className="bottom-10 right-10 flex justify-end gap-1">
           <button className="p-2" onClick={() => setModalOpen(false)}>
             Close
           </button>
-          <button type="submit" className="p-2 bg-black text-white rounded-sm">
+          <button type="submit" className="rounded-sm bg-black p-2 text-white">
             Submit
           </button>
         </div>

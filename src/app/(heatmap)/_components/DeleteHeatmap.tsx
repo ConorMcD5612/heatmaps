@@ -15,19 +15,23 @@ export const DeleteHeatmapModal = ({
 
   const formSubmit = async () => {
     await deleteHeatmap(heatmapID);
-
     router.refresh();
-    //closing options modal will close both 
-    setOptionsOpen(false)
+    setOptionsOpen(false);
   };
 
   return (
     <form className="w-full p-5" action={formSubmit}>
-      <p>Are you sure you want to <span className="font-semibold">PERMANENTLY</span> delete this heatmap? </p>
+      <p>
+        Are you sure you want to{" "}
+        <span className="font-semibold">PERMANENTLY</span> delete this
+        heatmap?{" "}
+      </p>
       <hr className="m-2" />
-      <div className="flex right-10 bottom-10 gap-1 justify-end">
-        <button className="p-1" onClick={() => setOpen(false)}type="button">Close</button>
-        <button type="submit" className="bg-red-500 text-white rounded-sm p-1">
+      <div className="bottom-10 right-10 flex justify-end gap-1">
+        <button className="p-1" onClick={() => setOpen(false)} type="button">
+          Close
+        </button>
+        <button type="submit" className="rounded-sm bg-red-500 p-1 text-white">
           Delete
         </button>
       </div>
