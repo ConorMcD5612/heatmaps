@@ -44,7 +44,7 @@ export default function UpdateCell({
       </div>
       <hr className="mb-5 opacity-50" />
       <form className="flex flex-col gap-1" action={formSubmit}>
-        <h2 className="text-xl font-semibold">Add To Cell:</h2>
+        
         <InputRenderer unit={unit} type={type} color={color}></InputRenderer>
         <hr className="mt-5 opacity-50" />
         <div className="bottom-10 right-10 flex justify-end gap-1">
