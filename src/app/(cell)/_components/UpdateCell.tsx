@@ -37,7 +37,7 @@ export default function UpdateCell({
   };
 
   return (
-    <div className="flex flex-col gap-1 p-3 border-[1px] border-white border-opacity-50">
+    <div className="flex flex-col gap-1 p-3 border-[1px] border-white border-opacity-50 w-128">
       <div>
         <div className="text-4xl font-extrabold">{mapName}</div>
         <div className="text-s font-medium text-gray-400">{formattedDate}</div>
@@ -45,7 +45,7 @@ export default function UpdateCell({
       <hr className="mb-5 opacity-50" />
       <form className="flex flex-col gap-1" action={formSubmit}>
         <h2 className="text-xl font-semibold">Add To Cell:</h2>
-        <InputRenderer unit={unit} type={type}></InputRenderer>
+        <InputRenderer unit={unit} type={type} color={color}></InputRenderer>
         <hr className="mt-5 opacity-50" />
         <div className="bottom-10 right-10 flex justify-end gap-1">
           <button className="p-2 my-3" onClick={() => setModalOpen(false)}>
